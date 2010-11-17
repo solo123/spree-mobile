@@ -1,38 +1,33 @@
 class UsersController < Spree::BaseController
   resource_controller
-  
-  before_filter :require_no_user, :only => [:new, :create]
-  before_filter :require_user, :only => [:show, :edit, :update]
 
   ssl_required :new, :create, :edit, :update, :show
-  
-  actions :all, :except => [:index, :destroy]
-	
-	#Cannot use resource_controller for create action
-	#as openID expects block passed to user.save method
-	def create
-	  @user = User.new(params[:user])
-	  @user.save do |result|
-	    if result
-        Msg.user_registed(@user)
-	      self.notice = t(:user_created_successfully) unless session[:return_to]
-	      @user.roles << Role.find_by_name("admin") unless admin_created?
-        @user.roles << Role.find_by_name("R1")  # default role: R1
-	      respond_to do |format|
-	        format.html { redirect_back_or_default '/'}
-	        format.js { render :js => true.to_json }
-	      end
-	    else
-	      respond_to do |format|
-	        format.html { render :action => :new }
-	        format.js { render :js => @user.errors.to_json }
-	      end
-	    end
-	  end
-	end
 
-  show.before :show_before
-  new_action.before :new_action_before
+  actions :all, :except => [:index, :destroy]
+
+  show.before do
+    @orders = @user.orders.complete
+  end
+
+  create.after do
+    create_session
+    associate_user
+  end
+
+  create.flash nil
+  create.wants.html { redirect_back_or_default(root_url) }
+
+  new_action.before do
+    flash.now[:notice] = I18n.t(:please_create_user) unless User.admin_created?
+  end
+
+  update.wants.html { redirect_to account_url }
+
+  update.after do
+    create_session
+  end
+
+  update.flash I18n.t("account_updated")
 
   def load_baseinfo
     @user = current_user
@@ -42,30 +37,29 @@ class UsersController < Spree::BaseController
      @user = current_user
     render :partial => 'edit_baseinfo'
   end
-  def update
-    @user = current_user
-    if @user.update_attributes(params[:user])
-      render :partial => 'show_baseinfo'
-    else
-      render :text => '保存出错。', :status => "500"
-    end
-  end
+
+
 
   private
+  def object
+    @object ||= current_user
+  end
 
-    def object
-      @object ||= current_user
-    end
-    
-    def show_before
-      @orders = @user.orders.checkout_complete 
-    end
-    
-    def new_action_before
-      flash.now[:notice] = I18n.t(:please_create_user) unless admin_created?
-    end
+  def accurate_title
+    I18n.t(:account)
+  end
 
-    def accurate_title
-      I18n.t(:account)
-    end
+  def associate_user
+    return unless current_order and @user.valid?
+    current_order.associate_user!(@user)
+    session[:guest_token] = nil
+  end
+
+  def create_session
+    session_params = params[:user]
+    session_params[:login] = session_params[:email]
+    UserSession.create session_params
+  end
+
 end
+

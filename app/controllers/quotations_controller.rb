@@ -1,4 +1,4 @@
-class QuotationsController < ApplicationController
+class QuotationsController < Spree::BaseController
   
   def index
     r = nil
