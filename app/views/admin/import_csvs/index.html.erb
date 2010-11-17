@@ -1,0 +1,99 @@
+<% content_for :head do %>
+<script type="text/javascript">
+$(function(){
+  $('#btn_import').attr("disabled","disabled");
+  
+  load_files();
+  $('#select_csv').change(parse_csv);
+});
+
+function load_files(){
+  $.getJSON("/admin/uploads/files", {q: "*.csv"}, function(data){
+    var csv = $('#select_csv');
+    csv.html("<option value=''>..::Please select::..</option>");
+    for (var i=0; i<data.length; i++){
+      csv.append("<option value='"+data[i]+"'>"+ data[i] +"</option>");
+    }
+  });
+}
+function parse_csv(){
+  $('#btn_import').attr("disabled","disabled");
+$('#products').text('');
+  v = $('#select_csv').val()
+  if (v!="") {
+      $.getJSON("/admin/import_csvs/parse", {csv: v}, function(data){
+          for (var i=0; i<data.length; i++){
+            $("#products").append(p_product(data[i]));
+          }
+          $('#btn_import').removeAttr("disabled");
+      });
+  }
+}
+function p_product(product){
+	if (product["name"]==undefined){
+		return product;
+	}
+	s = "<div class='products'>"
+	if (product["old"]){
+		s = "<div class='product edit'><a href='/products/" + product["old"] +"' target='_blank'>该手机已存在，点击查看</a><br />";
+	}
+	else
+		s = "<div class='product new'>新手机<br />";
+
+	s = s + "<b>" + product.name + "</b> ("+ product.permalink +")" +
+		"<br />" +
+		"<ul><li>品牌：" + product.brand +
+		"</li><li>型号：" + product.model +
+		"</li><li>批发价：" + product.price +
+		"</li><li>分类：" + product.taxons +
+		"</li><li>系统：" + product.system +
+		"</li><li>颜色：" + product.colors +
+		"</li><li>属性：<ul>";
+	for (var prop in product.properties){
+		s = s + "<li>" + prop + ": " + product.properties[prop] + "</li>";
+	}
+		"</ul></li></ul></div>";
+	return s;
+}
+function import_data(){
+	v = $('#select_csv').val();
+	if (v!=""){
+
+		if (confirm("新的产品需要收工补充相关描述信息和图片，如果csv文件中数据有误请修改后重传。" +
+			"\n\n确认导入"+ v +"数据码？")){
+			$('#msg').html('<span style="font-weight:bold;color:red;font-size:120%;">导入数据需要较长时间，请停留在此页面并请不要刷新。</span>');
+			$.getJSON("/admin/import_csvs/do_import",{csv: v}, function(data){
+				$('#msg').html('');
+				$('#products').html('');
+				for (var i=0; i<data.length; i++){
+                  p = data[i]
+                  $("#products").append("<div class='"+ p.op +"'>" + p.op + ' : '+ p.brand + '/' + p.model + '</div>');
+				}
+ 			});
+		}
+	}
+}
+</script>
+<style type="text/css">
+#products .edit { background-color: #ffcccc; }
+#products .new { background-color: #ccffff; }
+#products .product { margin:4px; border:solid 1px #999;}
+#products .product:hover { margin:4px; border:solid 1px red;}
+#products div {width:200px;float:left;margin:4px;border:solid 1px #999;}
+#products div.new {background-color:#ccffff;}
+#products div.update {background-color: #ffcccc;}
+</style>
+<% end %>
+
+<%= render :partial => 'admin/uploads/sub_menu' %>
+<h2>批量导入CSV产品资料</h2>
+<% form_tag do %>
+<select id="select_csv">
+ </select>
+ &nbsp;
+ <input id="btn_import" type='button' value='导入数据' onclick='import_data();' />
+&nbsp; 
+ <div id="msg"></div>
+<% end %>
+
+<div id="products"></div>

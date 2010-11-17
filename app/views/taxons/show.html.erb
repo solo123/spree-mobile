@@ -1,0 +1,19 @@
+<h1><%= @taxon.name %></h1>
+
+<% if @taxon.children.empty? || !params[:keywords].blank? %>
+  <% hook :taxon_products do %>
+    <div class="years-title"><h2>2010年</h2><span class="num">（共8款）</span></div>
+    <%= render :partial => "shared/products", :locals => {:products => @products, :taxon => @taxon } %>
+    <p class="years-look-more"><a href="JavaScrpt:;">查看2008年之前的商品</a><span class="num">（共226款）</span></p>
+  <% end %>
+<% else %>
+  <% hook :taxon_children do %>
+    <%= render :partial => "taxon", :collection => @taxon.children %>
+  <% end %>
+<% end %>
+
+<% content_for :sidebar do %>
+  <% hook :taxon_sidebar_navigation do %>
+    <%= render :partial => "shared/taxonomies" %>
+  <% end %>
+<% end %>

@@ -1,0 +1,80 @@
+<% content_for :head do %>
+  <%= javascript_include_tag 'jquery.validate.pack.js','messages_zh.js' %>
+
+<script type="text/javascript">
+  function send_code(){
+    if ($('#mobile').val().length != 11){
+      alert('请输入正确的手机号');
+      $('#mobile').select().focus();
+      return;
+    }
+    $('#link_send').attr("disabled","disabled").text('正在生成验证码，请稍候...');
+    $.get('/password_resets/' + $('#mobile').val() , function(data){
+      $('#link_send').removeAttr("disabled").text('发送验证码到我的手机');
+      if (data == "1"){
+        $('#code_msg').text('您的验证码已经发送到您的手机，因短信发送审查您可能会有1至15分钟延迟。');
+      } else {
+        alert('您输入的手机号码并没有注册，请检查是否输错手机号码，或者注册新用户。');
+      }
+    });
+  }
+  function reset_psw(){
+    if ($('#reset_mobile').valid()){
+      $('#btn_reset').attr('disabled','disabled').text('验证中...');
+      $.get('/password_resets/' + $('#mobile').val() + '?c=' + $('#code').val(), function(data){
+        if (data=='0'){
+          alert('验证码错误或失效。');
+          $('#code').select().focus();
+          $('#btn_reset').removeAttr('disabled').text('重设我的密码');
+        } else {
+          location = '/password_resets/' + data + '/edit';
+        }
+      })
+    }
+  }
+
+  $(function(){
+    $('#reset_mobile').validate({
+      rules: {
+        "mobile": "required",
+        "code": "required"
+      }
+    });
+    $('#reset_email').validate({
+      rules: {
+        "email": "required"
+      }
+    });
+
+
+  });
+</script>
+<% end %>
+
+<h1><%= t(:forgot_password) %></h1>
+
+<%= t(:instructions_to_reset_password) %>
+<br />
+<br />
+<% form_tag password_resets_path, :id => 'reset_mobile' do %>
+<p>
+  <label>手机号:</label><br />
+  <%= text_field_tag "mobile" %>
+  <a href="javascript:send_code();" id="link_send">发送验证码到我的手机！</a>
+</p>
+<p>
+  <label>验证码:</label><br />
+<%= text_field_tag "code" %> &nbsp; <label id="code_msg"></label>
+</p>
+<input id="btn_reset" type="button" class="button primary submit-btn" onclick="reset_psw();" value="重设我的密码" />
+<% end %>
+
+  <br /><br />
+<h3>或者:</h3>
+
+<% form_tag password_resets_path, :id => 'reset_email' do %>
+  <label><%= t(:email) %>:</label><br />
+  <%= text_field_tag "email" %><br />
+  <br />
+  <%= submit_tag t("reset_password"),:class => 'button primary submit-btn' %>
+<% end %>

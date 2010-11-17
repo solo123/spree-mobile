@@ -1,0 +1,225 @@
+<% content_for :head do %>
+
+<script type="text/javascript">
+  var supplier_id = 0;
+  var supplier_name = '';
+  function submit_quote(){
+    if ($('.ui-icon-pencil').length > 0){
+      alert('您修改过报价，请先进行报价检查。');
+      return false;
+    }
+    if (supplier_id == 0){
+      alert('请先选择提供报价的供货商。');
+      $('#supplier').focus();
+      return false;
+    }
+    var msg = '您准备导入' + supplier_name + '的' +
+      $('#quote_table > tbody > tr').length + '条报价信息，其中:\n\n' +
+      '正常报价：' + $('#quote_table .quote_row').length + '条\n' +
+      '新增品牌：' + $('#quote_table .new_brand').length + '条 *\n' +
+      '新增型号：' + $('#quote_table .new_model').length + '条 *\n' +
+      '--------------------\n\n' +
+      '确认吗？';
+    if (confirm(msg)){
+      $.get('quotes/save/' + supplier_id, function(data){
+        if (data == 'ok'){
+          alert('报价已经成功导入。');
+          location.reload();
+        } else
+          alert(data);
+      });
+    }
+    return false;
+  }
+
+
+  $(function(){
+    $("#dialog").dialog({autoOpen: false, show: "blind", hide: "blind", width: 580});
+    $('#add_supplier').dialog({autoOpen: false, show: "blind", hide: "blind", width: 580});
+    $('.buttonset').buttonset();
+    $('#supplier')
+      .autocomplete('suppliers', {
+        formatResult: function(row){ return row[2]; }
+      })
+      .result(function(event,data,formatted){
+        supplier_id = data[1];
+        supplier_name = data[2];
+      });
+
+  });
+
+
+  function import_data(){
+    $.ajax({
+      type: 'POST',
+      url: 'quotes/import/0',
+      data: ({authenticity_token: AUTH_TOKEN, quotes: $('#import_text').val()}),
+      success: function(r){
+        if (r=='ok')
+          location.reload();
+        else
+          alert(r);
+      }
+    });
+  }
+
+  function test_data(){
+    var data = $('#import_text').val();
+    var rows = data.split("\n");
+
+    var table = $('<table />');
+
+    for(var y in rows) {
+      var cells = rows[y].split("\t");
+      var row = $('<tr />');
+      for(var x in cells) {
+        row.append('<td>'+cells[x]+'</td>');
+      }
+      table.append(row);
+    }
+    $('#result').append(table);
+  }
+
+  function add_supplier(){
+    $.ajax({
+      type: 'POST',
+      url: 'suppliers/add',
+      data: ({
+        authenticity_token: AUTH_TOKEN,
+        'supplier[name]': $('#supplier_name').val(),
+        'supplier[contact]': $('#supplier_contact').val(),
+        'supplier[phone]': $('#supplier_phone').val(),
+        'supplier[address]': $('#supplier_address').val()
+      }),
+      success: function(msg){
+        if (msg == 'ok')
+          $('#add_supplier').dialog('close');
+        else
+          alert(msg);
+      }
+    });
+  }
+
+  function set_model(q, m){
+    $.post('quotes/update_model/change', {q:q, m:m}, function(d){alert(d);});
+  }
+</script>
+<style type="text/css">
+  #quote_table {width:auto;border:solid 1px green;padding:1px;}
+  #quote_table tbody tr {border-bottom:solid 1px #aaa;padding:1px;}
+  #quote_table tbody tr td {border-bottom:solid 1px green;}
+  .quote_row {background-color:whitesmoke;}
+  .new_brand {background-color:pink;}
+  .new_model {background-color:wheat;}
+  .dele {text-decoration:line-through; color:gray;}
+  .pic {width:8px; height:8px; border:solid 1px #aaa;}
+  table {width:auto;}
+</style>
+<% end %>
+
+<%= render :partial => 'admin/uploads/sub_menu' %>
+<h2>报价录入</h2>
+<table>
+  <tr>
+    <td>图示：</td>
+    <td class="quote_row pic"></td>
+    <td>正常报价</td>
+    <td class="new_brand pic"></td>
+    <td>新品牌 </td>
+    <td class="new_model pic"></td>
+    <td>新机型</td>
+  </tr>
+</table>
+
+报价提供：<input type="text" id="supplier" style="width:200px;" />
+<a onclick="$('#add_supplier').dialog('open');">添加新供货商</a>
+<br />
+<br />
+<a href="javascript:$('#dialog').dialog('open');">导入数据</a> |
+<%= link_to '添加报价', new_object_url %> |
+<a href="quotes/check/0">报价检查</a> |
+<a href="javascript:submit_quote();">提交报价</a> |
+<a href="quotes/clear/all">清空报价</a>
+
+<table id="quote_table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>品牌 </th>
+      <th>型号</th>
+      <th>类似型号</th>
+      <th>价格</th>
+      <th>旧报价</th>
+      <th>价格备注</th>
+      <th>报价日期</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%  @quotes.each do |q|
+      style = 'quote_row'
+      if !q.brand_id || q.brand_id == 0
+        style = 'new_brand'
+      elsif !q.product_id || q.product_id == 0
+        style = 'new_model'
+      end
+      style = " class='#{style}'" if style.length > 0
+    %>
+    <tr id="quote_<%= q.id -%>"<%= style %>>
+      <td><%= '<span class="ui-icon ui-icon-pencil"></span>' if q.status == 0 %></td>
+      <td><%= q.brand %></td>
+      <td><%= q.model %></td>
+      <td>
+        <% if q.rel_model && !q.rel_model.empty? %>
+        <div class="buttonset">
+        <% q.rel_model.split(',').each do |rel|
+        %>
+          <input type="radio" onchange="set_model(<%= q.id %>, '<%= rel %>');" id="rel_<%= q.id %>_<%= rel %>" name="rel_<%=  q.id %>" value="<%= rel %>" />
+          <label for="rel_<%= q.id %>_<%= rel %>"><%= rel %></label>
+        <% end %>
+        <input type="radio" onchange="set_model(<%= q.id %>, '<%= q.model %>');" id="rel_<%= q.id %>_new" name="rel_<%=  q.id %>" value="<%= q.model %>" />
+        <label for="rel_<%= q.id %>_new">new</label>
+        </div>
+        <%  end %>
+      </td>
+      <td><%= q.price %></td>
+      <td class="dele"><%= q.price_old %></td>
+      <td><%= q.remark %></td>
+      <td><%= q.created_at.getlocal.strftime("%Y-%m-%d %H:%M:%S") %></td>
+      <td><%= link_to_edit q %>&nbsp;<%= link_to_delete q %></td>
+    </tr>
+    <% end %>
+  </tbody>
+
+</table>
+
+<div id="dialog" title="导入数据">
+	<p>
+		<span class="ui-icon ui-icon-circle-check" style="float:left;margin:0 7px 50px 0;"></span>
+		请把excel表格数据拷贝粘贴到下面文本框中。
+	</p>
+	<p>
+      <textarea id="import_text" cols="80" rows="12" ></textarea>
+      <input type="button" onclick="import_data();" value="导入数据" />
+    </p>
+</div>
+
+<div id="add_supplier" title="添加新供货商">
+  <p>
+    <span class="ui-icon ui-icon-circle-check" style="float:left;margin:0 7px 50px 0;"></span>
+    添加新的供货商:
+  </p>
+
+<div>
+  <%= label :name, '名称' %><br />
+  <input type="text" id="supplier_name" /><br />
+  <%= label :contact, '联系人' %><br />
+  <input type="text" id="supplier_contact" /><br />
+  <%= label :phone, '联系电话' %><br />
+  <input type="text" id="supplier_phone" /><br />
+  <%= label :address, '地址' %><br />
+  <input type="text" id="supplier_address" /><br />
+  <input type="button" value="保存" onclick="add_supplier();" />
+</div>
+</div>
+

@@ -1,0 +1,25 @@
+<!-- 开始 Comm100在线客服系统按钮代码 --><div><div id="comm100_LiveChatDiv"></div><a href="http://www.comm100.cn/livechat/" onclick="comm100_Chat();return false;" target="_blank" title="在线客服"><img id="comm100_ButtonImage" src="http://chatserver.comm100.cn/BBS.aspx?siteId=80014851&planId=718" border="0px" alt="在线客服" /></a><script src="http://chatserver.comm100.cn/js/LiveChat.js?siteId=80014851&planId=718" type="text/javascript"></script><div id="comm100_track" style="z-index:99;  margin-top:2px;"></div><script type="text/javascript">document.getElementById("comm100_track").style.visibility = "hidden";</script></div><!-- 结束 Comm100在线客服系统按钮代码-->
+
+<img src="/images/site/footer.png" width="950" />
+
+<!-- up test alei -->
+<!--alei 测试-->
+
+<div class="block" id="footer">
+  <div class="bNavList clearfix">
+    <% Page.all(:conditions => 'is_active').each_with_index do |page,index| %>
+      <% if index > 0 %>
+        | 
+      <% end %>
+      <%= link_to page.title, page %>
+    <% end %>
+  </div>
+  <div class="blank"></div>
+  <div class="text">
+    &copy; 2009-2010 酷购直供平台。<br />
+    深圳市福田区车公庙天祥大厦CD座5D  Tel: 0755-83146905                                                                                   <br>
+  </div>
+</div>
+<%= render 'shared/google_analytics' %>
+
+

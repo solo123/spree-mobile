@@ -1,0 +1,31 @@
+<style>
+/*div.inner input[type=text], div.inner select { width: 60%; }
+.hidden { display: none; }*/
+</style>
+
+
+<fieldset id='shipping'>
+    <legend><%= t("shipping_address")%></legend>
+    <div class="inner">
+      <p id="sfname" class="field">
+        <%= addr.label :name, t(:name) %>
+        <%= addr.text_field :name, :class => 'required' -%><span class="req">*</span>
+      </p>
+      <p id="saddress" class="field">
+        <%= addr.label :address, t(:address) %>
+        <%= addr.text_field :address, :class => 'required' -%><span class="req">*</span>
+      </p>
+      <p id="scity" class="field">
+        <%= addr.label :city, t(:city) %>
+        <%= addr.text_field :city, :class => 'required' -%><span class="req">*</span>
+      </p>
+      <p id="szip" class="field">
+        <%= addr.label :zipcode, t(:zipcode) %>
+        <%= addr.text_field :zipcode, :class => 'required' -%><span class="req">*</span>
+      </p>
+      <p id="sphone" class="field">
+        <%= addr.label :phone, t(:phone) %>
+        <%= addr.text_field :phone, :class => 'required' -%><span class="req">*</span>
+      </p>
+    </div>
+</fieldset>

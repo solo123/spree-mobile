@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+  <%= hook :inside_head do %>
+    <%= render :partial => 'shared/head'%>
+  <% end %>
+  </head>
+  <%
+if @body_class.nil?
+  if content_for?(:sidebar)
+    @body_class = 'two-col'
+  else
+    @body_class = 'one-col'
+  end
+end
+%>
+  <body class="<%= @body_class %>"<%= %( id="#{@body_id}") if @body_id %>>
+    <div id="siteContainer">
+      <div id="header">        
+        <div class="mainLogo"> <h1><%= logo %> <span>酷购</span></h1> <h2>手机低价直供平台</h2></div>
+        <div class="head-tmp-right">
+          <ul class="topMenu">
+          <%= render 'shared/nav_bar' %>
+          </ul>
+          <div class="online-service" style="width:400px;">
+            <span class="service-hotline">0755-83998966, 83998300</span>
+            <!-- 开始 Comm100在线客服系统按钮代码 --><div class="live-chat-icon"><div id="comm100_LiveChatDiv"></div><a href="http://www.comm100.cn/livechat/" onclick="comm100_Chat();return false;" target="_blank" title="在线客服"><img id="comm100_ButtonImage" src="http://chatserver.comm100.cn/BBS.aspx?siteId=80014851&planId=718" border="0px" alt="在线客服" /></a><script src="http://chatserver.comm100.cn/js/LiveChat.js?siteId=80014851&planId=718" type="text/javascript"></script><div id="comm100_track" style="z-index:99;  margin-top:2px;"></div><script type="text/javascript">document.getElementById("comm100_track").style.visibility = "hidden";</script></div><!-- 结束 Comm100在线客服系统按钮代码-->
+          </div>
+        </div>
+        <div class="clr"></div>
+        <%= render 'shared/main_menu' %>
+      </div>
+
+      <% if content_for?(:sidebar) %>
+        <div id="sidebar">
+          <%= hook :sidebar do %>
+            <%= yield :sidebar %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <div id="content">
+        <%= breadcrumbs(@taxon) if @taxon %>
+        <% if self.notice %>
+          <div class="flash notice ui-state-highlight ui-corner-all" id="effectnotice">
+            <span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span><%= self.notice %>
+          </div>
+        <% end %>
+        <% if flash[:error] %>
+          <div class="flash errors ui-state-error ui-corner-all" id="effecterrors">
+            <span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span><%= flash[:error] %>
+          </div>
+
+        <% end %>
+
+        <%= yield %>
+      </div>
+      <%= render :partial => 'shared/browse_footer'%>
+
+    </div>
+    <%= render 'shared/google_analytics' %>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+  <% cache do %>
+
+<dl id="all_brands">
+
+  <dt>国际品牌</dt>
+    <dd>
+      <ul>
+        <% brands = Taxon.find_all_by_parent_id(Taxon.find_by_name('国际品牌').id, :order => 'lft')
+        brands.each do |brand|
+        %>
+          <li><%= link_to brand.name + '(' + Product.active().in_taxon(brand).count.to_s + ')', :b => brand.id %></li>
+        <% end %>
+      </ul>
+    </dd>
+    <dt>国内品牌</dt>
+    <dd><ul>
+        <% brands = Taxon.find_all_by_parent_id(Taxon.find_by_name('国内品牌').id, :order => 'lft', :limit => 20)
+        brands.each do |brand|
+        %>
+          <li><%= link_to brand.name + '(' + Product.active().in_taxon(brand).count.to_s + ')', :b => brand.id %></li>
+        <% end %>
+      </ul></dd>
+
+    <dt>手机分类</dt>
+    <dd><ul>
+        <% brands = Taxon.find_all_by_parent_id(Taxon.find_by_name('分类').id, :order => 'name')
+        brands.each do |brand|
+        %>
+          <li><%= link_to brand.name + '(' + Product.active().in_taxon(brand).count.to_s + ')', :b => brand.id %></li>
+        <% end %>
+      </ul></dd>
+
+    <dt>价格区间</dt>
+    <dd><ul>
+        <li><a href="/quotations?pl=50&ph=500">50~500(<%= Product.active().price_between(50,500).count %>)</a></li>
+        <li><a href="/quotations?pl=500&ph=1000">500~1000(<%= Product.active().price_between(500,1000).count %>)</a></li>
+        <li><a href="/quotations?pl=1000&ph=2000">1000~2000(<%= Product.active().price_between(1000,2000).count %>)</a></li>
+        <li><a href="/quotations?pl=2000&ph=50000">2000元以上(<%= Product.active().price_between(2000,50000).count %>)</a></li>
+      </ul></dd>
+
+</dl>
+<% end %>

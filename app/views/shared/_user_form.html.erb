@@ -1,0 +1,30 @@
+<div class="form-area">
+<p>
+  <%= f.label :display_name, t('activerecord.attributes.user.display_name') %><br />
+  <%= f.text_field :display_name, :class => 'title'  %>
+</p>
+<p>
+  <%= f.label :mobile, t('activerecord.attributes.user.mobile') %><br />
+  <%= f.text_field :mobile, :class => 'title'  %>
+</p>
+
+<p>
+  <%= f.label :email, t(:email) %><br />
+  <%= f.text_field :email, :class => 'title'  %>
+  <span>选填项，填写有效的email地址可以更方便的接收酷购的产品信息。</span>
+</p>
+<div id="password-credentials" style="<%=password_style(@user)%>">
+  <p>
+    <%= f.label :password, t(:password) %><br />
+    <%= f.password_field :password, :class => 'title'  %>
+  </p>
+
+  <p>
+    <%= f.label :password_confirmation, t(:confirm_password) %><br />
+    <%= f.password_field :password_confirmation, :class => 'title' %>
+  </p>
+</div>
+
+<%= hook :signup_below_password_fields %>
+
+</div>

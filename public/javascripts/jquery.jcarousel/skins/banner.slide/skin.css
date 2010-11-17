@@ -1,0 +1,198 @@
+/*--------------------------- homepage top area---------------------------------------------*/
+#random_index #jcarousel-control
+{
+	width: 100%;
+	height: 25px;
+	position: absolute;
+	margin: -35px 0 0 0;
+	z-index: 2;
+}
+
+#random_index #jcarousel-control #TableForRound
+{
+	width:auto;
+}
+
+#random_index #jcarousel-control #TableForRound div
+{
+	margin: auto;
+	float: left;
+	cursor: pointer;
+	width: 16px;
+	height: 20px;
+	_behavior: url(/js_v2/iepngfix.htc);
+	margin-top:4px;
+	_margin-top:2px;
+}
+#random_index #jcarousel-control #TableForRound div.round
+{
+	background: transparent url(btn_arrow_Center.png) no-repeat 0 -20px;
+	_background: transparent url(btn_arrow_Center.gif) no-repeat 0 -20px;
+	_behavior: url(/js_v2/iepngfix.htc);
+}
+
+#random_index #jcarousel-control #TableForRound div.roundSelected
+{
+	cursor: default;
+	background: transparent url(btn_arrow_Center.png) no-repeat 0 0px;
+	_background: transparent url(btn_arrow_Center.gif) no-repeat 0 0px;
+	_behavior: url(/js_v2/iepngfix.htc);
+}
+
+/**
+ * This <div> element is wrapped by jCarousel around the list
+ * and has the classname "jcarousel-container".
+ */
+.jcarousel-container
+{
+	position: relative;
+}
+
+.jcarousel-clip
+{
+	z-index: 2;
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+	position: relative;
+}
+
+.jcarousel-list
+{
+	z-index: 1;
+	overflow: hidden;
+	position: relative;
+	margin: 0;
+	padding: 0;
+}
+
+.jcarousel-list li, .jcarousel-item
+{
+	float: left;
+	list-style: none; /* We set the width/height explicitly. No width/height causes infinite loops.      width: 75px;     height: 75px;*/
+}
+
+/**
+ * The buttons are added dynamically by jCarousel before
+ * the <ul> list (inside the <div> described above) and
+ * have the classnames "jcarousel-next" and "jcarousel-prev".
+ */
+.jcarousel-next
+{
+	z-index: 3;
+	display: none;
+}
+
+.jcarousel-prev
+{
+	z-index: 3;
+	display: none;
+}
+
+/*--------------------------------------------Skin----------------------------------------------*/
+img
+{
+	_behavior: url(/js_v2/iepngfix.htc);
+}
+.jcarousel-skin-default .jcarousel-container
+{
+	-moz-border-radius: 10px;
+	background: white;
+}
+
+.jcarousel-skin-default .jcarousel-container-horizontal
+{
+	width: 980px;
+	height: 409px;
+	padding: 0;
+	margin: 0;
+}
+
+.jcarousel-skin-default .jcarousel-clip-horizontal
+{
+	width: 980px;
+	height: 400px;
+}
+
+.jcarousel-skin-default .jcarousel-item
+{
+	width: 980px;
+	height: 400px;
+}
+
+.jcarousel-skin-default .jcarousel-item:hover
+{
+	/*border-color: #808080;*/
+}
+
+.jcarousel-skin-default .jcarousel-item-horizontal
+{
+	margin-right: 0px;
+}
+
+.jcarousel-skin-default .jcarousel-item-placeholder
+{
+	width: 980px;
+	height: 400px;
+}
+
+/**
+ *  Horizontal Buttons
+ */
+.jcarousel-skin-default .jcarousel-next-horizontal
+{
+	position: absolute;
+	top: 360px;
+	right: 0px;
+	width: 40px;
+	height: 40px;
+	cursor: pointer;
+	background:url("/javascripts/jquery.jcarousel/skins/tango/next-horizontal.gif") no-repeat scroll 0 0 transparent;
+	_top: 369px; /*IE6 png file fix*/
+	_behavior: url(/js_v2/iepngfix.htc);
+}
+
+.jcarousel-skin-default .jcarousel-next-horizontal:hover
+{
+	/*background-position: -32px 0;*/
+}
+
+.jcarousel-skin-default .jcarousel-next-horizontal:active
+{
+	/*background-position: -64px 0;*/
+}
+
+.jcarousel-skin-default .jcarousel-next-disabled-horizontal, .jcarousel-skin-default .jcarousel-next-disabled-horizontal:hover, .jcarousel-skin-default .jcarousel-next-disabled-horizontal:active
+{
+	cursor: default; /*background-position: -96px 0;*/
+}
+
+.jcarousel-skin-default .jcarousel-prev-horizontal
+{
+	position: absolute;
+	top: 360px;
+	width: 40px;
+	height: 40px;
+	cursor: pointer;
+	background:url("/javascripts/jquery.jcarousel/skins/tango/prev-horizontal.gif") no-repeat scroll 0 0 transparent;
+	_top: 369px; /*IE6 png file fix*/
+	_behavior: url(/js_v2/iepngfix.htc);
+}
+
+.jcarousel-skin-default .jcarousel-prev-horizontal:hover
+{
+	/*background-position: -32px 0;*/
+}
+
+.jcarousel-skin-default .jcarousel-prev-horizontal:active
+{
+	/*background-position: -64px 0;*/
+}
+
+.jcarousel-skin-default .jcarousel-prev-disabled-horizontal, .jcarousel-skin-default .jcarousel-prev-disabled-horizontal:hover, .jcarousel-skin-default .jcarousel-prev-disabled-horizontal:active
+{
+	cursor: default; /*background-position: -96px 0;*/
+}
+
+
+

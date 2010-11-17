@@ -1,0 +1,10 @@
+<h1>详细资料</h1>
+
+<% form_for(@profile, :url => '/profiles/save') do |f| %>
+  <%= render 'profile_form', :f => f %>
+
+  <p class="buttonarea"><%= submit_tag '保存信息', :class => 'button submit-btn'%></p>
+<% end %>
+
+
+

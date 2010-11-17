@@ -1,0 +1,9 @@
+
+<%= link_to '添供货商', new_object_url %> |
+
+
+<ul>
+<% @suppliers.each do |s| %>
+  <li><%= s.name %></li>
+<% end %>
+</ul>

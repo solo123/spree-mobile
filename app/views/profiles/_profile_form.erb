@@ -1,0 +1,132 @@
+<div class="profiles-info">
+  <table>
+    <tr>
+      <td>客户名称</td>
+      <td><%= f.text_field :jbxx_khmc %></td>
+      <td>地址</td>
+      <td colspan="2"><%= f.text_field :jbxx_dz %></td>
+      <td>电话</td>
+      <td><%= f.text_field :jbxx_dh %></td>
+    </tr>
+    <tr>
+      <td>成立时间</td>
+      <td colspan="2"><%= f.text_field :jbxx_clsj %></td>
+      <td>注册资金</td>
+      <td><%= f.text_field :jbxx_zczj %></td>
+      <td>传真</td>
+      <td><%= f.text_field :jbxx_cz %></td>
+    </tr>
+    <tr>
+      <td>经营方式</td>
+      <td colspan="2">
+        <div class="checkset">
+          <input type="checkbox" name="checkbox" id="checkbox" /><label for="checkbox">独资</label>
+          <input type="checkbox" name="checkbox2" id="checkbox2" /><label for="checkbox2">合伙</label>
+          <input type="checkbox" name="checkbox3" id="checkbox3" /><label for="checkbox3">公司</label>
+        </div>
+      </td>
+      <td>组织</td>
+      <td colspan="3">
+        业务：<%= f.text_field :jbxx_ywrs, :size => 5 %>人；
+        市场：<%= f.text_field :jbxx_scrs, :size => 5 %>人；
+        公司共: <%= f.text_field :jbxx_gsrs,:size => 5 %>人。
+      </td>
+    </tr>
+  </table>
+  <h3>公司概况</h3>
+  <table>
+    <tr>
+      <td>总经理</td>
+      <td>姓名：
+        <%= f.text_field :gsgk_zjl_xm, :size => 16 %></td>
+      <td>电话：
+        <%= f.text_field :gsgk_zjl_dh, :size => 16 %></td>
+      <td>营销总监</td>
+      <td>姓名：
+        <%= f.text_field :gsgk_yxzj_xm, :size => 16 %></td>
+      <td>电话：
+        <%= f.text_field :gsgk_yxzj_dh, :size => 16 %></td>
+    </tr>
+    <tr>
+      <td>财务</td>
+      <td>姓名：
+        <%= f.text_field :gsgk_cw_xm, :size => 16 %></td>
+      <td>电话：
+        <%= f.text_field :gsgk_cw_dh, :size => 16 %></td>
+      <td>售后</td>
+      <td>姓名：
+        <%= f.text_field :gsgk_sh_xm, :size => 16 %></td>
+      <td>电话：
+        <%= f.text_field :gsgk_sh_dh, :size => 16 %></td>
+    </tr>
+  </table>
+  <h3>经营情况</h3>
+  <table>
+    <tr>
+      <td>代理品牌</td>
+      <td>月销情况</td>
+      <td>年销情况</td>
+      <td>备注</td>
+    </tr>
+    <tr>
+      <td><%= f.text_field :jyqk_dlpp1 %></td>
+      <td><%= f.text_field :jyqk_yxqk1 %></td>
+      <td><%= f.text_field :jyqk_nxqk1 %></td>
+      <td><%= f.text_field :jyqk_bz1 %></td>
+    </tr>
+    <tr>
+      <td><%= f.text_field :jyqk_dlpp2 %></td>
+      <td><%= f.text_field :jyqk_yxqk2 %></td>
+      <td><%= f.text_field :jyqk_nxqk2 %></td>
+      <td><%= f.text_field :jyqk_bz2 %></td>
+    </tr>
+    <tr>
+      <td><%= f.text_field :jyqk_dlpp3 %></td>
+      <td><%= f.text_field :jyqk_yxqk3 %></td>
+      <td><%= f.text_field :jyqk_nxqk3 %></td>
+      <td><%= f.text_field :jyqk_bz3 %></td>
+    </tr>
+    <tr>
+      <td><%= f.text_field :jyqk_dlpp4 %></td>
+      <td><%= f.text_field :jyqk_yxqk4 %></td>
+      <td><%= f.text_field :jyqk_nxqk4 %></td>
+      <td><%= f.text_field :jyqk_bz4 %></td>
+    </tr>
+  </table>
+  <h3>售后情况</h3>
+  <table>
+    <tr>
+      <td>售后能力</td>
+      <td><%= f.text_field :shqk_nl %></td>
+    </tr>
+    <tr>
+      <td>备注</td>
+      <td><%= f.text_field :shqk_bz %></td>
+    </tr>
+  </table>
+
+  <h3>您有何建议</h3>
+  <table>
+    <tr>
+      <td>价格方面</td>
+      <td><%= f.text_area :jy_jgfm, :size => '80x5' %></td>
+    </tr>
+    <tr>
+      <td>信用额度</td>
+      <td><%= f.text_area :jy_xyed, :size => '80x5' %></td>
+    </tr>
+    <tr>
+      <td>广告方面</td>
+      <td><%= f.text_area :jy_ggfm, :size => '80x5' %></td>
+    </tr>
+    <tr>
+      <td>售后方面</td>
+      <td><%= f.text_area :jy_shfm, :size => '80x5' %></td>
+    </tr>
+    <tr>
+      <td>市场现状</td>
+      <td><%= f.text_area :jy_scxz, :size => '80x5' %></td>
+    </tr>
+  </table>
+
+</div>

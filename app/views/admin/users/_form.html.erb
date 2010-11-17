@@ -1,0 +1,32 @@
+<%- locals = {:f => f} -%>
+<% hook :admin_user_form_fields, locals do %>
+
+  <% f.field_container :mobile do %>
+    <%= f.label :mobile, '手机号码' %><br />
+    <%= f.text_field :mobile  %>
+    <%= error_message_on :user, :mobile%>
+  <% end %>
+
+  <% f.field_container :email do %>
+    <%= f.label :email, t("email") %><br />
+    <%= f.text_field :email  %>
+    <%= error_message_on :user, :email%>
+  <% end %>
+
+<% end %>
+
+<% hook :admin_user_form_roles, locals do %>
+  <p>
+    <label><%= t("roles") %></label><br />
+    <% for role in @roles %>
+      <label class="sub">
+        <%= check_box_tag "user[role][#{role.name}]", 1, @user.has_role?(role.name) %>
+        <%= role.name %>
+      </label> &nbsp;
+    <% end %>
+  </p>
+<% end %>
+
+
+
+

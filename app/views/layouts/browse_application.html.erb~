@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<% hook :inside_head do %>
+  <%= render :partial => 'shared/browse_head'%>
+<% end %>
+</head>
+<body>
+	<div id="siteContainer">
+		<div id="header">
+	  		<div id="headerTop">
+	  			<div id="mainLogo">
+	  				<a href="/"><img src="ab" alt="酷购" /></a>
+	  			</div>
+	  			<div id="mainSubNav">
+	  				<ul>
+	  					<li><a href="/"><img src="abc" alt="abc" /></a></li>
+	  					<li><a href="/"><img src="abc" alt="abc" /></a></li>
+	  					<li><a href="/"><img src="abc" alt="abc" /></a></li>
+	  					<li><a href="/"><img src="abc" alt="abc" /></a></li>
+	  					<li><a href="/"><img src="abc" alt="abc" /></a></li>
+	  				</ul>
+	  			</div>
+	  		</div>
+	  		<div id="mainNav">
+	  		</div>
+	  	</div>
+	  	
+	  	<div class="horizRule">&nbsp;</div>
+
+      <%= yield %>
+	   <%= render :partial => 'shared/browse_footer'%>
+  </div>
+</body>
+</html>

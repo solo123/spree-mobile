@@ -1,0 +1,14 @@
+<h2>发送信息</h2>
+
+
+ <% form_tag('/admin/msgs/test') do -%>
+  <p>
+    手机号:<input type="text" name="mobile" />
+  </p>
+  <p>
+    内  容:<input type="text" name="content" />
+  </p>  <div><%= submit_tag 'Save' %></div>
+ <% end -%>
+
+
+

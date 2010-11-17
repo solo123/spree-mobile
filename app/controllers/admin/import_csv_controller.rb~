@@ -1,0 +1,151 @@
+require 'faster_csv'
+
+class Admin::ImportCsvController < Admin::BaseController
+
+	def index
+	end
+	
+	def parse
+		csv_file = params['csv']
+		@ps = get_all_rows
+   	check_exist	
+		render :json => @ps.to_json
+	end
+	
+	def do_import
+		csv_file = params['csv']
+		@top_catalog = params['catalog']
+		@ps = get_all_rows
+		check_exist
+		@imp_str = ""
+		@ps.each do |p|
+			add_product(p)
+		end
+		render :text => @imp_str
+	end
+	
+	def get_all_rows
+		csv_file = params['csv']
+		rows = []
+		FasterCSV.foreach("#{RAILS_ROOT}/public/upload/" + csv_file, :headers => true) do |row|
+			rows << parse_row(row)
+   	end
+   	rows
+	end
+	
+	def parse_row(line)
+	begin
+		p = {}
+		p['name'] = (line["名称"] ? line["名称"] : line["品牌"] + " " + line["型号"]).to_s
+		p['permalink'] = line["货号"] ? line["货号"] : "CP-" + Time.now.strftime("%y%m%d").to_i.to_s(35) + "-" + ("%04d" % line["序号"].to_i)
+		p['brand'] = line["品牌"].to_s
+		p_type = line["型号"]		
+		p_type = line["名称"].to_s.strip[/[^a-zA-Z0-9]+([a-zA-Z0-9]+)/,1] if !p_type && line["名称"]
+		p['model'] = p_type
+		p_price = line["批发价"]
+	   p_price="1.0" if !p_price
+		p['price'] = p_price.to_s
+		p['system'] = line["制式"].to_s  
+		p['taxons'] = line["分类"].to_s
+		
+		pp = {}
+		s_field = "名称，品牌，型号，货号，详细信息，制式，上市时间，序号，样式，分类，颜色，图片"
+		line.each do |c|
+			next if s_field.include?(c[0])
+			pp[c[0]] = c[1].to_s 
+  		end
+  		p['properties'] = pp
+  		
+  		cc = []
+		if line["颜色"]
+  			line["颜色"].split(/\s*[\/,，、]\s*/).each do |p_color|
+  				p_color << "色" if !p_color.include?("色")
+  				cc << p_color
+  			end
+  		end
+  		p['colors'] = cc
+  		p['description'] = line["详细信息"].to_s
+  		
+  		p
+  		rescue => e
+  			e.to_s
+  	end
+	end
+	def check_exist
+		@ps.each do |p|
+  			s = Product.find_by_name(p['name'])
+			p['old'] = s.permalink if s
+		end
+	end
+	
+	def add_product(product)
+		if product['old'] && product['old'].length > 0
+			
+			return
+		end
+
+		p = Product.create \
+			:name => product['name'], \
+			:price => product['price'].to_d, \
+			:description => product['description'],\
+			:permalink => product['permalink'], \
+			:available_on => Time.now
+
+		p.shipping_category = ShippingCategory.find_or_create_by_name("Type A")
+		
+		# 品牌，制式，分类
+		find_or_create_taxonomy if !@taxonomy_id
+		@the_taxons = []
+		add_brand_taxon(product['brand'])
+		add_simple_taxon("制式", product['system'])
+		add_simple_taxon("分类", product['taxons'])
+		p.taxons = @the_taxons
+		
+		prop = Property.find_or_create_by_name_and_presentation("型号", "型号")
+		ProductProperty.create :property => prop, :product => p, :value => product['model']
+		
+		product['properties'].each do |c|
+			prop = Property.find_or_create_by_name_and_presentation(c[0],c[0])
+			ProductProperty.create :property => prop, :product => p, :value => c[1]
+  		end
+  		
+  		if product['colors'].length > 0
+			pt = OptionType.find_or_create_by_name_and_presentation("颜色", "颜色")
+			p.option_types << pt
+			product['colors'].each do |p_color|
+  				ov = OptionValue.find_or_create_by_name_and_presentation_and_option_type_id(p_color,p_color, pt.id)
+  				
+  				v = Variant.create :product => p
+  				v.option_values << ov
+  			end
+  		end
+  		
+  		p.save
+  		@imp_str << p.name
+		@imp_str << '<br />'
+	end
+	
+	def add_simple_taxon(taxonomy, taxon_text)
+		if taxon_text
+			c_id = Taxonomy.find_or_create_by_name(taxonomy).id
+			p_id = Taxon.find_by_name(taxonomy).id
+			names = taxon_text.split(/\s*[,，、]\s*/)
+			names.each do |name|
+				@the_taxons << Taxon.find_or_create_by_name_and_parent_id_and_taxonomy_id(taxon_text, p_id, c_id)
+			end
+		end
+	end
+	def find_or_create_taxonomy
+		@taxonomy_id = Taxonomy.find_or_create_by_name("品牌").id
+		p_id = Taxon.find_by_name("品牌").id
+		if @top_catalog.length > 0
+			@taxonomy_brand = Taxon.find_or_create_by_name_and_parent_id_and_taxonomy_id(@top_catalog, p_id, @taxonomy_id).id
+		else
+			@taxonomy_brand = p_id
+		end
+	end
+	def add_brand_taxon(brand)
+		@the_taxons << Taxon.find_or_create_by_name_and_parent_id_and_taxonomy_id(brand, @taxonomy_brand, @taxonomy_id)
+	end	
+	
+end

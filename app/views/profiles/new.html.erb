@@ -1,0 +1,36 @@
+
+<% form_for(@profile, :url => 'save' ) do |f| %>
+
+<p>
+  <%= f.label :shop_name, t(:shop_name) %><br />
+  <%= f.text_field :shop_name, :class => 'title'  %>
+</p>
+<p>
+  <%= f.label :shop_type, t(:shop_type) %><br />
+  <%= f.text_field :shop_type, :class => 'title'  %>
+</p>
+
+<div>
+  <% f.fields_for :contact do |c| %>
+    <%= render "address", :addr => c %>
+  <% end %>
+</div>
+
+<p>
+  <%= f.label :sales_monthly, t(:sales_monthly) %><br />
+  <%= f.text_field :sales_monthly, :class => 'title'  %>
+</p>
+<p>
+  <%= f.label :brands, t(:brands) %><br />
+  <%= f.text_field :brands, :class => 'title'  %>
+</p>
+<p>
+  <%= f.label :grade, t(:grade) %><br />
+  <%= f.text_field :grade, :class => 'title'  %>
+</p>
+
+<p><%= submit_tag t("create"), :class => 'button primary' %></p>
+<% end %>
+
+
+

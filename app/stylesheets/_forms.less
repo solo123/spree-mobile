@@ -1,0 +1,81 @@
+form {
+  
+  p.field {
+    margin-bottom: 0.5em;
+    clear: both;
+    
+    span.req {
+      color: red;
+      float: left; 
+      margin-left: 2px;
+      position: relative;
+      top: -3px;
+    }
+    
+    input[type=text], select { 
+      float: left;
+      margin: 0 5px 7px 0; 
+    }
+  }
+  p.field.radios {
+    line-height: 150%;
+  }
+  
+}
+
+label {
+  font-weight: bold;
+}
+
+.form-area{
+    input.error{
+        border: 1px solid #FF8080;
+    }
+    label.error{
+        margin-left: 5px;
+        background: url("/images/site/msg_bg.png") no-repeat scroll 3px 1px transparent;
+        background-color:#FFF2F2;
+        border: 1px solid #FF8080;
+        color:#404040;
+        line-height:18px;
+        padding:2px 10px 2px 23px;
+    }
+
+}
+
+
+
+div#checkout #checkout_form_address #billing label.error, 
+div#checkout #checkout_form_address #shipping label.error
+{
+  color: red;
+  float: left;
+  text-align: left;
+  display:inline-block;
+  top: 0px;
+  font-size: 11px;
+  border: none;
+  padding: 0px;
+  width: auto;
+}
+fieldset {
+  margin-bottom: 1em;
+}
+legend {
+  font-size: 150%;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+input.ipt,textarea.ipt{
+    padding: 5px;
+    border:2px solid #c0c0c0;
+    -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px;
+}
+
+input.hover,textarea.hover{
+    border:2px solid #8ec871;
+}
+input.focus,textarea.focus{
+    border:2px solid #ffb311;
+}

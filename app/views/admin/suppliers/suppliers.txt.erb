@@ -1,0 +1,5 @@
+<% if @suppliers
+@suppliers.each do |s| -%>
+<b><%= s.name %></b> <%= s.contact %> <%= s.phone %>  |<%=  s.id %>|<%= s.name %>
+<% end
+end -%>

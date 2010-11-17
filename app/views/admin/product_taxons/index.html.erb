@@ -1,0 +1,84 @@
+<% content_for :head do %>
+<script type="text/javascript">
+  function load_taxons(){
+
+    v = $('#taxon_source').val();
+    if (v!="") {
+        $.getJSON("/admin/product_taxons/taxon", {q: v}, function(data){
+            $('#t_src').html("");
+            for (var i=0; i<data.length; i++){
+              $('#t_src').append("<input type='radio' name='taxon_source' value = '"+ data[i].id +"' id='t_src_"+ i.toString() +"'><label for='t_src_"+ i.toString() +"'>"+ data[i].name +"</label><br />");
+            }
+     });
+    }
+
+    v = $('#taxon_target').val();
+    if (v!="") {
+        $.getJSON("/admin/product_taxons/taxon", {q: v}, function(data){
+            $('#t_tag').html("");
+            for (var i=0; i<data.length; i++){
+              $('#t_tag').append("<input type='radio' name='taxon_target' value = '"+ data[i].id +"' id='t_tag_"+ i.toString() +"'><label for='t_tag_"+ i.toString() +"'>"+ data[i].name +"</label><br />");
+            }
+     });
+    }
+  }
+
+  function merge(){
+    var s_id =  $('input:radio[name=taxon_source]:checked').val();
+    var s_txt = $('input:radio[name=taxon_source]:checked').next().text();
+    var t_id =  $('input:radio[name=taxon_target]:checked').val();
+    var t_txt = $('input:radio[name=taxon_target]:checked').next().text();
+    if (s_id==undefined || t_id==undefined || s_id==t_id){
+      alert("请选择从哪个分类合并到哪个分类，两个分类不能一样。")
+      return;
+    }
+    if (confirm("准备合并分类"+s_id+":"+ s_txt +" =>> "+ t_id +":"+ t_txt +"\n\n确认要合并分类吗?")){
+      $.get("/admin/product_taxons/merge", {src:s_id, tag:t_id}, function(data){
+        alert(data);
+      });
+    }
+
+  }
+</script>
+<% end %>
+
+<%= render :partial => 'admin/uploads/sub_menu' %>
+
+<h2>修改分类</h2>
+
+<table cellpadding="4" style="width:600px;border:solid 1px green;">
+  <tr>
+    <td>分类：</td>
+    <td><%= text_field :taxon, :source, :size => 20 %></td>
+    <td>==&gt; 合并到分类:</td>
+    <td><%= text_field :taxon, :target, :size => 20 %></td>
+    <td><input type="button" value="查询" onclick="load_taxons();" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td id="t_src"></td>
+    <td></td>
+    <td id="t_tag"></td>
+    <td></td>
+  </tr>
+</table>
+
+<p>
+  <input type="button" value="合并" onclick="merge();" />
+</p>
+
+
+<p>
+  <input type="checkbox" value="01" name="products" id="p_01" /><label for="p_01">Product 01</label>
+  <input type="checkbox" value="02" name="products" id="p_02" /><label for="p_02">Product 02</label>
+  <input type="checkbox" value="03" name="products" id="p_03" /><label for="p_03">Product 03</label>
+  <input type="checkbox" value="04" name="products" id="p_04" /><label for="p_04">Product 04</label>
+  <input type="checkbox" value="05" name="products" id="p_05" /><label for="p_05">Product 05</label>
+</p>
+
+<p>
+  
+</p>
+
+
+<%= "index.html" %>

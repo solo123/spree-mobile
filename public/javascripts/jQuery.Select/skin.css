@@ -1,0 +1,24 @@
+
+    /* select style */
+    /* must have this*/
+    .dropdown {outline:none;}
+    .dropdown h4{cursor:default;}
+    .dropdown * {-moz-user-select:none;}
+    .dropdown h4.over {}
+    .dropdown div {display:none; position:relative; z-index: 100; }
+    .dropdown span {position:absolute;}
+    .dropdown ul{ margin:0; position:absolute;display:none;}
+    .dropdown ul li{}
+    .dropdown ul li.over{}
+    /* write you style here */
+    .dropdown {float:left;}
+    .dropdown h4{display:block; padding:0 25px 0 5px; margin:0; height:21px; font:12px/21px Arial, Helvetica, sans-serif; border:solid 1px #AAA; background:#DDD url(selectBg.png) repeat-x left top; width:120px;}
+    .dropdown h4.over{border-color:#369;}
+    .dropdown div {}
+    .dropdown span {top:0; right:7px; background:url(droparrow.gif) no-repeat center; width:7px; height:21px;}
+    .dropdown span.over {background-image:url(droparrowover.gif);}
+    .dropdown ul{border:1px solid #AAA; background:#FFF; width:150px; border-top:none;}
+    .dropdown ul li{background:#FFF;height:19px;display:block;padding:0 25px 0 5px;cursor:default;font:400 12px/19px Arial, Helvetica, sans-serif;}
+    .dropdown ul li.over{background:#369; color:#FFF;}
+    /* select style */
+    #searchtype, #test2 {float:left; margin-right:8px;}

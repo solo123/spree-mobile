@@ -1,0 +1,49 @@
+<% content_for :head do %>
+  <%= javascript_include_tag 'jquery.validate.pack.js','messages_zh.js' %>
+<script type="text/javascript">
+  $(function(){
+
+    $('#new_user').validate({
+      rules: {
+        "user[display_name]": "required",
+        "user[mobile]": "required",
+        "user[password]": "required",
+        "user[password_confirmation]": "required",
+        "user[email]": "email"
+      }
+    });
+
+
+  });
+</script>
+<% end %>
+
+<%= error_messages_for :user %>
+
+<% @body_id = 'signup' %>
+
+<div id="new-customer">
+  <h2><%= t("new_customer") %></h2>
+
+  <% hook :signup do %>
+
+    <% form_for(@user) do |f| %>
+
+      <% hook :signup_inside_form do %>
+        <%= render 'shared/user_form', :f => f %>
+        <p>单击“<%= t("create") %>”即表示您同意 Coolpur <a href="/pages/registration-agreement" target="_blank">用户协议</a>和<a href="/pages/legal-notices" target="_blank">法律声明</a>。 </p>
+        <p><%= submit_tag t("create"), :class => 'button primary submit-btn' %></p>
+        <% if Spree::Config[:allow_openid] %>
+          <hr />
+          <p id='enable_login_via_openid' style="<%=password_style(@user)%>" ><a href='#'><%= t :enable_login_via_openid %></a></p>
+          <p id='enable_login_via_login_password' style="<%=openid_style(@user)%>" ><a href='#'><%= t :enable_login_via_login_password %></a></p>
+          <%= javascript_include_tag 'open_id' %>
+        <% end %>
+      <% end %>
+    <% end %>
+    <%= t("or") %> <%= link_to t("login_as_existing"), login_path %> |
+    <%= link_to t("forgot_password"), new_password_reset_path %>
+
+  <% end %>
+
+</div>

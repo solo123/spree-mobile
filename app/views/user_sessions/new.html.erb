@@ -1,0 +1,41 @@
+<% content_for :head do %>
+  <%= javascript_include_tag 'messages_zh.js' %>
+<script type="text/javascript">
+  $(function(){
+    $('#login_form').validate();
+  });
+</script>
+<% end %>
+
+<% @body_id = 'login' %>
+<div id="existing-customer">
+  <div class="login-area">
+    <h2><%= t("login_as_existing") %></h2>
+    <% hook :login do %>
+      <%= render :partial => 'shared/login' %>
+      <%= t("or") %> <%= link_to t("create_a_new_account"), signup_path %> | <%= link_to t("forgot_password"), new_password_reset_path %>
+    <% end %>
+  </div>
+  <div class="login-tips">
+    <h3>欢迎登录到酷购</h3>
+    <ol>
+      <li>支持手机号登录(不会被公开)</li>
+      <li>用手机找回密码更方便</li>
+      <li>登录后可以查看最新产品及报价</li>
+      <li>可以享受到更多的服务</li>
+    </ol>
+    <h3>还没有酷购帐号吗?</h3>
+    <p>那赶快注册吧!
+      <a href="<%= signup_path %>">
+        <img onmouseover="this.src='/images/site/btn/signup-btn-hover.png'" onmouseout="this.src='/images/site/btn/signup-btn.png'" src="/images/site/btn/signup-btn.png" alt="免费注册" />
+      </a>
+    </p>
+    <strong>注册后您可以</strong>
+    <ol>
+      <li>查看最新的产品及报价</li>
+      <li>可以实时跟踪订单处理状态</li>
+      <li>并且注册信息是安全的,详情查看我们的　<a href="#">隐私条款</a></li>
+    </ol>
+  </div>
+  <div class="clr"></div>
+</div>

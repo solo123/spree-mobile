@@ -1,0 +1,82 @@
+@import "_colors";
+@import "_mixins";
+
+#signup #new-customer, #login #existing-customer {
+  /*.column(24);*/
+  min-height:400px;
+  height:auto;
+  _height:400px;
+  h2 { margin-bottom: .25em; }
+  p {
+    margin-bottom: 10px;
+    input.title {
+      padding: 3px;
+      margin: 0px;
+    }
+    img{
+        float:none;
+        margin-left:8px;
+    }
+  }
+  input[type=checkbox] {
+    top: 0.0em;
+  }
+}
+
+#new-customer, #existing-customer {
+  h2 { margin-bottom: .25em; }
+  p {
+    margin-bottom: 10px;
+    input.title {
+      padding: 3px;
+      margin: 0px;
+    }
+  }
+  input[type=checkbox] {
+    top: 0.0em;
+  }
+}
+
+#new-customer{
+    margin:50px 50px;
+    h2{ padding-bottom:12px; border-bottom: 2px solid #f1d33d; }
+    hr{ background:#f1d33d; }
+}
+
+
+#existing-customer{
+    margin:50px 0 18px 0;
+
+    h2{ padding-bottom:12px; border-bottom: 2px solid #f1d33d; }
+
+    .login-area{
+        float:right;
+        width:40%;
+        hr{ background:#f1d33d; }
+    }
+    .login-tips{
+        float:left;
+        width:50%;
+        padding:10px 0 10px 50px;
+        h3{
+            font-size:22px;
+            color:#238cbb;
+        }
+        ol{
+            list-style-type: circle;
+            margin-bottom: 18px; 
+            li{
+
+            }
+        }
+    }
+
+
+}
+
+input.openid_url {
+  background: #FFFFFF url(../images/openid-inputicon.gif) no-repeat scroll 0pt 50%;
+  padding-left: 18px;
+  border: 1px solid #BBBBBB;
+  font-size: 1.5em;
+  }

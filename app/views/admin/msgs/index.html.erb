@@ -1,0 +1,30 @@
+<h2>信息列表</h2>
+
+<table>
+  <thead>
+    <th>Sender</th>
+    <th>Sendee</th>
+    <th>Sendee#</th>
+    <th>Type</th>
+    <th>Title</th>
+    <th>Body</th>
+    <th>Status</th>
+    <th>Op</th>
+  </thead>
+  <tbody>
+    <% for msg in @msgs do %>
+    <tr>
+      <td><%= msg.sender %></td>
+      <td><%= msg.sendee %></td>
+      <td><%= msg.sendee_id %></td>
+      <td><%= msg.msg_type %></td>
+      <td><%= msg.msg_title %></td>
+      <td><%= msg.msg_body %></td>
+      <td><%= msg.status %></td>
+      <td><%= link_to 'Send', :id => msg.id   %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

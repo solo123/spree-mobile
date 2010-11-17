@@ -1,0 +1,51 @@
+<div class="info-title editing">
+  <h3>编辑基本信息</h3>
+  <a onclick="discard_baseinfo();">放弃修改</a>
+  <%= error_messages_for :user %>
+</div>
+  <table>
+    <tr><td>
+        <% form_for(@user, :url => object_url, :html => { :method => :put, :class => 'baseinfo' }) do |f| %>
+          <table style="width:auto;">
+            <tr>
+              <td>显示名：</td>
+              <td><%= f.text_field :display_name, :class => 'title'  %></td>
+            </tr>
+            <tr>
+              <td><%= t('activerecord.attributes.user.mobile') %>：</td>
+              <td><%= f.text_field :mobile, :class => 'title'  %></td>
+            </tr>
+            <tr>
+              <td><%= t('activerecord.attributes.user.email') %>：</td>
+              <td><%= f.text_field :email, :class => 'title'  %></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><%=submit_tag t("update"), :class => 'button submit-btn' %></td>
+            </tr>
+          </table>
+        <% end %>
+      </td><td>
+        <% form_for(:user, :url => object_url, :html => { :method => :put, :class=>"baseinfo" }) do |f| %>
+          <table style="width:auto;">
+            <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td>新密码：</td>
+              <td><%= f.password_field :password, :class => 'title'  %></td>
+            </tr>
+            <tr>
+              <td>再次输入新密码：</td>
+              <td><%= f.password_field :password_confirmation, :class => 'title' %></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><%=submit_tag t("update"), :class => 'button submit-btn' %></td>
+            </tr>
+          </table>
+        <% end %>
+      </td></tr>
+  </table>
+  <%= hook :signup_below_password_fields %>

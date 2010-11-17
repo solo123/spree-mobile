@@ -1,0 +1,69 @@
+<% @body_id = 'product-details' %>
+<div class="pro-r-a">
+  <div id="product-parameters">
+    <h1 class="product-name"><%= @product.name %></h1>
+    <% hook :product_properties do
+      sys = @product.taxon_name('制式')
+      tax = @product.taxon_name('分类')
+      fun = @product.taxon_name('功能')
+    %>
+      <dl id="product-taxons" class="table-display">
+        <% if sys.length > 0 %>
+          <dt>制式</dt>
+          <dd><%= sys.join(',') %>&nbsp;</dd>
+        <% end %>
+        <% if tax.length > 0 %>
+          <dt>分类</dt>
+          <dd><%= tax.join(',') %>&nbsp;</dd>
+        <% end %>
+      </dl>
+      <div class="clr"></div>
+      <%= render 'properties' %>
+      <div class="clr"></div>
+      <div class="fun-icon">
+        <% if fun.length > 0
+          fun.each do |f|
+          %>
+            <img src="/images/icon/<%= f %>.jpg" alt="" />
+          <% end
+        end %>
+      </div>
+
+    <% end %>
+    <div class="clr"></div>
+    <div class="intro">产品卖点：<%= @product.property('卖点') %></div>
+    <p>标配：<%= @product.property('标配') %></p>
+
+
+  </div>
+
+  <div class="pro-right-area">
+    <% hook :cart_form do %>
+      <div id="cart-form">
+        <%= render 'cart_form' %>
+      </div>
+    <% end %>
+    <!--<%= render 'taxons' %>-->
+  </div>
+</div>
+
+
+<div id="product-images">
+  <div id="main-image">
+    <%= render 'image' -%>
+  </div>
+  <div id="thumbnails">
+    <%= render 'thumbnails', :product => @product -%>
+  </div>
+</div>
+
+
+
+<div class="clr"></div>
+
+<div id="product-description">
+  <% hook :product_description do %>
+    <h2>详细参数</h2>
+    <%= product_description(@product) rescue t("product_has_no_description") %>
+  <% end %>
+</div>

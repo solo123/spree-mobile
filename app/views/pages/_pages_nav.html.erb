@@ -1,0 +1,69 @@
+<script type="text/javascript">
+function highlightPage() {
+  if (!document.getElementsByTagName) return false;
+  if (!document.getElementById) return false;
+  if (!document.getElementById("pageNavigation")) return false;
+  var nav = document.getElementById("pageNavigation");
+  var links = nav.getElementsByTagName("a");
+  for (var i=0; i<links.length; i++) {
+    var linkurl = links[i].getAttribute("href");
+    var currenturl = window.location.href;
+    if (currenturl.indexOf(linkurl) != -1) {
+      links[i].className = "current";
+      var linktext = links[i].lastChild.nodeValue.toLowerCase();
+      document.body.setAttribute("id",linktext);
+    }
+  }
+}
+highlightPage();
+</script>
+<ul id="pageNavigation">
+  <li>
+    <h3 class="parent-name">新手指南</h3>
+    <ul>
+      <li> <a href="/pages/register-new-user">注册新用户</a> </li>
+      <li> <a href="/pages/direct-supply-process">直供流程</a> </li>
+      <li> <a href="/pages/faq">常见问题</a></li>
+    </ul>
+  </li>
+  <li>
+    <h3 class="parent-name">如何付款/退款</h3>
+    <ul>
+      <li> <a href="/pages/payment">支付方式</a> </li>
+      <li> <a href="/pages/how-to-apply-for-a-refund">如何办理退款</a> </li>
+    </ul>
+  </li>
+  <li>
+    <h3 class="parent-name">配送方式</h3>
+    <ul>
+      <li> <a href="/pages/logistics-services">物流服务</a> </li>
+      <li> <a href="/pages/delivery-time">支持地区及配送时间</a> </li>
+      <li> <a href="/pages/distribution-costs">配送费收取标准</a> </li>
+      <li> <a href="/pages/logistics-security">物流担保</a> </li>
+    </ul>
+  </li>
+  <li>
+    <h3 class="parent-name">售后服务</h3>
+    <ul>
+      <li> <a href="/pages/return-policy">退换货政策</a> </li>
+      <li> <a href="/pages/how-to-apply-for-returns">如何办理退换货</a> </li>
+      <li> <a href="/pages/complaints-and-suggestions">投诉与建议</a> </li>
+    </ul>
+  </li>
+  <li>
+    <h3 class="parent-name">合作申请</h3>
+    <ul>
+      <li> <a href="/pages/cooperation">合作方式</a> </li>
+      <li> <a href="/pages/Cooperation-agreement">合作协议</a> </li>
+    </ul>
+  </li>
+  <li>
+    <h3 class="parent-name">关于我们</h3>
+    <ul>
+      <li> <a href="/pages/about-us">公司介绍</a> </li>
+      <li> <a href="/pages/why-choose-us">为什么要选择我们</a> </li>
+      <li> <a href="/pages/contact">联系方式</a> </li>
+      <li> <a href="/pages/partners">合作伙伴</a> </li>
+    </ul>
+  </li>
+</ul>

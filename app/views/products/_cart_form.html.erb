@@ -1,0 +1,60 @@
+<% form_for :order, :url => orders_url do |f| %>
+<% hook :inside_product_cart_form do %>
+
+  <% if product_price(@product) %>
+    <% hook :product_price do %>
+<% if @product.property('零售价') %>
+<p>
+  零售价：<%= @product.property('零售价') %>
+</p>
+<% end %>
+
+      <p class="prices">
+        <%= t("price") %>
+        <span class="price selling"><%= product_price(@product) %></span>
+      </p>
+    <% end %>
+  <% end %>
+
+  <% if @product.has_variants? %>
+    <div id="product-variants">
+      <h3><%= t('variants') %></h3>
+      <ul>
+        <%  has_checked = false
+        @product.variants.active.each_with_index do |v,index|
+          next if v.option_values.empty? || (!v.in_stock && !Spree::Config[:show_zero_stock_products])
+          checked = !has_checked && (v.in_stock || Spree::Config[:allow_backorders])
+          has_checked = true if checked %>
+          <li>
+            
+              <%= radio_button_tag "products[#{@product.id}]", v.id, checked, :disabled => !v.in_stock && !Spree::Config[:allow_backorders] %>
+              <label for="products_<%=@product.id%>_<%=v.id%>">
+            <span class="variant-description">
+                <%= variant_options v %>
+              </span>
+              <% if variant_price_diff v %>
+                <span class="price diff"><%= variant_price_diff v %></span>
+              <% end %>
+            </label>
+          </li>
+        <% end%>
+      </ul>
+    </div>
+  <% end%>
+  <% if @product.has_stock? || Spree::Config[:allow_backorders] %>
+    <%= text_field_tag (@product.has_variants? ? :quantity : "variants[#{@product.master.id}]"),
+      1, :class => "title", :size => 3 %>
+    &nbsp;
+    <button type='submit' class='large protrusion-btn'>
+      <%= image_tag('/images/add-to-cart.png') + t('add_to_cart') %>
+    </button>
+  <% else %>
+    <%= content_tag('strong', t('out_of_stock')) %>
+  <% end %>
+
+<% end %>
+<% end %>
+
+<% content_for :head do %>
+  <%= javascript_include_tag 'product' %>
+<% end %>

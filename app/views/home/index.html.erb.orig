@@ -1,0 +1,115 @@
+<% content_for :head do %>
+  <%= javascript_include_tag 'jquery.jcarousel/jquery.jcarousel.min', 'jquery.jcarousel/banner.slide' %>
+  <%= stylesheet_link_tag '/javascripts/jquery.jcarousel/skins/tango/skin.css', '/javascripts/jquery.jcarousel/skins/banner.slide/skin.css' %>
+  <style type="text/css">
+    th, td, caption {
+      padding:0;
+    }
+  </style>
+  <script type="text/javascript">
+<<<<<<< HEAD
+   function mycarousel_initCallback(carousel)
+=======
+   
+    function mycarousel_initCallback(carousel)
+>>>>>>> alei
+    {
+      carousel.buttonNext.bind('click', function() { carousel.startAuto(0);});
+      carousel.buttonPrev.bind('click', function() { carousel.startAuto(0);});
+      carousel.clip.hover(function() {carousel.stopAuto();}, function() {carousel.startAuto();});
+    };
+
+    $(function() {
+      $('#mycarousel').jcarousel({
+        auto: 25,
+        wrap: 'last',
+        initCallback: mycarousel_initCallback
+      });
+      $('.home-rce-pdt')
+      .disableTextSelect()
+      .pngFix();
+
+    });
+    
+  </script>
+<% end %>
+
+
+<div class="homebanner">
+  <div id="random_index"  class="jcarousel-skin-default"> </div>
+  <div id='index_itemlist' style='display:none;'>
+    <ul class="slide-c" id="numlabel">
+      <li>
+        <A href="/pages/about-us"><IMG src="/images/picture/home-banner-01.jpg" alt="酷购 手机低价直供平台"></A>
+      </li>
+      <li>
+        <A href="/pages/direct-supply-process"><IMG src="/images/picture/home-banner-02.jpg" alt="酷购 手机低价直供平台"></A>
+      </li>
+      <li>
+        <A href="/pages/about-us"><IMG src="/images/picture/home-banner-03.jpg" alt="酷购 手机低价直供平台"></A>
+      </li>
+      <!--
+      <li>
+        <A target="_blank" href="/products/CP-2cau-0000-181"><IMG src="/images/aleitemp/homebanner-04.png" alt="China Wholesale Video Game"></A>
+      </li>
+      -->
+    </ul>
+  </div>
+  <script type="text/javascript">
+    var totalvalue=$("#numlabel li").length;
+    var total_content=totalvalue;
+    var randomwidth='980px';
+    var randomheight='400px';
+    
+  </script>
+  <div class="clr"></div>
+</div>
+
+
+<div class="homelogin">
+  <div class="notice">这里有进口手机品牌全线产品和国产手机深圳优势机型，不做三码机和高仿机。是手机零售商的最优选择。"</div>
+  <div class="logininfo">
+    <p>即刻登录查看最新机型报价</p>
+    <a href="signup" <%= 'onclick="alert(\'您现在已经登录，如果目前账户不是您的或需要重新注册，请先点击页面上方退出登录。\');return false;"' if current_user %> >
+      <img onmouseover="this.src='/images/site/btn/signup-btn-hover.png'" onmouseout="this.src='/images/site/btn/signup-btn.png'" src="/images/site/btn/signup-btn.png" alt="免费注册" />
+    </a>
+    <a href="<%= current_user ? "products"  : "login" -%>">
+      <img onmouseover="this.src='/images/site/btn/login-btn-hover.png'" onmouseout="this.src='/images/site/btn/login-btn.png'" src="/images/site/btn/login-btn.png" alt="会员登录"/>
+    </a>
+  </div>
+  <div class="clr"></div>
+</div>
+
+
+<div class="home-rce-pdt">
+  <h3>主推机型</h3>
+  <!--class="product-listing"-->
+  <ul id="mycarousel" class="jcarousel-skin-tango product-listing">
+    <% @products.each do |product| %>
+      <li id="product_<%= product.id %>">
+        <%= link_to small_image(product), product %>
+        <%= link_to product.name + "<span class='price selling'>#{product.property('卖点')}</span>", product, :class => 'info' %>
+      </li>
+    <% end %>
+  </ul>
+  <div class="clr"></div>
+</div>
+
+
+<table id="__01" width="980" height="546" border="0" cellpadding="0" cellspacing="0" style="width:976px;">
+  <tr>
+    <td><img src="/images/picture/home-why-choose-us_01.png" width="573" height="199" alt="" /></td>
+    <td><img src="/images/picture/home-why-choose-us_02.png" width="407" height="199" alt="" /></td>
+  </tr>
+  <tr>
+    <td><img src="/images/picture/home-why-choose-us_03.png" width="573" height="111" alt="" /></td>
+    <td><img src="/images/picture/home-why-choose-us_04.png" width="407" height="111" alt="" /></td>
+  </tr>
+  <tr>
+    <td><img src="/images/picture/home-why-choose-us_05.png" width="573" height="236" alt=""></td>
+    <td><a href="<%= signup_path %>"><img src="/images/picture/home-why-choose-us_06.png" width="407" height="236" alt="登陆到coolpur.com"></a></td>
+  </tr>
+</table>
+
+
+

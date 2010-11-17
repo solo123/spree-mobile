@@ -1,0 +1,16 @@
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title><%= title %></title>
+
+<%= raw stylesheet_tags %>
+<%= csrf_meta_tag %>
+<%= javascript_include_tag 'jquery-1.4.2.min', 'jquery.validate.min.js', 'rails', 'jquery.form', 'jquery.disable.text.select.pack', 'jQuery.Select/jquery.select.park', 'jquery.pngFix', 'application', :cache => 'jquery-core' %>
+
+<%= javascript_include_tag 'jquery.ui/js/jquery-ui-1.8.5.custom.min' %>
+<%= stylesheet_link_tag '/javascripts/jquery.ui/css/custom-theme/jquery-ui-1.8.5.custom.css', '/javascripts/jQuery.Select/skin.css' %>
+<!--[if lte IE 6]>  
+<STYLE type=text/css media=screen>@import url( '/stylesheets/ie6.css' );  
+</STYLE>
+<![endif]-->  
+
+<%= yield :head %>
+<%= raw meta_data_tags %>

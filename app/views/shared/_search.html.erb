@@ -1,0 +1,6 @@
+<%= form_tag products_url, :method => :get do %>
+  <div class="search-area">
+    <%= text_field_tag :keywords, params[:keywords], :class => 'search-ipt' %>
+    <%= submit_tag t(:search), :name => nil, :class => 'search-button' %>
+  </div>
+<% end %>

@@ -1,0 +1,11 @@
+<% unless @product_properties.empty? %>
+<% props = %w{上市日期 型号 屏幕 颜色 尺寸 内存 通话时长 待机时长 频率 CPU 操作系统 参数 备注} %>
+
+<dl id="product-properties" class="table-display">
+  <% props.each do |p| %>
+  <% if @product.property(p) %>
+  <dt><%= p %>：</dt><dd><%=  @product.property(p) %></dd>
+  <% end %>
+  <% end %>
+</dl>
+<% end %>

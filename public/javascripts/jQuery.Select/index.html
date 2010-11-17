@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>下拉菜单</title>
+<style type="text/css">
+body,div,ul,h4,li {margin:0; padding:0; border:none; list-style:none; font-size:1;}
+/* select style */
+/* must have this*/
+.dropdown {outline:none;}
+.dropdown h4{cursor:default;}
+.dropdown * {-moz-user-select:none;}
+.dropdown h4.over {}
+.dropdown div {display:none; position:relative;}
+.dropdown span {position:absolute;}
+.dropdown ul{position:absolute;display:none;}
+.dropdown ul li{}
+.dropdown ul li.over{}
+/* write you style here */
+.dropdown {float:left;}
+.dropdown h4{display:block; padding:0 25px 0 5px; margin:0; height:21px; font:12px/21px Arial, Helvetica, sans-serif; border:solid 1px #AAA; background:#DDD url(selectBg.png) repeat-x left top; width:150px;}
+.dropdown h4.over{border-color:#369;}
+.dropdown div {}
+.dropdown span {top:0; right:7px; background:url(droparrow.gif) no-repeat center; width:7px; height:21px;}
+.dropdown span.over {background-image:url(droparrowover.gif);}
+.dropdown ul{border:1px solid #AAA; background:#FFF; width:180px; border-top:none;}
+.dropdown ul li{background:#FFF;height:19px;display:block;padding:0 25px 0 5px;cursor:default;font:400 12px/19px Arial, Helvetica, sans-serif;}
+.dropdown ul li.over{background:#369; color:#FFF;}
+/* select style */
+#test1, #test2 {float:left; margin-right:20px;}
+</style>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="jquery.select.park.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#test1").sSelect();
+	$("#test2").sSelect();
+	$("#test3").sSelect();
+	//提交表单
+	$("#postform").click(function(){
+		$("#value").append("<b>表单值为:</b>"+$("select option:selected").text()+"<br />");
+	})
+})
+</script>
+</head>
+<body>
+<h1>Jquery Select 模拟插件 V1.2</h1>
+
+<form action="#" method="get" style="margin:10px;">
+<div id="test1" class="dropdown" tabIndex="1">
+    <select name="birthday">
+			<option>请选择出生年份</option>
+			<option>1980</option>
+            <option>1981</option>
+            <option>1982</option>
+			<option>1983</option>
+
+            <option>1984</option>
+			<option>1985</option>
+            <option>1986</option>
+            <option>1987</option>
+            <option>1988</option>
+            <option>1989</option>
+
+	</select>
+</div>
+<div id="test2" class="dropdown" tabIndex="2">
+    <select name="sex">
+			<option>性别</option>
+			<option>男</option>
+			<option>女</option>
+	</select>
+
+</div>
+<div id="test3" class="dropdown" tabIndex="3">
+    <select name="student">
+    		<option>请选择学历</option>
+			<option>大专</option>
+			<option>本科</option>
+			<option>硕士</option>
+	</select>
+
+</div>
+</form>
+<div style="clear:both; margin:10px;">
+<br />
+<input type="button" id="postform" value="提交表单" style="border:1px solid #000; width:auto; height:23px;" />
+</div>
+<div id="value" style="margin:0 10px;"></div>
+<div style="margin:10px; font:12px/1.6 Arial, Helvetica, sans-serif;">
+<h3 style="font:900 12px/1.6 Arial, Helvetica, sans-serif">插件下载:&nbsp;<a href="jQuery.Select.zip">点此链接下载</a></h3>
+<p>简介：<br />
+1、根据原有的select 模拟生成新的 select。（避免程序大规模调整）<br />
+2、支持键盘，可通过键盘选择选项。<br />
+
+3、可自定义样式。<br />
+4、方便灵活，可选择需要的seletc 进行模拟（非全局模拟） <br />
+5、判断用户是否开启脚本支持，若未开启，不进行模拟。<br />
+</p>
+</div>
+</body>
+</html>

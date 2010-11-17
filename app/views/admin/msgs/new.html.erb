@@ -1,0 +1,7 @@
+<h2>新建信息</h2>
+
+<% form_for(:msg, :url => admin_msgs_path) do |f| %>
+  <%= render 'msg_form', :f => f %>
+
+  <%= submit_tag('send') %>
+<%  end %>

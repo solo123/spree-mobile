@@ -1,0 +1,59 @@
+<% content_for :head do %>
+<%= stylesheet_link_tag 'uploadify' %>
+<%= javascript_include_tag 'uploadify/swfobject','uploadify/jquery.uploadify.v2.1.0.min' %>
+<script type="text/javascript">
+$(function(){
+	$("#uploadify").uploadify({
+		'uploader'       : '/javascripts/uploadify/uploadify.swf',
+		'script'         : '/admin/upload/do_upload',
+		'cancelImg'      : '/javascripts/uploadify/cancel.png',
+		'folder'         : 'upload',
+		'queueID'        : 'fileQueue',
+		'auto'           : true,
+		'multi'          : true,
+        'onAllComplete'  : reload_uploaded_file_list
+	});
+
+    reload_uploaded_file_list();
+
+});
+function reload_uploaded_file_list(){
+    $.getJSON("/admin/uploads/files", function(data){
+        $("#file_uploaded").html("");
+        for (var i=0; i<data.length; i++){
+          $("#file_uploaded").append("<li>" + data[i] + " <a href='javascript:del_file(\""+ data[i] +"\");'>删除</a></li>");
+        }
+    });
+
+}
+function del_file(file){
+  if (confirm("确认删除文件：" + file + " 吗?")){
+    $.get("/admin/uploads/delete", {f:file}, function(data){
+      //alert(data);
+      reload_uploaded_file_list();
+    });
+  }
+  return false;
+}
+
+</script>
+<% end %>
+
+<%= render :partial => 'sub_menu' %>
+
+
+<h1>上传文件</h1>
+<fieldset style="height: 200px; width: 200px; float:left;">
+<input type="file" name="uploadify" id="uploadify" />
+<div id="fileQueue"></div>
+</fieldset>
+
+<fieldset style="float:left;margin-left:10px;">
+<h3>已上传的文件：</h3>
+<div>
+  <ul id="file_uploaded"></ul>
+</div>
+</fieldset>
+
+
+<div class="clear"></div>

@@ -1,0 +1,68 @@
+<% content_for :head do %>
+  <%= javascript_include_tag 'jquery.jcarousel/jquery.jcarousel.min', 'jquery.jcarousel/banner.slide' %>
+  <style type="text/css" media=screen>@import url( '/javascripts/jquery.jcarousel/skins/banner.slide/skin.css' );</style>
+  <style type="text/css">
+    .jcarousel-skin-default .jcarousel-clip-horizontal {
+      height:400px;
+      width:770px;
+    }
+  </style>
+  <script type="text/javascript">
+    var total_content=0;
+  </script>
+<% end %>
+
+<% content_for :sidebar do %>
+  <%= hook :homepage_sidebar_navigation do %>
+    <% if "products" == @current_controller && @taxon %>
+      <%= render "shared/filters" %>
+    <% else %>
+      <%= render "shared/taxonomies" %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% if params[:keywords] %>
+
+  <%= hook :search_results do %>
+    <% if @products.empty? %>
+      <%= t(:no_products_found) %>
+    <% else %>
+      <%= render "shared/products", :products => @products, :taxon => @taxon %>
+    <% end %>
+  <% end %>
+
+<% else %>
+
+  <%= hook :homepage_products do %>
+    <div id="random_index"  class="jcarousel-skin-default"> </div>
+    <div id='index_itemlist' style='display:none;'>
+      <ul class="slide-c" id="numlabel">
+        <li>
+          <A target="_blank" href="/products/zhao-xun-da-sm800"><IMG src="/images/picture/pic-001.jpg" alt="China Wholesale As Seen On TV"></A>
+        </li>
+        <li>
+          <A target="_blank" href="/products/bi-jia-suo-f8"><IMG src="/images/picture/pic-002.jpg" alt="China Wholesale Wedding Dress"></A>
+        </li>
+        <li>
+          <A target="_blank" href="/products/CP-2cd3-0075"><IMG src="/images/picture/pic-003.jpg" alt="China Wholesale Cell Phone"></A>
+        </li>
+        <li>
+          <A target="_blank" href="/products/CP-2cau-0000-181"><IMG src="/images/picture/pic-004.jpg" alt="China Wholesale Video Game"></A>
+        </li>
+      </ul>
+    </div>
+
+    <script type="text/javascript">
+      var totalvalue=$("#numlabel li").length;
+      var total_content=totalvalue;
+      var randomwidth='770px';
+      var randomheight='400px';
+    </script>
+
+    <%= render "shared/products", :products => @products, :taxon => @taxon %>
+  <% end %>
+
+
+<% end %>
+

@@ -1,0 +1,9 @@
+<% content_for :sidebar do %>
+  <div class="pages-side-nav">
+    <%= render "pages_nav" %>
+  </div>
+<% end %>
+<h1><%=@page.title%></h1>
+<div class="content">
+  <%= @page.body_raw %>
+</div>

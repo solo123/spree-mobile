@@ -1,0 +1,16 @@
+<% if !@product.taxons.blank? -%>
+  <div id="taxon-crumbs">
+    <h3><%= t('look_for_similar_items') -%></h3>
+    <% hook :product_taxons do %>
+      <ul id='similar_items_by_taxon'>
+        <%
+          fun = Taxon.find_by_name('功能')
+          @product.taxons.each do |taxon|
+            next if taxon.parent_id == fun.id
+        -%>
+          <li><%= link_to taxon.name, "/t/#{taxon.permalink}" %></li>
+        <% end -%>
+      </ul>
+    <% end %>
+  </div>
+<% end -%>
