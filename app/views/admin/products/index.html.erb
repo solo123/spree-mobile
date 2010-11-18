@@ -49,8 +49,8 @@
       <td> <%= product.property('屏幕')  %> </td>
       <td> <%= product.property('标配')  %> </td>
       <td> <%= product.property('零售价')  %> </td>
-      <td> <%= product.property('批发价')  %> </td>
-      <td><%= product.price %></td>
+      <td> <%= number_with_precision(product.property('批发价'), :precision => 2)  %> </td>
+      <td><%= number_with_precision(product.price, :precision => 2) %></td>
 
 
 
