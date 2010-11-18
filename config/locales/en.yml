@@ -9,7 +9,6 @@ en:
   account: Account
   account_updated: "Account updated!"
   action: Action
-  alt_text: Alternative Text
   actions:
     cancel: Cancel
     create: Create
@@ -224,6 +223,7 @@ en:
   address: Address
   address_information: "Address Information"
   adjustment: Adjustment
+  adjustment_total: Adjustment Total
   adjustments: Adjustments
   administration: Administration
   all: "All"
@@ -231,11 +231,13 @@ en:
   allow_backorders: "Allow Backorders"
   allow_ssl_to_be_used_when_in_developement_and_test_modes: Allow SSL to be used when in development and test modes
   allow_ssl_to_be_used_when_in_production_mode: Allow SSL to be used in production mode
-  allowed_ssl_in_production_mode: "SSL will {{not}} be used in production"
+  allowed_ssl_in_production_mode: "SSL will %{not} be used in production"
   already_registered: Already Registered?
+  alt_text: Alternative Text
   alternative_phone: Alternative Phone
   amount: Amount
   analytics_trackers: Analytics Trackers
+  apply: "Apply"
   are_you_sure: "Are you sure?"
   are_you_sure_category: "Are you sure you want to delete this category?"
   are_you_sure_delete: "Are you sure you want to delete this record?"
@@ -253,21 +255,24 @@ en:
   back_end: Back End
   back_to_store: "Go Back To Store"
   backordered: Backordered
-  backordering_is_allowed: "Backordering {{not}} allowed"
+  backordering_is_allowed: "Backordering %{not} allowed"
   balance_due: "Balance Due"
   best_selling_products: "Best Selling Products"
   best_selling_taxons: "Best Selling Taxons"
-  both: Both
   bill_address: "Bill Address"
   billing: Billing
   billing_address: "Billing Address"
+  both: Both
   by_day: "by day"
   calculator: Calculator
   calculator_settings_warning: "If you are changing the calculator type, you must save first before you can edit the calculator settings"
   cancel: cancel
+  cancel_my_account: Cancel my account
+  cancel_my_account_description: "Unhappy?"
   canceled: Canceled
-  cannot_create_returns: Cannot create returns as this order has not shipped yet.
+  cannot_create_returns: Cannot create returns as this order no shipped units.
   cannot_destory_line_item_as_inventory_units_have_shipped: Cannot destory line item as some inventory units have shipped.
+  cannot_perform_operation: "Cannot perform requested operation"
   capture: Capture
   card_code: "Card Code"
   card_details: "Card details"
@@ -283,13 +288,6 @@ en:
   charged: Charged
   charges: Charges
   checkout: Checkout
-  checkout_steps:
-    # keys correspond to Checkout state names:
-    address: Address
-    complete: Complete
-    confirm: Confirm
-    delivery: Delivery
-    payment: Payment
   cheque: Cheque
   city: City
   clone: Clone
@@ -309,15 +307,12 @@ en:
   copy_all_mails_to: Copy All Mails To
   cost_price: "Cost Price"
   count: Count
-  count_of_reduced_by: "count of '{{name}}' reduced by {{count}}"
+  count_of_reduced_by: "count of '%{name}' reduced by %{count}"
   country: Country
   country_based: "Country Based"
-  coupon: Coupon
-  coupon_code: Coupon Code
-  coupons: Coupons
-  coupons_description: Manage coupons
   create: Create
   create_a_new_account: "Create a new account"
+  create_product_group_from_products: Create a new product group from these products
   create_user_account: Create User Account
   created_successfully: "Created Successfully"
   credit: Credit
@@ -341,11 +336,14 @@ en:
   depth: Depth
   description: Description
   destroy: Destroy
+  didnt_receive_confirmation_instructions: "Didn't receive confirmation instructions?"
+  didnt_receive_unlock_instructions: "Didn't receive unlock instructions?"
+  discount_amount: "Discount Amount"
   display: Display
   edit: Edit
   editing_billing_integration: Editing Billing Integration
   editing_category: "Editing Category"
-  editing_coupon: Editing Coupon
+  editing_mail_method: Editing Mail Method
   editing_option_type: "Editing Option Type"
   editing_option_types: "Editing Option Types"
   editing_payment_method: Editing Payment Method
@@ -355,7 +353,6 @@ en:
   editing_prototype: "Editing Prototype"
   editing_shipping_category: "Editing Shipping Category"
   editing_shipping_method: "Editing Shipping Method"
-  editing_shipping_rate: Editing Shipping Rate
   editing_state: "Editing State"
   editing_tax_category: "Editing Tax Category"
   editing_tax_rate: "Editing Tax Rate"
@@ -365,12 +362,13 @@ en:
   email: Email
   email_address: "Email Address"
   email_server_settings_description: "Set email server settings."
+  empty: "Empty"
   empty_cart: "Empty Cart"
   enable_login_via_login_password: "Use standard email/password"
   enable_login_via_openid: "Use OpenID instead"
   enable_mail_delivery: Enable Mail Delivery
-  enable_mail_queue: "Enable Mail Queue"
   enter_exactly_as_shown_on_card: Please enter exactly as shown on the card
+  enter_password_to_confirm: "(we need your current password to confirm your changes)"
   environment: "Environment"
   error: error
   event: Event
@@ -380,7 +378,6 @@ en:
   expiration_year: "Expiration Year"
   extension: Extension
   extensions: Extensions
-  front_end: Front End
   filename: Filename
   final_confirmation: "Final Confirmation"
   finalize: Finalize
@@ -393,7 +390,8 @@ en:
   flat_rate_per_item: "Flat Rate (per item)"
   flat_rate_per_order: "Flat Rate (per order)"
   flexible_rate: "Flexible Rate"
-  forgot_password: "Forgot Password"
+  forgot_password: "Forgot Password?"
+  front_end: Front End
   full_name: "Full Name"
   gateway: Gateway
   gateway_configuration: "Gateway configuration"
@@ -427,6 +425,8 @@ en:
   included_in_this_shipment: Included in this Shipment
   instructions_to_reset_password: "Fill out the form below and instructions to reset your password will be emailed to you:"
   integration_settings_warning: "If you are changing the billing integration, you must save first before you can edit the integration settings"
+  intercept_email_address: Intercept Email Address
+  intercept_email_instructions: "Override email recipient and replace with this address."
   invalid_search: "Invalid search criteria."
   inventory: Inventory
   inventory_adjustment: "Inventory Adjustment"
@@ -445,6 +445,7 @@ en:
   last_name: "Last Name"
   last_name_begins_with: "Last Name Begins With"
   last_year: "Last Year"
+  leave_blank_to_not_change: "(leave blank if you don't want to change it)"
   list: List
   listing_categories: "Listing Categories"
   listing_option_types: "Listing Option Types"
@@ -460,19 +461,17 @@ en:
   logged_in_as: "Logged in as"
   logged_in_succesfully: "Logged in successfully"
   logged_out: "You have been logged out."
+  login: Login
   login_as_existing: "Log In as Existing Customer"
   login_failed: "Login authentication failed."
   login_name: Login
   logout: Logout
-  Signup_free: Sign up for free
   look_for_similar_items: Look for similar items
   maestro_or_solo_cards: Maestro/Solo cards
   mail_delivery_enabled: "Mail delivery is enabled"
   mail_delivery_not_enabled: "Mail delivery is not enabled"
-  mail_queue_enabled: "Mail queue is enabled"
-  mail_queue_not_enabled: "Mail queue is not enabled (emails are delivered immediately)"
+  mail_methods: Mail Methods
   mail_server_preferences: Mail Server Preferences
-  mail_server_settings: "Mail Server Settings"
   make_refund: Make refund
   mark_shipped: "Mark Shipped"
   master_price: "Master Price"
@@ -481,6 +480,7 @@ en:
   meta_keywords: "Meta Keywords"
   metadata: "Metadata"
   missing_required_information: "Missing Required Information"
+  minimal_amount: "Minimal Amount"
   month: "Month"
   my_account: "My Account"
   my_orders: "My Orders"
@@ -490,9 +490,9 @@ en:
   new_adjustment: "New Adjustment"
   new_billing_integration: New Billing Integration
   new_category: "New category"
-  new_coupon: New Coupon
   new_customer: "New Customer"
   new_image: "New Image"
+  new_mail_method: New Mail Method
   new_option_type: "New Option Type"
   new_option_value: "New Option Value"
   new_order: "New Order"
@@ -507,7 +507,6 @@ en:
   new_shipment: "New Shipment"
   new_shipping_category: "New Shipping Category"
   new_shipping_method: "New Shipping Method"
-  new_shipping_rate: New Shipping Rate
   new_state: "New State"
   new_tax_category: "New Tax Category"
   new_tax_rate: "New Tax Rate"
@@ -522,11 +521,14 @@ en:
   no_match_found: "No Match Found"
   no_payment_methods_available: "Can't check out, no payment methods are configured for this environment"
   no_products_found: "No products found"
+  no_results: "No results"
   no_shipping_methods_available: "No shipping methods available, please change your address and try again."
   no_user_found: "No user was found with that email address"
   none: None
   none_available: "None Available"
+  normal_amount: "Normal Amount"
   not: not
+  not_shown: "Not Shown"
   note: Note
   notice_messages:
     option_type_removed: "Succesfully removed option type."
@@ -534,7 +536,6 @@ en:
     product_deleted: "Product has been deleted"
     product_not_cloned: "Product could not be cloned"
     product_not_deleted: "Product could not be deleted"
-    track_me_in_GA: "Track Me in GA"
     variant_deleted: "Variant has been deleted"
     variant_not_deleted: "Variant could not be deleted"
   on_hand: "On Hand"
@@ -556,8 +557,21 @@ en:
   order_operation_authorize: Authorize
   order_processed_but_following_items_are_out_of_stock: "Your order has been processed, but following items are out of stock:"
   order_processed_successfully: "Your order has been processed successfully"
+  order_state:
+    # keys correspond to Checkout state names:
+    address: address
+    adjustments: adjustments
+    awaiting_return: awaiting return
+    canceled: canceled
+    cart: cart
+    complete: complete
+    confirm: confirm
+    delivery: delivery
+    payment: payment
+    resumed : resumed
+    returned: returned
   order_summary: Order Summary
-  order_sure_want_to: "Are you sure you want to {{event}} this order?"
+  order_sure_want_to: "Are you sure you want to %{event} this order?"
   order_total: "Order Total"
   order_total_message: "The total amount charged to your card will be"
   order_updated: "Order Updated"
@@ -585,6 +599,13 @@ en:
   payment_method: Payment Method
   payment_methods: Payment Methods
   payment_methods_setting_description: Configure methods customers can use to pay
+  payment_processing_failed: "Payment could not be processed, please check the details you entered"
+  payment_state: Payment State
+  payment_states:
+    balance_due: balance due
+    credit_owed: credit owed
+    failed: failed
+    paid: paid
   payment_updated: Payment Updated
   payments: Payments
   pending_payments: Pending Payments
@@ -597,7 +618,8 @@ en:
   preview: Preview
   previous: Previous
   price: Price
-  price_with_vat_included: "{{price}} (inc. VAT)"
+  price_bucket: Price Bucket
+  price_with_vat_included: "%{price} (inc. VAT)"
   problem_authorizing_card: "Problem authorizing credit card"
   problem_capturing_card: "Problem capturing credit card"
   problems_processing_order: "We had problems processing your order"
@@ -694,6 +716,12 @@ en:
         description: "Selects all products that have at least one variant that have specified value as either option or property (eg. red)"
         name: With value
         sentence: with value <em>%s</em>
+      with_ids:
+        args:
+          ids: IDs
+        description: "Select specific products"
+        name: Products with IDs
+        sentence: with IDs <em>%s</em>
       with_option:
         args:
           option: Option
@@ -721,7 +749,7 @@ en:
         name: "With property value"
         sentence: with property <em>%s</em> and value <em>%s</em>
   products: Products
-  products_with_zero_inventory_display: "Products with a zero inventory will {{not}} be displayed"
+  products_with_zero_inventory_display: "Products with a zero inventory will %{not} be displayed"
   properties: Properties
   property: Property
   prototype: Prototype
@@ -730,6 +758,7 @@ en:
   provider_settings_warning: "If you are changing the provider type, you must save first before you can edit the provider settings"
   qty: Qty
   quantity_shipped: Quantity Shipped
+  quantity_returned: Quantity Returned
   range: "Range"
   rate: Rate
   reason: Reason
@@ -745,6 +774,8 @@ en:
   reports: Reports
   required_for_solo_and_maestro: Required for Solo and Maestro cards.
   resend: Resend
+  resend_confirmation_instructions: "Resend confirmation instructions"
+  resend_unlock_instructions: "Resend unlock instructions"
   reset_password: "Reset my password"
   resource_controller:
     member_object_not_found: "Member object not found."
@@ -760,6 +791,7 @@ en:
   return_authorizations: Return Authorizations
   return_quantity: Return Quantity
   returned: Returned
+  rma_credit: RMA Credit
   rma_number: RMA Number
   rma_value: RMA Value
   roles: Roles
@@ -773,7 +805,8 @@ en:
   scope: Scope
   scopes: Scopes
   search: Search
-  search_results: "Search results for '{{keywords}}'"
+  search_results: "Search results for '%{keywords}'"
+  searching: Searching
   secure_connection_type: Secure Connection Type
   secure_creditcard: Secure Creditcard
   select: Select
@@ -782,6 +815,7 @@ en:
   send_copy_of_all_mails_to: Send Copy of All Mails To
   send_copy_of_orders_mails_to: Send Copy of Order Mails To
   send_mails_as: Send Mails As
+  send_me_reset_password_instructions: "Send me reset password instructions"
   send_order_mails_as: Send Order Mails As
   server: Server
   server_error: "The server returned an error"
@@ -791,6 +825,13 @@ en:
   shipment: Shipment
   shipment_details: Shipment Details
   shipment_number: "Shipment #"
+  shipment_state: Shipment State
+  shipment_states:
+    backorder: backorder
+    partial: partial
+    pending: pending
+    ready: ready
+    shipped: shipped
   shipment_updated: Shipment Updated
   shipments: "Shipments"
   shipped: Shipped
@@ -805,10 +846,8 @@ en:
   shipping_method: "Shipping Method"
   shipping_methods: "Shipping Methods"
   shipping_methods_description: "Manage shipping methods"
-  shipping_rates: "Shipping Rates"
-  shipping_rates_description: "Manage shipping rates"
   shipping_total: "Shipping Total"
-  shop_by_taxonomy: "Shop by {{taxonomy}}"
+  shop_by_taxonomy: "Shop by %{taxonomy}"
   shopping_cart: "Shopping Cart"
   show: Show
   show_active: "Show Active"
@@ -817,7 +856,7 @@ en:
   show_only_complete_orders: "Only show complete orders"
   show_out_of_stock_products: "Show out-of-stock products"
   show_price_inc_vat: "Show price including VAT"
-  showing_first_n: "Showing first {{n}}"
+  showing_first_n: "Showing first %{n}"
   sign_up: "Sign up"
   site_name: "Site Name"
   site_url: "Site URL"
@@ -829,12 +868,11 @@ en:
   smtp_password: SMTP Password
   smtp_port: SMTP Port
   smtp_send_all_emails_as_from_following_address: "Send all mails as from the following address."
-  smtp_send_copy_of_orders_to_this_addresses: "Sends a copy of all order's mails to this address. For multiple addresses, separate with commas."
   smtp_send_copy_to_this_addresses: "Sends a copy of all outgoing mails to this address. For multiple addresses, separate with commas."
-  smtp_send_order_mails_as_from_following_address: "Send orders mails as from the following address."
   smtp_username: SMTP Username
   sold: Sold
   sort_ordering: "Sort ordering"
+  special_instructions: "Special Instructions"
   spree:
     date: Date
     time: Time
@@ -890,12 +928,14 @@ en:
   tree: Tree
   try_again: "Try Again"
   type: Type
+  type_to_search: Type to search
   unable_ship_method: "Unable to generate shipping methods due to a server error."
   unable_to_authorize_credit_card: "Unable to Authorize Credit Card"
   unable_to_capture_credit_card: "Unable to Capture Credit Card"
   unable_to_connect_to_gateway: "Unable to connect to gateway."
   unable_to_save_order: "Unable to Save Order"
   under_paid: "Under Paid"
+  units: "Units"
   unrecognized_card_type: Unrecognized card type
   update: Update
   update_password: "Update my password and log me in"
@@ -911,11 +951,12 @@ en:
   user_created_successfully: "User created successfully"
   user_details: "User Details"
   users: Users
+  validate_on_profile_create: Validate on profile create
   validation:
+    cannot_be_less_than_shipped_units: "cannot be less than the number of shipped units."
     is_too_large: "is too large -- stock on hand cannot cover requested quantity!"
     must_be_int: "must be an integer"
     must_be_non_negative: "must be a non-negative value"
-    cannot_be_less_than_shipped_units: "cannot be less than the number of shipped units."
   value: Value
   variants: Variants
   vat: "VAT"

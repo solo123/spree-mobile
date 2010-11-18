@@ -10,6 +10,7 @@ class UsersController < Spree::BaseController
   end
 
   create.after do
+    Msg.user_registed(@user)
     create_session
     associate_user
   end
@@ -21,13 +22,13 @@ class UsersController < Spree::BaseController
     flash.now[:notice] = I18n.t(:please_create_user) unless User.admin_created?
   end
 
-  update.wants.html { redirect_to account_url }
+  update.wants.html { render :partial => 'show_baseinfo' }
 
   update.after do
     create_session
   end
 
-  update.flash I18n.t("account_updated")
+  #update.flash I18n.t("account_updated")
 
   def load_baseinfo
     @user = current_user

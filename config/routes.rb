@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   match '/pages/:id' => 'pages#index'
   match '/quotations' => 'quotations#index'
   match '/quotations/:action' => 'quotations', :method => :action
+  match '/account/:action' => 'users', :method => :action
   resources :profiles
   resources :addresses
 

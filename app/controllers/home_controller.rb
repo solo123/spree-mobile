@@ -1,5 +1,4 @@
 class HomeController < Spree::BaseController
-	caches_page :index
 
 	def index
     t = Taxon.find_by_name('主推机型')

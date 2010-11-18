@@ -1,12 +1,9 @@
-<% render :partial => 'admin/shared/product_sub_menu' %>
+<%= render :partial => 'admin/shared/product_sub_menu' %>
 
 <div class='toolbar'>
   <ul class='actions'>
-    <li id="new_ot_link">
-      <%= button_link_to_remote t("new_product"),
-                         {:url => new_object_url,
-                         :method => :get,
-                         :update => "new-product"}, :icon => 'add' %>
+    <li id="new_product_link">
+      <%= button_link_to t("new_product"), new_object_url, {:remote => true, :icon => 'add'} %>
     </li>
   </ul>
   <br class='clear' />
@@ -14,12 +11,14 @@
 
 <h1><%= "#{t("actions.listing")} #{t("products")}" %></h1>
 
-<%= image_tag "spinner.gif", :plugin=>"spree", :style => "display:none", :id => 'busy_indicator' %>
-<div id="new-product"></div>
+<div id="new_product"></div>
 
 <table class="index">
   <tr>
-    <% hook :admin_products_index_headers do %>
+    <%= hook :admin_products_index_headers do %>
+      <th><%= t("sku") %></th>
+      <th><%= order @search, :by => :name, :as => t("name") %></th>
+      <th><%= order @search, :by => :master_price, :as => t("master_price") %></th>
       <th><%= order @search, :by => :name, :as => t("name") %></th>
       <th>品牌</th>
       <th>型号</th>
@@ -29,6 +28,8 @@
       <th>零售价</th>
       <th>批发价</th>
      <th><%= order @search, :by => :master_price, :as => t("master_price") %></th>
+
+
     <% end %>
     <th>
       <%= hook :admin_products_index_header_actions %>
@@ -36,11 +37,12 @@
   </tr>
 <% @collection.each do |product| %>
   <tr <%= 'style="color:red;"' if product.deleted? %> id="<%= dom_id product %>">
-    <%- locals = {:product => product} -%>
-    <% hook :admin_products_index_rows, locals do 
-      pp = product.properties
-    %>
+    <%- locals = {:product => product} %>
+    <%= hook :admin_products_index_rows, locals do %>
+      <td><%= product.sku %></td>
       <td><%= product.name %></td>
+      <td><%= product.price %></td>
+
       <td> <%= product.taxon_val('品牌') %> </td>
       <td> <%= product.property('型号')  %> </td>
       <td> <%= product.taxon_val('制式') %> </td>
@@ -49,9 +51,12 @@
       <td> <%= product.property('零售价')  %> </td>
       <td> <%= product.property('批发价')  %> </td>
       <td><%= product.price %></td>
-    <% end %>
-    <td class="actions" nowrap>
-      <% hook :admin_products_index_row_actions, locals do %>
+
+
+
+  <% end %>
+    <td class="actions">
+      <%= hook :admin_products_index_row_actions, locals do %>
         <%= link_to_edit product unless product.deleted?  %>
         &nbsp;
         <%= link_to_clone product %>
@@ -66,12 +71,12 @@
 
 <% content_for :sidebar do %>
 
-  <% form_for @search do |f| %>
+  <%= form_for @search do |f| %>
     <div class="box">
       <h3><%= t(:search) %></h3>
 
-      <%- locals = {:f => f} -%>
-      <% hook :admin_products_index_search, locals do %>
+      <%- locals = {:f => f} %>
+      <%= hook :admin_products_index_search, locals do %>
         <p>
           <label><%= t("name") %></label><br />
           <%= f.text_field :name_contains, :size => 15 %>
@@ -87,7 +92,7 @@
         </p>
       <% end %>
 
-      <% hook :admin_products_index_search_buttons, locals do %>
+      <%= hook :admin_products_index_search_buttons, locals do %>
         <p class="form-buttons">
           <%= button t("search") %>
         </p>
@@ -96,4 +101,3 @@
   <% end %>
 
 <% end %>
-
