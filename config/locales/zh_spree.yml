@@ -8,8 +8,8 @@ zh:
   access_denied: "访问被拒绝"
   account: "帐户"
   account_updated: "帐户更新"
-  action: Action
-    actions:
+  action: 
+    actions: 
     cancel: "取消"
     create: "创建"
     destroy: "删除"
@@ -272,7 +272,7 @@ zh:
   canceled: "取消"
   cannot_create_returns: "当此命令还没有开始运行无法创建返回。"
   cannot_destory_line_item_as_inventory_units_have_shipped: "当一些库存单位已经装船时不能损坏线项目。"
-  cannot_perform_operation: "Cannot perform requested operation"无法完成请求的操作
+  cannot_perform_operation: "无法完成请求的操作"
   capture: "捕获"
   card_code: "卡码"
   card_details: "卡详情"
@@ -719,9 +719,9 @@ zh:
       with_ids:
         args:
           ids: IDs
-        description: "Select specific products"选择特定产品
-        name: Products with IDs入侵检测系统（IDs）的产品
-        sentence: with IDs <em>%s</em>
+        description: "选择特定产品"
+        name: "入侵检测系统（IDs）的产品"
+        sentence: "with IDs <em>%s</em>"
       with_option:
         args:
           option: "选项"
@@ -758,7 +758,7 @@ zh:
   provider_settings_warning: "如果你正在改变提供程序类型，你必须先修改之前保存你的设置的供应商"
   qty: "数量"
   quantity_shipped: "数量发货"
-  quantity_returned:数量返还
+  quantity_returned: "数量返还"
   range: "范围"
   rate: "率"
   reason: "原因"
