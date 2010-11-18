@@ -35,19 +35,14 @@
   <div id='index_itemlist' style='display:none;'>
     <ul class="slide-c" id="numlabel">
       <li>
-        <A href="/pages/about-us"><IMG src="/images/picture/home-banner-01.jpg" alt="酷购 手机低价直供平台"></A>
+        <a href="/pages/about-us"><img src="/images/picture/home-banner-01.jpg" alt="酷购 手机低价直供平台" /></a>
       </li>
       <li>
-        <A href="/pages/direct-supply-process"><IMG src="/images/picture/home-banner-02.jpg" alt="酷购 手机低价直供平台"></A>
+        <a href="/pages/direct-supply-process"><img src="/images/picture/home-banner-02.jpg" alt="酷购 手机低价直供平台" /></a>
       </li>
       <li>
-        <A href="/pages/about-us"><IMG src="/images/picture/home-banner-03.jpg" alt="酷购 手机低价直供平台"></A>
+        <a href="/pages/about-us"><img src="/images/picture/home-banner-03.jpg" alt="酷购 手机低价直供平台" /></a>
       </li>
-      <!--
-      <li>
-        <A target="_blank" href="/products/CP-2cau-0000-181"><IMG src="/images/aleitemp/homebanner-04.png" alt="China Wholesale Video Game"></A>
-      </li>
-      -->
     </ul>
   </div>
   <script type="text/javascript">
@@ -83,7 +78,7 @@
     <% @products.each do |product| %>
       <li id="product_<%= product.id %>">
         <%= link_to small_image(product), product %>
-        <%= link_to product.name + "<span class='price selling'>#{product.property('卖点')}</span>", product, :class => 'info' %>
+        <%= link_to raw(product.name + "<span class='price selling'>#{product.property('卖点')}</span>"), product, :class => 'info' %>
       </li>
     <% end %>
   </ul>
@@ -101,8 +96,8 @@
     <td><img src="/images/picture/home-why-choose-us_04.png" width="407" height="111" alt="" /></td>
   </tr>
   <tr>
-    <td><img src="/images/picture/home-why-choose-us_05.png" width="573" height="236" alt=""></td>
-    <td><a href="<%= signup_path %>"><img src="/images/picture/home-why-choose-us_06.png" width="407" height="236" alt="登陆到coolpur.com"></a></td>
+    <td><img src="/images/picture/home-why-choose-us_05.png" width="573" height="236" alt="" /></td>
+    <td><a href="<%= signup_path %>"><img src="/images/picture/home-why-choose-us_06.png" width="407" height="236" alt="登陆到coolpur.com" /></a></td>
   </tr>
 </table>
 

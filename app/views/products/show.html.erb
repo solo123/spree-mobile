@@ -2,8 +2,8 @@
 <div class="pro-r-a">
   <div id="product-parameters">
     <h1 class="product-name"><%= @product.name %></h1>
-    <% hook :product_properties do
-      sys = @product.taxon_name('制式')
+    <%= hook :product_properties do %>
+    <% sys = @product.taxon_name('制式')
       tax = @product.taxon_name('分类')
       fun = @product.taxon_name('功能')
     %>
@@ -28,7 +28,6 @@
           <% end
         end %>
       </div>
-
     <% end %>
     <div class="clr"></div>
     <div class="intro">产品卖点：<%= @product.property('卖点') %></div>
@@ -38,31 +37,31 @@
   </div>
 
   <div class="pro-right-area">
-    <% hook :cart_form do %>
+    <%= hook :cart_form do %>
       <div id="cart-form">
         <%= render 'cart_form' %>
       </div>
     <% end %>
-    <!--<%= render 'taxons' %>-->
   </div>
 </div>
 
 
 <div id="product-images">
+  <%= hook :product_images do %>
   <div id="main-image">
-    <%= render 'image' -%>
+    <%= render 'image' %>
   </div>
   <div id="thumbnails">
-    <%= render 'thumbnails', :product => @product -%>
+    <%= render 'thumbnails', :product => @product %>
   </div>
+  <% end %>
 </div>
-
 
 
 <div class="clr"></div>
 
 <div id="product-description">
-  <% hook :product_description do %>
+  <%= hook :product_description do %>
     <h2>详细参数</h2>
     <%= product_description(@product) rescue t("product_has_no_description") %>
   <% end %>

@@ -1,10 +1,10 @@
 <% content_for :head do %>
   <script type="text/javascript">
     function discard_baseinfo(){
-      $('#base-info').html( $.ajax({url: "load_baseinfo/me",async: false}).responseText );
+      $('#base-info').html( $.ajax({url: "/account/load_baseinfo",async: false}).responseText );
     }
     function edit_base_info(){
-      $('#base-info').html( $.ajax({url: "edit_baseinfo/me",async: false}).responseText );
+      $('#base-info').html( $.ajax({url: "/account/edit_baseinfo",async: false}).responseText );
       $('form.baseinfo').submit(function() {//点击submit的函数
         $(this).ajaxSubmit({//点击submit发起ajax请求
           target: '#base-info',  //目标是对base-info的dom进行局部更新
@@ -33,7 +33,7 @@
 <% end %>
 <% @body_id = 'users' %>
 <h1><%= t("my_account") %></h1>
-<% hook :account_summary do %>
+<%= hook :account_summary do %>
   <div class="profiles-info">
     <div id="base-info">
       <%= render 'show_baseinfo' %>
@@ -73,7 +73,7 @@
 
   <% end %>
 
-  <% hook :account_my_orders do %>
+  <%= hook :account_my_orders do %>
     <hr/>
     <h2><%= t("my_orders") %></h2>
 

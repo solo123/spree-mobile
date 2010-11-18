@@ -1,8 +1,10 @@
 <% if current_user -%>
-  <li>欢迎光临酷购!: <%= current_user.display_name %>&nbsp;<%= '<img src="/images/site/star.gif" alt="" />' * current_user.stars %> &nbsp;［<%= link_to '我的酷购', user_path(current_user) %> ］
+  <li>欢迎光临酷购!
+  <%= current_user.display_name %>&nbsp;
+  <%= raw '<img src="/images/site/star.gif" alt="" />' * current_user.stars %> &nbsp;
+  ［<%= link_to '我的酷购', account_path %> ］
    &nbsp;<%= link_to t('left_logout'), logout_path %></li>
 <% else %>
   <li><%= link_to t("Signup_free"), signup_path %></li>
   <li><%= link_to t('log_in'), login_path %></li>
 <% end -%>
-  <li> | </li>
