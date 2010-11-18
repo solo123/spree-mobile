@@ -9,8 +9,7 @@ zh:
   account: "帐户"
   account_updated: "帐户更新"
   action: Action
-  alt_text: "替代文字"
-  actions:
+    actions:
     cancel: "取消"
     create: "创建"
     destroy: "删除"
@@ -224,6 +223,7 @@ zh:
   address: "地址"
   address_information: "地址信息"
   adjustment: "调整"
+  adjustment_total: Adjustment Total
   adjustments: "调整"
   administration: "管理"
   all: "所有"
@@ -231,11 +231,13 @@ zh:
   allow_backorders: "允许后台订单"
   allow_ssl_to_be_used_when_in_developement_and_test_modes: "发展和测试模型时允许使用SSL"
   allow_ssl_to_be_used_when_in_production_mode: "生产模型时允许使用SSL"
-  allowed_ssl_in_production_mode: "{{not}}使用SSL证书"
+  allowed_ssl_in_production_mode: "%{not}使用SSL证书"
   already_registered: "已经注册？"
+  alt_text: 替换文本
   alternative_phone: "备用电话"
   amount: "金额"
   analytics_trackers: "分析追踪"
+  apply: "Apply"
   are_you_sure: "你肯定吗？"
   are_you_sure_category: "你确定要删除这个分类？"
   are_you_sure_delete: "你确定要删除此记录？"
@@ -253,21 +255,24 @@ zh:
   back_end: "后端"
   back_to_store: "返回产品列表"
   backordered: "待补"
-  backordering_is_allowed: " {{不}}允许延期交货"
+  backordering_is_allowed: " %{不}允许延期交货"
   balance_due: "应付余额"
   best_selling_products: "最畅销产品"
   best_selling_taxons: "最畅销类群"
-  both: "两"
   bill_address: "条例草案的报告"
   billing: "帐单"
   billing_address: "帐单地址"
+  both: "两"
   by_day: "白天"
   calculator: "计算器"
   calculator_settings_warning: "如果你正在改变类型计算器，您必须先修改之前保存你的设置计算器"
   cancel: "取消"
+  cancel_my_account: Cancel my account
+  cancel_my_account_description: "Unhappy?"
   canceled: "取消"
   cannot_create_returns: "当此命令还没有开始运行无法创建返回。"
   cannot_destory_line_item_as_inventory_units_have_shipped: "当一些库存单位已经装船时不能损坏线项目。"
+  cannot_perform_operation: "Cannot perform requested operation"无法完成请求的操作
   capture: "捕获"
   card_code: "卡码"
   card_details: "卡详情"
@@ -283,13 +288,6 @@ zh:
   charged: "带电"
   charges: "收费"
   checkout: "结帐"
-  checkout_steps:
-    # keys correspond to Checkout state names:
-    address: "地址"
-    complete: "完成"
-    confirm: "确认"
-    delivery: "交货"
-    payment: "付款"
   cheque: "支票"
   city: "城市"
   clone: "克隆"
@@ -309,15 +307,12 @@ zh:
   copy_all_mails_to: "复制的所有邮件"
   cost_price: "成本价格"
   count: "计数"
-  count_of_reduced_by: "计数'{{name}}' 减少了{{count}}"
+  count_of_reduced_by: "计数'%{name}' 减少了%{count}"
   country: "国家"
   country_based: "基于国家"
-  coupon: "优惠券"
-  coupon_code: "优惠券代码"
-  coupons: "优惠券"
-  coupons_description: "管理优惠券"
   create: "创建帐户"
   create_a_new_account: "创建一个新帐户"
+  create_product_group_from_products: 从这个产品创建一个新的产品组
   create_user_account: "创建用户帐户"
   created_successfully: "创建成功"
   credit: "信用"
@@ -341,6 +336,9 @@ zh:
   depth: "深度"
   description: "描述"
   destroy: "摧毁"
+  didnt_receive_confirmation_instructions: 没有收到确认指令？
+  didnt_receive_unlock_instructions: "没有收到打开指令?"
+  discount_amount: "优惠金额"
   display: "显示"
   edit: "编辑"
   editing_billing_integration: "编辑帐单整合"
@@ -355,7 +353,6 @@ zh:
   editing_prototype: "编辑原型"
   editing_shipping_category: "编辑船舶分类"
   editing_shipping_method: "编辑配送方式"
-  editing_shipping_rate: "编辑的运费率"
   editing_state: "编辑状态"
   editing_tax_category: "编辑税分类"
   editing_tax_rate: "编辑税率"
@@ -365,12 +362,13 @@ zh:
   email: "Email"
   email_address: "Email地址"
   email_server_settings_description: "设置Email服务器设置。"
+  empty: "Empty"
   empty_cart: "清空购物车"
   enable_login_via_login_password: "通过用户名/密码登录"
   enable_login_via_openid: "使用的OpenID登录"
   enable_mail_delivery: "启用邮件传递"
-  enable_mail_queue: "启用邮件队列"
   enter_exactly_as_shown_on_card: "请输入准确的显示卡上的"
+  enter_password_to_confirm: "我们需要你当前的密码确认您的更改"
   environment: "环境"
   error: "错误"
   event: "事件"
@@ -380,7 +378,6 @@ zh:
   expiration_year: "到期年份"
   extension: "延期"
   extensions: "扩展"
-  front_end: "前端"
   filename: "文件名"
   final_confirmation: "最后确认"
   finalize: "敲定"
@@ -394,6 +391,7 @@ zh:
   flat_rate_per_order: "统一税率（每个订单）"
   flexible_rate: "灵活的汇率"
   forgot_password: "忘记密码"
+  front_end: "前端"
   full_name: "姓名"
   gateway: "网关"
   gateway_configuration: "网关配置"
@@ -427,10 +425,12 @@ zh:
   included_in_this_shipment: "包括在此装运"
   instructions_to_reset_password: "您可以通过手机短信或email邮箱重设您的密码(请在收到手机验证码或验证邮件后30分钟内修改密码)："
   integration_settings_warning: "如果你正在改变计费集成，您必须先修改之前保存你的设置集成"
+  intercept_email_address: 拦截电子邮件地址
+  intercept_email_instructions: 覆盖电子邮件接收者并替换这个邮件地址
   invalid_search: "无效的搜寻准则。"
   inventory: "库存"
   inventory_adjustment: "存货调整"
-  inventory_setting_description: "库存配置，Backordering，零股票显示"
+  inventory_setting_description: "库存配置，延迟交货，零股票显示"
   inventory_settings: "库存设置"
   is_not_available_to_shipment_address: "不提供货件处理"
   issue_number: "发行数量"
@@ -445,6 +445,7 @@ zh:
   last_name: "姓"
   last_name_begins_with: "姓从...开始"
   last_year: "去年"
+  leave_blank_to_not_change: "(留下空白如果你不想改变)"
   list: "表"
   listing_categories: "物品分类"
   listing_option_types: "列表选项类型"
@@ -460,19 +461,17 @@ zh:
   logged_in_as: "记录在"
   logged_in_succesfully: "登录成功"
   logged_out: "您已退出登录"
+  login: Login
   login_as_existing: "登录到现有客户"
   login_failed: "登录身份验证失败。"
   login_name: "注册"
   logout: "退出登录"
-  Signup_free: "免费注册"
   look_for_similar_items: "寻找类似的项目"
   maestro_or_solo_cards: "Maestro卡/Solo卡"
   mail_delivery_enabled: "邮件传递启用"
   mail_delivery_not_enabled: "邮件传递未启用"
-  mail_queue_enabled: "邮件队列启用"
-  mail_queue_not_enabled: "邮件队列未启用（电子邮件是立即传递）"
+  mail_methods: Mail Methods
   mail_server_preferences: "邮件服务器首选项"
-  mail_server_settings: "邮件服务器设置"
   make_refund: "设为退款"
   mark_shipped: "标明出货"
   master_price: "主价格"
@@ -481,6 +480,7 @@ zh:
   meta_keywords: "标签关键词"
   metadata: "元数据"
   missing_required_information: "所需信息丢失"
+  minimal_amount: "最小值"
   month: "月"
   my_account: "我的帐户"
   my_orders: "我的订单"
@@ -490,9 +490,9 @@ zh:
   new_adjustment: "新调整"
   new_billing_integration: "新的结算一体化"
   new_category: "新的类别"
-  new_coupon: "新的优惠券"
   new_customer: "新客户"
   new_image: "新形象"
+  new_mail_method: 新的邮件方法
   new_option_type: "新选择类型"
   new_option_value: "新的期权价值"
   new_order: "新秩序"
@@ -507,7 +507,6 @@ zh:
   new_shipment: "新装运"
   new_shipping_category: "新的航运分类"
   new_shipping_method: "新的配送方式"
-  new_shipping_rate: "新的航运价格"
   new_state: "新结构"
   new_tax_category: "新税额分类"
   new_tax_rate: "新税率"
@@ -522,11 +521,14 @@ zh:
   no_match_found: "没有找到副本"
   no_payment_methods_available: "无法核实此环境配置下的付款方式"
   no_products_found: "没有找到产品"
+  no_results: "No results"
   no_shipping_methods_available: "在现有的运输方法，请更改您的地址，然后再试一次。"
   no_user_found: "没有找到对应的账户，请检查您输入的手机号码或email，或者注册新用户。"
   none: "无"
   none_available: "不可用"
-  not: "不"
+  normal_amount: "正常值"
+  not: 没有
+  not_shown: "没有显示"
   note: "注意"
   notice_messages:
     option_type_removed: "成功删除的选项类型。"
@@ -534,7 +536,6 @@ zh:
     product_deleted: "产品已被删除"
     product_not_cloned: "产品不能被克隆"
     product_not_deleted: "产品不能被删除"
-    track_me_in_GA: "平均值追踪"
     variant_deleted: "选项已被删除"
     variant_not_deleted: "选项无法删除"
   on_hand: "库存"
@@ -556,8 +557,21 @@ zh:
   order_operation_authorize: "授权"
   order_processed_but_following_items_are_out_of_stock: "您的订单已被处理，但下列物品缺货："
   order_processed_successfully: "您的订单已成功处理"
+  order_state:
+    # keys correspond to Checkout state names:
+    address: 地址
+    adjustments: 调整
+    awaiting_return: 等待返回
+    canceled: 取消
+    cart: 运送
+    complete: 完成
+    confirm: 确认
+    delivery: 交货
+    payment: 付款
+    resumed : 恢复
+    returned: 返回
   order_summary: "订单摘要"
-  order_sure_want_to: "你确定要{{event}}这个秩序？"
+  order_sure_want_to: "你确定要%{event}这个秩序？"
   order_total: "订单总量"
   order_total_message: "记账在您卡上的总支出将被"
   order_updated: "为了更新"
@@ -585,6 +599,13 @@ zh:
   payment_method: "付款方式"
   payment_methods: "付款方式"
   payment_methods_setting_description: "设置方法可以用于支付客户"
+  payment_processing_failed: 付款无法处理，请进入核对清楚
+  payment_state: 支付情形
+  payment_states:
+    balance_due: 结欠余额
+    credit_owed: 亏欠贷款
+    failed: 失败
+    paid: 支付
   payment_updated: "更新后的付款"
   payments: "付款"
   pending_payments: "待付款"
@@ -597,7 +618,8 @@ zh:
   preview: "预览"
   previous: "上一页"
   price: "价格"
-  price_with_vat_included: "{{price}}包括增值税）"
+  price_bucket: 价格存储桶
+  price_with_vat_included: "%{price}包括增值税）"
   problem_authorizing_card: "信用卡授权问题"
   problem_capturing_card: "问题捕获信用卡"
   problems_processing_order: "我们有问题处理您的订单"
@@ -694,6 +716,12 @@ zh:
         description: "选择所有的产品都至少有一个变体，都要么有值指定选项或属性（如红色）"
         name: "与价值"
         sentence: "<em>%s的价值</em>与"
+      with_ids:
+        args:
+          ids: IDs
+        description: "Select specific products"选择特定产品
+        name: Products with IDs入侵检测系统（IDs）的产品
+        sentence: with IDs <em>%s</em>
       with_option:
         args:
           option: "选项"
@@ -721,7 +749,7 @@ zh:
         name: "随着物业价值"
         sentence: "属性<em>%s</em>与价值<em>%s</em>"
   products: "产品"
-  products_with_zero_inventory_display: "将产品与零库存{{不}}显示"
+  products_with_zero_inventory_display: "将产品与零库存%{不}显示"
   properties: "属性"
   property: "财产"
   prototype: "原型"
@@ -730,6 +758,7 @@ zh:
   provider_settings_warning: "如果你正在改变提供程序类型，你必须先修改之前保存你的设置的供应商"
   qty: "数量"
   quantity_shipped: "数量发货"
+  quantity_returned:数量返还
   range: "范围"
   rate: "率"
   reason: "原因"
@@ -745,6 +774,8 @@ zh:
   reports: "报告"
   required_for_solo_and_maestro: "需要单独和Maestro卡。"
   resend: "重发"
+  resend_confirmation_instructions: "重新发送确认指示"
+  resend_unlock_instructions: "重新发送解锁指示"
   reset_password: "重设我的密码"
   resource_controller:
     member_object_not_found: "会员找不到对象。"
@@ -760,6 +791,7 @@ zh:
   return_authorizations: "返回授权书"
   return_quantity: "返回数量"
   returned: "返回"
+  rma_credit: RMA Credit
   rma_number: "RMA号码"
   rma_value: "RMA价值"
   roles: "角色"
@@ -773,7 +805,8 @@ zh:
   scope: "范围"
   scopes: "领域"
   search: "搜索"
-  search_results: "搜索结果 {{keywords}}"
+  search_results: "搜索结果 %{keywords}"
+  searching: Searching
   secure_connection_type: "安全连接类型"
   secure_creditcard: "安全的信用卡"
   select: "选择"
@@ -782,6 +815,7 @@ zh:
   send_copy_of_all_mails_to: "发送所有电子邮件副本给"
   send_copy_of_orders_mails_to: "发送订单邮件副本给"
   send_mails_as: "发送邮件的"
+  send_me_reset_password_instructions: "发送重置密码指令"
   send_order_mails_as: "发送邮件命令"
   server: "服务器"
   server_error: "服务器错误"
@@ -791,6 +825,13 @@ zh:
   shipment: "装船"
   shipment_details: "装运详情"
   shipment_number: "装运＃"
+  shipment_state: Shipment State
+  shipment_states:
+    backorder: 欠交订货
+    partial: 部分
+    pending: 待定
+    ready: 准备
+    shipped: 装运
   shipment_updated: "装运更新"
   shipments: "出货"
   shipped: "出货"
@@ -805,10 +846,8 @@ zh:
   shipping_method: "配送方式"
   shipping_methods: "运送方法"
   shipping_methods_description: "航运管理办法"
-  shipping_rates: "运费"
-  shipping_rates_description: "运输价格管理"
   shipping_total: "船舶共有"
-  shop_by_taxonomy: "{{taxonomy}}"
+  shop_by_taxonomy: "%{taxonomy}"
   shopping_cart: "购物车"
   show: "显示"
   show_active: "展览活动"
@@ -817,7 +856,7 @@ zh:
   show_only_complete_orders: "只显示完整的订单"
   show_out_of_stock_products: "显示出存在断货产品"
   show_price_inc_vat: "显示价格包括增值税"
-  showing_first_n: "显示第一次{{n}}"
+  showing_first_n: "显示第一次%{n}"
   sign_up: "报名"
   site_name: "网站名称"
   site_url: "网站网址"
@@ -829,12 +868,11 @@ zh:
   smtp_password: "SMTP密码"
   smtp_port: "SMTP端口"
   smtp_send_all_emails_as_from_following_address: "发送的所有电子邮件从以下地址。"
-  smtp_send_copy_of_orders_to_this_addresses: "发送订单的所有邮件副本到这个地址。对于多个地址，用逗号分开。"
   smtp_send_copy_to_this_addresses: "发送的所有外发邮件复制到这个地址。对于多个地址，用逗号分开。"
-  smtp_send_order_mails_as_from_following_address: "从以下地址发送邮件订单。"
   smtp_username: "SMTP用户名"
   sold: "出售"
   sort_ordering: "排序"
+  special_instructions: "特别指示"
   spree:
     date: "日期"
     time: "团队"
@@ -890,12 +928,14 @@ zh:
   tree: "树状图"
   try_again: "再试一次"
   type: "类型"
+  type_to_search: 类型搜索
   unable_ship_method: "发货方式无法产生由于服务器错误。"
   unable_to_authorize_credit_card: "无法授权信用卡"
   unable_to_capture_credit_card: "无法捕获信用卡"
   unable_to_connect_to_gateway: "无法连接到网关。"
   unable_to_save_order: "无法保存订单"
   under_paid: "根据有偿"
+  units: "Units"
   unrecognized_card_type: "无法识别的卡类型"
   update: "更新"
   update_password: "更新我的密码和登录我在"
@@ -911,11 +951,12 @@ zh:
   user_created_successfully: "用户创建成功"
   user_details: "用户详细信息"
   users: "用户"
+  validate_on_profile_create: 确认简介创造
   validation:
+    cannot_be_less_than_shipped_units: "不能比的出货量减少。"
     is_too_large: "过大 - 手头股票并不能超过请求数量！"
     must_be_int: "必须是整数"
     must_be_non_negative: "必须为非负值"
-    cannot_be_less_than_shipped_units: "不能比的出货量减少。"
   value: "值"
   variants: "选项"
   vat: "增值税"

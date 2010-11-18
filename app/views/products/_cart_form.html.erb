@@ -4,7 +4,7 @@
   <% if product_price(@product) %>
     <% hook :product_price do %>
 <% if @product.property('零售价') %>
-<p>
+<p class="retail-price">
   零售价：<%= @product.property('零售价') %>
 </p>
 <% end %>

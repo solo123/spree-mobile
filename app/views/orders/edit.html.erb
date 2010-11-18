@@ -20,10 +20,12 @@
   <% end -%>
   <p><%=link_to t("continue_shopping"), products_path, :class => 'button continue cancel-btn' %></p>
   <% unless @order.line_items.empty? -%>
-  <p id="clear_cart_link">
+	<p id="clear_cart_link">
     <%= link_to t("empty_cart"), object_url, :method => :delete, :class => 'button empty cancel-btn'  %>
   </p>
   <% end -%>
 
 <% end %>
 <% end -%>
+      <h2>酷购网顾客下单流程</h2>
+      <img src="/images/site/coolpur-flow.png" alt="酷购网顾客下单流程" />
