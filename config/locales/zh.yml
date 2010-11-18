@@ -362,7 +362,7 @@ zh:
   email: "Email"
   email_address: "Email地址"
   email_server_settings_description: "设置Email服务器设置。"
-  empty: "Empty"
+  empty: 空
   empty_cart: "清空购物车"
   enable_login_via_login_password: "通过用户名/密码登录"
   enable_login_via_openid: "使用的OpenID登录"
@@ -446,6 +446,7 @@ zh:
   last_name_begins_with: "姓从...开始"
   last_year: "去年"
   leave_blank_to_not_change: "(留下空白如果你不想改变)"
+  left_logout: 退出登录
   list: "表"
   listing_categories: "物品分类"
   listing_option_types: "列表选项类型"

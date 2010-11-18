@@ -20,7 +20,7 @@ module Mobile
         v = []
         t = Taxonomy.find_by_name(tname)
         if t
-          self.taxons.find_all_by_taxonomy_id(t.id).each { |t| v << t.name }
+          self.taxons.find_all_by_taxonomy_id(t.id).each { |tt| v << tt.name }
         end
         v.join(',')
       end
