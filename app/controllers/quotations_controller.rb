@@ -1,6 +1,7 @@
 class QuotationsController < Spree::BaseController
   
   def index
+    redirect_to login_url unless current_user
     r = nil
     if params[:b]
       t = Taxon.find_by_id(params[:b])
@@ -17,6 +18,7 @@ class QuotationsController < Spree::BaseController
   end
 
   def table
+    redirect_to login_url unless current_user
     gjpp = Taxon.find_by_name('国际品牌')
     @p_gj = Product.in_taxon(gjpp).active.price_between(50,8000).all(:order => 'name, updated_at desc')
     gnpp = Taxon.find_by_name('国内品牌')
