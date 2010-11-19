@@ -26,7 +26,8 @@
     <% if Spree::Config[:show_zero_stock_products] || product.has_stock? %>
       <li id="product_<%= product.id %>">
         <%= link_to small_image(product), product %>
-        <%= link_to raw(product.name + " <span class='price selling'>#{product.property('卖点')}</span>"), product, :class => 'info' %>
+        上市时间：<%= product.property('上市时间') %><br />
+        制式：<%= product.taxon_val('制式') %>
       </li>
     <% end %>
   <% end %>

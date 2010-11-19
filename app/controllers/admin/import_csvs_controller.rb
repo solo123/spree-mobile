@@ -1,4 +1,4 @@
-require 'faster_csv'
+#require 'faster_csv'
 
 class Admin::ImportCsvsController < Admin::BaseController
   resource_controller :except => [:show]
