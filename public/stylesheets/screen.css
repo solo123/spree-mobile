@@ -1228,10 +1228,13 @@ ul.thumbnails li.selected { border-color: #8ec871; }
   color: #ffffff;
 }
 .quotations-filter-area {
-  width: 980px;
-  _width: 300px;
-  float: none;
-  _float: right;
+  float: right;
+  margin-left: -676px;
+  width: 100%;
+}
+.quotations-filter-area .qfb {
+  margin-left: 676px;
+  width: auto;
 }
 .quotations-filter {
   width: 300px;
@@ -1276,8 +1279,9 @@ ul.thumbnails li.selected { border-color: #8ec871; }
   margin-right: 8px;
 }
 .quotations-product-list {
-  width: 660px;
+  display: block;
   float: left;
+  width: 660px;
 }
 .quotations-product-list .result-stats {
   height: 30px;

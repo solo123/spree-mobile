@@ -1,6 +1,6 @@
 <% content_for :head do %>
   <%= javascript_include_tag 'quotations' %>
-<script type="text/javascript">
+  <script type="text/javascript">
     function discard_baseinfo(){
       $('#base-info').html( $.ajax({url: "/account/load_baseinfo",async: false}).responseText );
     }
@@ -35,7 +35,7 @@
       $('#password-info').html( '<div class="info-title"><h3>安全信息</h3><a onclick="edit_pwd_info();" class="edit-link">修改密码</a></div>' );
     }
     function edit_pwd_info(){
-      $('#password-info').html( $.ajax({url: "edit_pwdinfo/me",async: false}).responseText );
+      $('#password-info').html( $.ajax({url: "/account/edit_pwdinfo",async: false}).responseText );
       $('form.pwdinfo').submit(function() {//点击submit的函数
         $(this).ajaxSubmit({//点击submit发起ajax请求
           success: function(){discard_pwdinfo(); $('#upPwdInfo').html('密码修改成功');},
@@ -73,7 +73,7 @@
 <% @body_id = 'users' %>
 <h1><%= t("my_account") %></h1>
 <div class="myhome-side">
-  <% hook :account_summary do %>
+  <%= hook :account_summary do %>
     <div class="info-area area-base-pwd">
       <div id="base-info" class="base-info">
         <%= render 'show_baseinfo' %>
@@ -85,15 +85,15 @@
       <div class="clr"></div>
     </div>
     <div class="info-area area-profiles">
-    <% if @user.profile
-      pf = @user.profile
-    %>
+      <% if @user.profile
+        pf = @user.profile
+      %>
 
-<div class="details-info">
-<div class="info-title">
-  <h3>详细资料</h3>
-  <%= link_to t('edit'), profiles_url, :class => 'edit-link' %>
-</div>
+        <div class="details-info">
+          <div class="info-title">
+            <h3>详细资料</h3>
+            <%= link_to t('edit'), profiles_url, :class => 'edit-link' %>
+          </div>
 
           <table style="width:auto;">
             <tr>
@@ -276,39 +276,39 @@
       </table>
     </div>
   </div>
-  
 
 
 
-<%= hook :account_my_orders do %>
+
+  <%= hook :account_my_orders do %>
     <div class="info-area">
-    <h2><%= t("my_orders") %></h2>
+      <h2><%= t("my_orders") %></h2>
 
-    <table class="order-summary" width="545">
-      <thead>
-        <tr>
-          <th><%= t("order_number") %></th>
-          <th><%= t("order_date") %></th>
-          <th><%= t("status") %></th>
-          <th><%= t("customer") %></th>
-          <th><%= t("total") %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @orders.each do |order| %>
-          <tr class="<%= cycle('even', 'odd') %>">
-            <td><%= link_to order.number, order_url(order) %></td>
-            <td><%=order.created_at.to_date%></td>
-            <td><%= t(order.state).titleize %></td>
-            <td><%= order.user.email if order.user %></td>
-            <td><%= number_to_currency order.total %></td>
+      <table class="order-summary" width="545">
+        <thead>
+          <tr>
+            <th><%= t("order_number") %></th>
+            <th><%= t("order_date") %></th>
+            <th><%= t("status") %></th>
+            <th><%= t("customer") %></th>
+            <th><%= t("total") %></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr class="<%= cycle('even', 'odd') %>">
+              <td><%= link_to order.number, order_url(order) %></td>
+              <td><%=order.created_at.to_date%></td>
+              <td><%= t(order.state).titleize %></td>
+              <td><%= order.user.email if order.user %></td>
+              <td><%= number_to_currency order.total %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
 
     </div>
-<% end %>
+  <% end %>
 
 
 

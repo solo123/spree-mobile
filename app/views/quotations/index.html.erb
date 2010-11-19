@@ -1,17 +1,19 @@
 <% content_for :head do %>
-    <%= javascript_include_tag 'quotations', 'smartFloat' , :cache => 'quotations-core' %>
+  <%= javascript_include_tag 'quotations', 'smartFloat' , :cache => 'quotations-core' %>
 <% end %>
 <% cache do %>
   <h1>手机批发报价</h1>
-  <div  id="float" class="quotations-filter-area">
-    <div class="quotations-filter">
-      <h3>请选择条件</h3>
-      <div class="search-model">
-        <input type="text" id="" value="请输入品牌或型号" />
-        <button class="submit-btn">查找</button>
+  <div class="quotations-filter-area">
+    <div class="qfb">
+      <div class="quotations-filter" id="float">
+        <h3>请选择条件</h3>
+        <div class="search-model">
+          <input type="text" id="" value="请输入品牌或型号" />
+          <button class="submit-btn">查找</button>
+        </div>
+        <%= render 'brands' %>
+        <div class="clr"></div>
       </div>
-      <%= render 'brands' %>
-      <div class="clr"></div>
     </div>
   </div>
 
@@ -47,35 +49,35 @@
 
 
 
-<tbody>
-<% @products.each do |p|
-  brn = p.taxon_val('品牌')
-%>
+      <tbody>
+        <% @products.each do |p|
+          brn = p.taxon_val('品牌')
+        %>
 
-        <tr>
-          <td>
-            <% if params[:b] && (bb = Taxon.find_by_name(brn).id) == params[:b].to_i %>
-              <%= brn %>
-            <% else %>
-              <%= link_to brn, :b => bb %></td>
-          <% end %>
+          <tr>
+            <td>
+              <% if params[:b] && (bb = Taxon.find_by_name(brn).id) == params[:b].to_i %>
+                <%= brn %>
+              <% else %>
+                <%= link_to brn, :b => bb %></td>
+            <% end %>
 
 
 
-          <td><%= link_to p.property('型号'), p %></td>
-          <td><%= p.property('颜色') %> </td>
-          <td><%= p.taxon_val('制式') %></td>
-          <td><%= p.property('上市时间') %></td>
-          <td class="prices"><%= show_price(p.property('批发价')) %> </td>
-          <td>
-            <a href="javascript:void(0)">询价</a>
-            <a href="javascript:void(0)">购买</a>
-            <a href="javascript:void(0)" class="collectbtn">收藏</a>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+            <td><%= link_to p.property('型号'), p %></td>
+            <td><%= p.property('颜色') %> </td>
+            <td><%= p.taxon_val('制式') %></td>
+            <td><%= p.property('上市时间') %></td>
+            <td class="prices"><%= show_price(p.property('批发价')) %> </td>
+            <td>
+              <a href="javascript:void(0)">询价</a>
+              <a href="javascript:void(0)">购买</a>
+              <a href="javascript:void(0)" class="collectbtn">收藏</a>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 <% end %>
 
