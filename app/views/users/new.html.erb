@@ -27,7 +27,7 @@
       <%= hook :signup_inside_form do %>
         <%= render 'shared/user_form', :f => f %>
         <p>单击“<%= t("create") %>”即表示您同意 Coolpur <a href="/pages/registration-agreement" target="_blank">用户协议</a>和<a href="/pages/legal-notices" target="_blank">法律声明</a>。 </p>
-        <p><%= submit_tag t("create"), :class => 'button primary' %></p>
+        <p><%= submit_tag t("create"), :class => 'button primary submit-btn' %></p>
       <% end %>
     <% end %>
     <%= t("or") %> <%= link_to t("login_as_existing"), login_path %>  | <%= link_to t("forgot_password"), new_password_reset_path %>

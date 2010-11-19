@@ -33,6 +33,9 @@ $(function(){
     });
 
     $(".radiogroup").buttonset();
+
+    $("#cart-form").addClass("cart-form-hover")
+
     $.getJSON('/home/userinfo', function(u){
         s = "<li>欢迎光临酷购!: "+
         u.name + "&nbsp;<img src='/images/site/star.gif' alt=''>";

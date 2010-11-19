@@ -1528,6 +1528,14 @@ ul.thumbnails li.selected { border-color: #8ec871; }
   padding-left: 12px;
   padding-right: 12px;
 }
+#cart-form:hover {
+  background: #fff6ed;
+  border: 2px solid #faefe3;
+}
+.cart-form-hover {
+  background: #fff6ed;
+  border: 2px solid #faefe3;
+}
 #taxon-crumbs { margin-top: 20px; }
 #taxon-crumbs ul {
   list-style: none;
