@@ -10,14 +10,14 @@
 <% end %>
 
 
-<div class="brand-list"
+<div class="brand-list">
      <h1>手机品牌</h1>
 
   <%
   pp = Taxon.find_by_name('国际品牌')
   bs = Taxon.find_all_by_parent_id(pp.id, :order => :lft)
 %>
-  <h3 id="international">国际品牌 <span class="info">(现有品牌 <strong><%= bs.count %></strong> 个，手机 <strong><%= Product.active.in_taxon(bs).count %></strong> 款)</span></h3>
+  <h3 id="international">国际品牌 <span class="info">(现有品牌 <strong><%= bs.count %></strong> 个，手机 <strong><%= Product.active.in_taxon(pp).count %></strong> 款)</span></h3>
 
   <ul>
     <% bs.each do |b| %>
@@ -30,7 +30,7 @@
   pp = Taxon.find_by_name('国内品牌')
   bs = Taxon.find_all_by_parent_id(pp.id, :order => :lft)
 %>
-  <h3 id="china">国内品牌 <span class="info">(现有品牌 <strong><%= bs.count %></strong> 个，手机 <strong><%= Product.active.in_taxon(bs).count %></strong> 款) </span></h3>
+  <h3 id="china">国内品牌 <span class="info">(现有品牌 <strong><%= bs.count %></strong> 个，手机 <strong><%= Product.active.in_taxon(pp).count %></strong> 款) </span></h3>
 
   <ul>
     <% bs.each do |b| %>
@@ -38,3 +38,4 @@
     <% end %>
   </ul>
   <div class="clr"></div>
+</div>
