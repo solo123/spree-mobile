@@ -1,4 +1,3 @@
-<% cache do %>
 <% content_for :head do %>
   <%= javascript_include_tag 'jquery.jcarousel/jquery.jcarousel.min', 'jquery.jcarousel/banner.slide' %>
   <%= stylesheet_link_tag '/javascripts/jquery.jcarousel/skins/tango/skin.css', '/javascripts/jquery.jcarousel/skins/banner.slide/skin.css' %>
@@ -29,7 +28,7 @@
     
   </script>
 <% end %>
-
+<% cache do %>
 <div class="homebanner">
   <div id="random_index"  class="jcarousel-skin-default"> </div>
   <div id='index_itemlist' style='display:none;'>
