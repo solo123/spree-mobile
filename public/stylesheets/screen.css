@@ -1310,20 +1310,25 @@ ul.thumbnails li.selected { border-color: #8ec871; }
 .quotations-product-list table tbody tr.seleted td .collectbtn { visibility: visible; }
 .quotations-product-list table colgroup .col_1 { width: 70px; }
 .quotations-product-list table colgroup .col_7 { width: 96px; }
-.brand-list h3 {
-  font-size: 1.5em;
+.brand-list .area-header {
   height: 1.8em;
   line-height: 1.8em;
   margin: 18px auto;
-  padding-left: 0.5em;
-  background: #d4ebb4;
+  padding: 0.5em;
+  background: #e9f4e9;
 }
-.brand-list h3 .info {
-  margin-left: 0.2em;
-  font-size: 0.8em;
+.brand-list .area-header h3 {
+  font-size: 1.5em;
+  color: #006600;
+  display: inline;
+}
+.brand-list .area-header .info {
+  margin-left: 0.3em;
+  font-size: 1.2em;
   font-weight: normal;
 }
-.brand-list h3 .info strong { color: #ffb311; }
+.brand-list .area-header .info strong { color: #ff5411; }
+.brand-list .tips { font-size: 1.2em; }
 .brand-list ul {
   list-style-type: none;
   margin: 5px 0 12px 0;
@@ -1331,28 +1336,19 @@ ul.thumbnails li.selected { border-color: #8ec871; }
 .brand-list ul li {
   display: block;
   float: left;
-  width: 23%;
-  height: 44px;
+  width: 18%;
+  height: 25px;
   margin: 0 1% 12px 0;
   padding: 8px 0;
   white-space: nowrap;
-  border: 1px solid #dfdfdf;
+  border: 1px solid #efeeed;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
 }
 .brand-list ul li a {
   margin-right: 5px;
   font-size: 1.2em;
-}
-.brand-list ul li a:link {
-  color: #8cc63f;
-  text-decoration: none;
-}
-.brand-list ul li a:visited {
-  color: #8cc63f;
-  text-decoration: none;
-}
-.brand-list ul li a:hover {
-  color: #8cc63f;
-  text-decoration: underline;
 }
 .brand-list ul li a.current {
   background: url(../images/menu-current.png) right center no-repeat;
@@ -1360,21 +1356,30 @@ ul.thumbnails li.selected { border-color: #8ec871; }
   overflow: hidden;
 }
 .brand-list ul li .brand-name {
-  height: 44px;
-  line-height: 44px;
+  height: 25px;
+  line-height: 25px;
   float: left;
   padding-left: 8px;
+  color: #b9b9b9;
 }
 .brand-list ul li .concern {
   float: right;
-  padding: 5px 8px 0 0;
+  padding: 3px 8px 0 0;
   font-size: 0.8em;
 }
-.brand-list ul li:hover { border-color: #8ec871; }
+.brand-list ul li label { display: none; }
+.brand-list ul li:hover {
+  border-color: #8ec871;
+  background: #e9f4e9;
+}
+.brand-list ul li.hover {
+  border-color: #8ec871;
+  background: #e9f4e9;
+}
 .years-title {
-  height: 50px;
-  line-height: 50px;
-  background: #d4ebb4;
+  height: 40px;
+  line-height: 40px;
+  background: #e9f4e9;
   padding: 0 12px;
   margin: 22px 0 12px 0;
 }
@@ -1385,7 +1390,7 @@ ul.thumbnails li.selected { border-color: #8ec871; }
 }
 .years-title .num {
   font-size: 1.2em;
-  color: #ffb311;
+  color: #ff5411;
 }
 .years-look-more {
   margin: 12px 0;

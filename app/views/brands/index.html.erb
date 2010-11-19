@@ -1,36 +1,36 @@
 <% content_for :head do %>
   <%= javascript_include_tag 'jquery.checkbox/jquery.checkbox.min' %>
-  <%= stylesheet_link_tag '/javascripts/jquery.checkbox/jquery.checkbox.css' %>
-  
+  <%= stylesheet_link_tag '/javascripts/jquery.checkbox/jquery.checkbox.css','/javascripts/jquery.checkbox/jquery.safari-checkbox.css' %>
+
   <script type="text/javascript">
     $(document).ready(function() {
-        $('input:checkbox').checkbox();
+      $('input:checkbox:not([safari])').checkbox();
+      $('input[safari]:checkbox').checkbox({cls:'jquery-safari-checkbox'});
+      $('input:radio').checkbox();
     });
-</script>
+  </script>
 <% end %>
-
-
 <div class="brand-list">
-     <h1>手机品牌</h1>
-
+  <h1>手机品牌</h1>
+  <p class="tips">点击品牌后面的开关，选择您关注的品牌，将会优先为您推荐。</p>
   <%
   pp = Taxon.find_by_name('国际品牌')
   bs = Taxon.find_all_by_parent_id(pp.id, :order => :lft)
 %>
-  <h3 id="international">国际品牌 <span class="info">(现有品牌 <strong><%= bs.count %></strong> 个，手机 <strong><%= Product.active.in_taxon(pp).count %></strong> 款)</span></h3>
+  <div id="international" class="area-header"><h3>国际品牌</h3> <span class="info">(现有品牌 <strong><%= bs.count %></strong> 个，手机 <strong><%= Product.active.in_taxon(pp).count %></strong> 款)</span></div>
 
   <ul>
     <% bs.each do |b| %>
       <li>
         <span class="brand-name"><%= link_to b.name, '/t/' + b.permalink %>(<%= Product.active().in_taxon(b).count %>)</span> <span class="concern"><input type="checkbox" id="tax_<%= b.id %>" /><label for="tax_<%= b.id %>">关注</label></span></li>
-      <% end %>
+    <% end %>
   </ul>
   <div class="clr"></div>
   <%
   pp = Taxon.find_by_name('国内品牌')
   bs = Taxon.find_all_by_parent_id(pp.id, :order => :lft)
 %>
-  <h3 id="china">国内品牌 <span class="info">(现有品牌 <strong><%= bs.count %></strong> 个，手机 <strong><%= Product.active.in_taxon(pp).count %></strong> 款) </span></h3>
+  <div id="china" class="area-header"><h3>国内品牌</h3> <span class="info">(现有品牌 <strong><%= bs.count %></strong> 个，手机 <strong><%= Product.active.in_taxon(pp).count %></strong> 款) </span></div>
 
   <ul>
     <% bs.each do |b| %>
