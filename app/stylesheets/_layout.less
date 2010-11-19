@@ -39,6 +39,7 @@ body.two-col #content {
   float:right;
   width:770px;
   padding-top:18px;
+  overflow: hidden;
 }
 
 #header{
@@ -46,7 +47,7 @@ body.two-col #content {
     .mainLogo {
         float: left;
         height:100px;
-        width:500px;
+        width:430px;
         h1{
             margin:0;
             float:left;
@@ -68,14 +69,14 @@ body.two-col #content {
     
     .head-tmp-right{
         float: right;
-        width:470px;
+        width:540px;
     }
     .topMenu{
         margin:0;
         float: right;
         list-style-type: none;  
         text-align: right;
-        width:460px;
+        width:530px;
         height:22px;
         line-height:22px;
 
@@ -177,6 +178,7 @@ body.two-col #content {
                 border:0 none;
                 background: #fff url("/images/site/search_form_bg.png") no-repeat scroll left top;
             }
+            
             .search-button{
                 width:59px;
                 height:31px;
@@ -195,24 +197,24 @@ body.two-col #content {
     padding-top:18px;
     
     .footBar{
-        background: url("/images/site/global-bg.png") repeat-x scroll left top;
+        background: #f8f8f8; /*url("/images/site/global-bg.png") repeat-x scroll left top*/
         height:28px;
         line-height:28px;
         margin:0 0 0 0;
         padding:0;
         vertical-align:top;
         width:980px;
-
+        /*
         a{
             color:#FFFFFF;
             font-family:Arial;
-            font-size:13px;
             text-decoration:none;
         }
         a:hover{
             color:#C5E29F;
             text-decoration:none;
         }
+        */
         ul {
             display:block;
             list-style-type:none;
@@ -234,11 +236,10 @@ body.two-col #content {
     .copyright{
         float:right;
         font-family:Arial;
-        font-size:12px;
         padding-right:14px;
         height:30px;
         line-height:30px;
-        color:#fff;
+        color:#777;
     }
     .footmapnav{
         padding-left:4%;
@@ -254,7 +255,7 @@ body.two-col #content {
 
                 h3{
                     padding:2px 0;
-                    font-size:1.3em;
+                    font-size:1.2em;
                     margin-bottom:0.3em;
                 }
 
@@ -263,15 +264,7 @@ body.two-col #content {
                     li{
                         float:none;
                         width:auto;
-                        
-                        a:link,a:visited{
-                            color:#8e8e8e;
-                            text-decoration: none;
-                        }
-                        a:hover{
-                            color: @link_hover_color;
-                            text-decoration: underline;
-                        }
+                        /*font-size: 1.2em;*/
                     }
                 }
             }
@@ -298,38 +291,20 @@ body.two-col #content {
     }
 }
 
-
-
-
 .search-area{
     padding: 16px 40px 0 0;
 }
-
-sub {color:#007DB1;font-family:Arial;font-size:14px;line-height:1.62;}
-
-
-h1 { font-size: 2.5em; }
-.form-buttons, .clear { clear: both; }
-input.title { width: auto; }
 
 p.follow-all {
   font-size: 1.3em;
   text-align: center;
   display: block;
 }
-p img {
-  float: left;
-  margin-right: 5px;
-  vertical-align: middle;
-}
 
-img {border:medium none;}
-a{color:@link_color; font-family:Arial;}
-a:hover{ color:@link_hover_color; text-decoration:none;}
+.form-buttons, .clear { clear: both; }
+input.title { width: auto; }
 
 .clr{ clear: both; line-height: 0; font-size: 0; height: 0; overflow: hidden;}
-
-
 
 .pages-side-nav{
     ul{
@@ -350,7 +325,6 @@ a:hover{ color:@link_hover_color; text-decoration:none;}
                     a{ 
                         cursor: pointer!important;
                         text-decoration: none;
-                        color: #8CC63F;
                         display: block;
                         height:1.8em;
                         line-height:1.8em;
@@ -358,12 +332,11 @@ a:hover{ color:@link_hover_color; text-decoration:none;}
                         font-size:1.2em;
                     }
                     a:hover {
-                        color: #8CC63F;
                         text-decoration: underline;
                     }
                     a.current{
-                        color: #ffb311;
-                        border-bottom: 2px solid #ffb311;
+                        color: #FF5411;
+                        border-bottom: 2px solid #FBCC91;
                     }
                 }
             }
@@ -376,6 +349,102 @@ a:hover{ color:@link_hover_color; text-decoration:none;}
 .content{
     margin:22px 0 12px 0;
     font-size:1.2em;
+}
+
+.myhome-side{
+    width: 300px;
+    float: right;
+    
+    .info-area{
+        margin-bottom: 12px;
+    }
+
+    .info-title{
+        margin:0 0 12px 0;
+        height:30px;
+        line-height: 30px;
+        h3{
+            display:inline;
+            margin: 0;
+        }
+        .edit-link{
+            margin-left: 8px;
+            cursor: pointer;
+            color: @link_color;
+        }
+        .edit-link:hover{
+            color: @link_hover_color;
+        }
+        .edit-link-false{
+            color: #b9b9b9;
+        }
+    }
+    .area-base-pwd{
+        background: #fff6ed;
+        border:1px solid #faefe3;
+        .rounded_corners(3px);
+        padding:12px;
+    }
+    .area-profiles{
+        background: #f8f8f8;
+        .rounded_corners(3px);
+        padding: 12px;
+        
+    }
+    .recently-Viewed{
+        .price{
+            margin-left: 8px;
+            color: @selling_price_color;
+        }
+    }
+}
+.myhome-main{
+    width: 660px;
+    float: left;
+
+    .info-area{
+        margin-bottom: 12px;
+    }
+
+    h2{
+        color: #006600;
+        margin-bottom:0.5em;
+    }
+
+    .info-title{
+        margin:0 0 12px 0;
+        height:30px;
+        line-height: 30px;
+        h2{
+            display:inline;
+            margin: 0;
+        }
+    }
+
+    .my-account-info{
+    
+        .my-level{
+            width:60%; 
+        }
+        .level-info{
+            margin: 8px 0;
+            font-size: 1.2em;
+        }
+    }
+
+    .my-concern{
+
+        .toolbar{
+            text-align: right;
+            margin-bottom: 12px;
+            padding:5px;
+            background: #e9f4e9;
+        }
+    }
+
+
+
+
 }
 
 
@@ -403,25 +472,22 @@ a:hover{ color:@link_hover_color; text-decoration:none;}
     .form-area,.form-area-display{
         margin:12px 0 12px 50px;
         .radiogroup{ font-size:0.8em; }
+        font-size: 1.2em;
 
         .tb-two-col{
             td.item_name{
                 width:15%;
-                font-size:1.2em;
             }
             td.item_value{
                 width:35%;
-                font-size:1.2em;
             }
         }
         .tb-one-col{
             td.item_name{
                 width:15%;
-                font-size:1.2em;
             }
             td.item_value{
                 width:85%;
-                font-size:1.2em;
             }
         }
         .tb-list{
@@ -435,18 +501,15 @@ a:hover{ color:@link_hover_color; text-decoration:none;}
             }
             thead{
                 th{
-                    font-size:1.2em;
                     font-weight: bold;
                 }
             }
             tbody{
                 th{
-                    font-size: 1.2em;
                     font-weight: normal;
                     color: #ffb311;
                 }
                 td{
-                    font-size: 1.2em;
                 }
             }
         }

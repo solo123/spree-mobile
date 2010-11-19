@@ -1,17 +1,17 @@
-  <div class="info-title">
-    <h3>基本信息</h3><a onclick="edit_base_info();" class="edit-link">编辑</a>
-  </div>
-    <table style="width:auto;">
-      <tr>
-        <td>显示名：</td>
-        <td><%= @user.display_name %></td>
-      </tr>
-      <tr>
-        <td><%= t('activerecord.attributes.user.mobile') %>：</td>
-        <td><%= @user.mobile %></td>
-      </tr>
-      <tr>
-        <td><%= t('activerecord.attributes.user.email') %>：</td>
-        <td><%= @user.email %></td>
-      </tr>
-    </table>
+<div class="info-title">
+  <h3>基本信息</h3><a onclick="edit_base_info();" class="edit-link">编辑</a>
+</div>
+<table style="width:auto;">
+  <tr>
+    <td>显示名：</td>
+    <td><%= @user.display_name %></td>
+  </tr>
+  <tr>
+    <td><%= t('activerecord.attributes.user.mobile') %>：</td>
+    <td><%= @user.mobile %></td>
+  </tr>
+  <tr>
+    <td><%= t('activerecord.attributes.user.email') %>：</td>
+    <td><%= @user.email %></td>
+  </tr>
+</table>

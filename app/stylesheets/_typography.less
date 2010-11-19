@@ -3,14 +3,14 @@
 body {
   line-height: 1.5;
   font-family: Helvetica Neue, Arial, Helvetica, sans-serif;
-  color: #333333;
+  color: @black;
   font-size: 75%; }
 
 h1 {
   font-weight: normal;
-  border-bottom:2px solid #8ec871;
-  color:#FFB311;
-  font-size: 3em;
+  border-bottom:2px solid #EFEEED;
+  color:@black;
+  font-size: 2.2em;
   line-height: 1.5em;
   margin-top:0.5em;
   margin-bottom: 0.5em; }
@@ -22,34 +22,29 @@ h1.noborder{
 
 h2 {
   font-weight: normal;
-  color: #222222;
   font-size: 2em;
   margin-bottom: 0.75em; }
 
 h3 {
   font-weight: normal;
-  color: #222222;
   font-size: 1.5em;
   line-height: 1;
   margin-bottom: 1em; }
 
 h4 {
   font-weight: normal;
-  color: #222222;
   font-size: 1.2em;
   line-height: 1.25;
   margin-bottom: 1.25em; }
 
 h5 {
   font-weight: normal;
-  color: #222222;
   font-size: 1em;
   font-weight: bold;
   margin-bottom: 1.5em; }
 
 h6 {
   font-weight: normal;
-  color: #222222;
   font-size: 1em;
   font-weight: bold; }
 
@@ -69,9 +64,14 @@ p {
     margin: 1.5em 0 1.5em 1.5em;
     padding: 0; }
 
-a {
-  text-decoration: underline;
-  color: @link_color; }
+sub { color:#007DB1; font-family:Arial; font-size:14px; line-height:1.62; }
+
+img {border:medium none;}
+
+a{ font-family:Arial; }
+a:link{ color: @link_color; text-decoration:none;}
+a:visited{ color: @link_visited_color; text-decoration:none; }
+a:hover{ color: @link_hover_color; }
 
 blockquote {
   margin: 1.5em;
@@ -142,7 +142,7 @@ th, td, caption {
   padding: 4px 10px 4px 5px; }
 
 tr.even td {
-  background: #e5ecf9; }
+  background: #f8f8f8; }
 
 tfoot {
   font-style: italic; }
