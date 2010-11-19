@@ -3,7 +3,7 @@
 <% form_for(@profile, :url => '/profiles/save') do |f| %>
   <%= render 'profile_form', :f => f %>
 
-  <p class="buttonarea"><%= submit_tag '保存信息', :class => 'button submit-btn'%></p>
+  <p class="buttonarea"><%= submit_tag '保存信息', :class => 'button submit-btn'%> <input type="reset" class="button cancel-btn" value="取消"/></p>
 <% end %>
 
 

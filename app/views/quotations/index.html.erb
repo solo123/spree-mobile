@@ -1,44 +1,57 @@
 <% content_for :head do %>
-<%= javascript_include_tag 'quotations' %>
+    <%= javascript_include_tag 'quotations', 'smartFloat' , :cache => 'quotations-core' %>
 <% end %>
 <% cache do %>
-<h1 class="noborder">手机批发报价</h1>
-<div class="quotations-filter">
-  <h3>共搜索到 <strong>x</strong> 款</h3>
-  <%= render 'brands' %>
-  <div class="clr"></div>
-</div>
+  <h1>手机批发报价</h1>
+  <div  id="float" class="quotations-filter-area">
+    <div class="quotations-filter">
+      <h3>请选择条件</h3>
+      <div class="search-model">
+        <input type="text" id="" value="请输入品牌或型号" />
+        <button class="submit-btn">查找</button>
+      </div>
+      <%= render 'brands' %>
+      <div class="clr"></div>
+    </div>
+  </div>
 
-<div class="quotations-product-list" id="QPlist">
-  <table>
-    <colgroup>
-      <col class="col_1"></col>
-      <col class="col_2"></col>
-      <col class="col_3"></col>
-      <col class="col_4"></col>
-      <col class="col_5"></col>
-      <col class="col_6"></col>
-      <col class="col_7"></col>
-      <col class="col_8"></col>
-      <col class="col_9"></col>
-    </colgroup>
-    <thead>
-      <tr>
-        <th>品牌</th>
-        <th>型号</th>
-        <th>颜色</th>
-        <th>制式</th>
-        <th>样式</th>
-        <th>屏幕</th>
-        <th>标配</th>
-        <th>批发价</th>
-        <th>操作</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @products.each do |p|
-        brn = p.taxon_val('品牌')
-      %>
+  <script type="text/javascript">
+    //绑定
+    $("#float").smartFloat();
+  </script>
+
+  <div class="quotations-product-list" id="QPlist">
+    <div class="result-stats">共搜索到 <strong>x</strong> 款</div>
+    <table>
+      <colgroup>
+        <col class="col_1"></col>
+        <col class="col_2"></col>
+        <col class="col_3"></col>
+        <col class="col_4"></col>
+        <col class="col_5"></col>
+        <col class="col_6"></col>
+        <col class="col_7"></col>
+      </colgroup>
+      <thead>
+        <tr>
+          <th>品牌</th>
+          <th>型号</th>
+          <th>颜色</th>
+          <th>制式</th>
+          <th>上市时间</th>
+          <th>批发价</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+
+
+
+
+<tbody>
+<% @products.each do |p|
+  brn = p.taxon_val('品牌')
+%>
+
         <tr>
           <td>
             <% if params[:b] && (bb = Taxon.find_by_name(brn).id) == params[:b].to_i %>
@@ -46,12 +59,13 @@
             <% else %>
               <%= link_to brn, :b => bb %></td>
           <% end %>
+
+
+
           <td><%= link_to p.property('型号'), p %></td>
           <td><%= p.property('颜色') %> </td>
           <td><%= p.taxon_val('制式') %></td>
-          <td><%= p.property('样式') %></td>
-          <td><%= p.property('屏幕') %></td>
-          <td><%= p.property('标配') %></td>
+          <td><%= p.property('上市时间') %></td>
           <td class="prices"><%= show_price(p.property('批发价')) %> </td>
           <td>
             <a href="javascript:void(0)">询价</a>

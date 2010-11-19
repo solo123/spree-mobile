@@ -1,5 +1,6 @@
 <% content_for :head do %>
-  <script type="text/javascript">
+  <%= javascript_include_tag 'quotations' %>
+<script type="text/javascript">
     function discard_baseinfo(){
       $('#base-info').html( $.ajax({url: "/account/load_baseinfo",async: false}).responseText );
     }
@@ -18,63 +19,269 @@
     }
     function displayError(request, errorType) {
       var msg = '' +
-    '<div class="ui-widget error" style="float:left;">' +
+        '<div class="ui-widget error" style="float:left;" id="effecterrors">' +
         '<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;">' +
-            '<p style="margin:0.5em;"><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>' +
-            '<strong>出错了:</strong> ' + request.responseText + '(请检查输入数据项，修改密码长度不能少于5) </p>' +
+        '<p style="margin:0.5em;"><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>' +
+        '<strong>出错了:</strong> ' + request.responseText + '(请检查输入数据项) </p>' +
         '</div>' +
-    '</div>';
+        '</div>';
 
       $('#base-info').append(msg)
       $('.error').click(function(){$(this).hide()})
     }
 
+
+    function discard_pwdinfo(){
+      $('#password-info').html( '<div class="info-title"><h3>安全信息</h3><a onclick="edit_pwd_info();" class="edit-link">修改密码</a></div>' );
+    }
+    function edit_pwd_info(){
+      $('#password-info').html( $.ajax({url: "edit_pwdinfo/me",async: false}).responseText );
+      $('form.pwdinfo').submit(function() {//点击submit的函数
+        $(this).ajaxSubmit({//点击submit发起ajax请求
+          success: function(){discard_pwdinfo(); $('#upPwdInfo').html('密码修改成功');},
+          clearForm: true,
+          //success: DeleteProduct,
+          error: displayPwdError//发生错误,譬如validate?为false时
+        });
+        return false;
+      });
+      return false;
+    }
+    function displayPwdError(request, errorType) {
+      var msg = '' +
+        '<div class="ui-widget error" style="float:left;" id="effecterrors">' +
+        '<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;">' +
+        '<p style="margin:0.5em;"><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>' +
+        '<strong>出错了:</strong> ' + request.responseText + '(请检查输入数据项，修改密码长度不能少于5) </p>' +
+        '</div>' +
+        '</div>';
+
+      $('#password-info').append(msg)
+      $('.error').click(function(){$(this).hide()})
+    }
+
+
+    $(function(){
+      // Progressbar
+      $("#progressbar").progressbar({
+        value: 20
+      });
+    });
+    
   </script>
 <% end %>
 <% @body_id = 'users' %>
 <h1><%= t("my_account") %></h1>
-<%= hook :account_summary do %>
-  <div class="profiles-info">
-    <div id="base-info">
-      <%= render 'show_baseinfo' %>
+<div class="myhome-side">
+  <% hook :account_summary do %>
+    <div class="info-area area-base-pwd">
+      <div id="base-info" class="base-info">
+        <%= render 'show_baseinfo' %>
+      </div>
+      <div id="password-info" class="password-info">
+        <div class="info-title"><h3>安全信息</h3><a onclick="edit_pwd_info();" class="edit-link">修改密码</a></div>
+      </div>
+      <div id="upPwdInfo"></div>
+      <div class="clr"></div>
     </div>
-    <hr/>
-
+    <div class="info-area area-profiles">
     <% if @user.profile
       pf = @user.profile
     %>
+
+<div class="details-info">
 <div class="info-title">
   <h3>详细资料</h3>
-  <%= link_to t('edit'), profiles_url %>
+  <%= link_to t('edit'), profiles_url, :class => 'edit-link' %>
 </div>
-      <table style="width:auto;">
-        <tr>
-          <td>客户名称：</td>
-          <td><%= pf.jbxx_khmc %></td>
-        </tr>
-        <tr>
-          <td>联系电话：</td>
-          <td><%= pf.jbxx_dh %></td>
-        </tr>
-        <tr>
-          <td>公司传真：</td>
-          <td><%= pf.jbxx_cz %></td>
-        </tr>
-      </table>
-    <% else %>
-    <h2>详细资料</h2>
-      <p>您尚未填写详细信息。您可以填写详细信息后，通过审核成为酷购正式会员。正式会员可以直接查看酷购平台中所有手机的报价，
-        并且酷购客服会专门为您专业信息和推荐。
-      </p>
-      <p><%= link_to '点击这里填写详细信息', profiles_url, :class => 'button protrusion-btn' %></p>
+
+          <table style="width:auto;">
+            <tr>
+              <td>客户名称：</td>
+              <td><%= pf.jbxx_khmc %></td>
+            </tr>
+            <tr>
+              <td>联系电话：</td>
+              <td><%= pf.jbxx_dh %></td>
+            </tr>
+            <tr>
+              <td>公司传真：</td>
+              <td><%= pf.jbxx_cz %></td>
+            </tr>
+          </table>
 
 
-    <% end %>
 
+        </div>
+      <% else %>
+
+        <h2>详细资料</h2>
+        <p>您尚未填写详细信息。您可以填写详细信息后，通过审核成为酷购正式会员。正式会员可以直接查看酷购平台中所有手机的报价，
+          并且酷购客服会专门为您专业信息和推荐。
+        </p>
+        <p><%= link_to '点击这里填写详细信息', profiles_url, :class => 'button protrusion-btn' %></p>
+      <% end %>
+
+    </div>
   <% end %>
 
-  <%= hook :account_my_orders do %>
-    <hr/>
+  <div class="info-area recently-Viewed">
+    <h3>最近浏览的机型</h3>
+    <ul>
+      <li><a href="#">OPPO 668K</a><span class="price">699.00</span></li>
+      <li><a href="#">OPPO 668K</a><span class="price">699.00</span></li>
+      <li><a href="#">OPPO 668K</a><span class="price">699.00</span></li>
+      <li><a href="#">OPPO 668K</a><span class="price">699.00</span></li>
+      <li><a href="#">OPPO 668K</a><span class="price">699.00</span></li>
+      <li><a href="#">OPPO 668K</a><span class="price">699.00</span></li>
+      <li><a href="#">OPPO 668K</a><span class="price">699.00</span></li>
+      <li><a href="#">OPPO 668K</a><span class="price">699.00</span></li>
+      <li><a href="#">OPPO 668K</a><span class="price">699.00</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="myhome-main">
+  <div class="my-account-info">
+    <div class="info-title"><h2>我的会员成长体系</h2> <a href="#">了解成长体系？</a></div>
+    <div id="progressbar" class="my-level"></div>
+    <div class="level-info">我目前的级别为 <strong>4级</strong> 会员<br />加油！只需有 <strong>20点</strong> 成长值，即可激活为 <strong>VIP黄金会员</strong></div>
+  </div>
+
+
+
+  <div class="my-concern info-area">
+    <h2>我的关注</h2>
+    <div class="toolbar">
+      <a href="/quotations" class="button cancel-btn">查看更多机型报价</a>
+      <a href="/print.html" class="button cancel-btn">打印报价单</a>
+      <input type="button" value="导出为Excel(CSV)" class="button cancel-btn"/>
+    </div>
+    <div id="QPlist" class="quotations-product-list">
+      <table>
+        <colgroup>
+          <col class="col_1">
+          <col class="col_2">
+          <col class="col_3">
+          <col class="col_4">
+          <col class="col_5">
+          <col class="col_6">
+          <col class="col_7">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>品牌</th>
+            <th>型号</th>
+            <th>颜色</th>
+            <th>制式</th>
+            <th>上市时间</th>
+            <th>批发价</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <td><a href="/quotations">OPPO</a></td>
+            <td><a href="/products/CP-2cau-0000-10-1">A105K</a></td>
+            <td>黑色, 红色</td>
+            <td>GSM</td>
+            <td>2010-08</td>
+            <td class="prices">695.0 </td>
+            <td>
+              <a href="javascript:void(0)">询价</a>
+              <a href="javascript:void(0)">购买</a>
+              <a class="collectbtn" href="javascript:void(0)">收藏</a>
+            </td>
+          </tr>
+          <tr>
+            <td><a href="/quotations">OPPO</a></td>
+            <td><a href="/products/CP-2cau-0000-10-1">A105K</a></td>
+            <td>黑色, 红色</td>
+            <td>GSM</td>
+            <td>2010-08</td>
+            <td class="prices">695.0 </td>
+            <td>
+              <a href="javascript:void(0)">询价</a>
+              <a href="javascript:void(0)">购买</a>
+              <a class="collectbtn" href="javascript:void(0)">收藏</a>
+            </td>
+          </tr>
+          <tr>
+            <td><a href="/quotations">OPPO</a></td>
+            <td><a href="/products/CP-2cau-0000-10-1">A105K</a></td>
+            <td>黑色, 红色</td>
+            <td>GSM</td>
+            <td>2010-08</td>
+            <td class="prices">695.0 </td>
+            <td>
+              <a href="javascript:void(0)">询价</a>
+              <a href="javascript:void(0)">购买</a>
+              <a class="collectbtn" href="javascript:void(0)">收藏</a>
+            </td>
+          </tr>
+          <tr>
+            <td><a href="/quotations">OPPO</a></td>
+            <td><a href="/products/CP-2cau-0000-10-1">A105K</a></td>
+            <td>黑色, 红色</td>
+            <td>GSM</td>
+            <td>2010-08</td>
+            <td class="prices">695.0 </td>
+            <td>
+              <a href="javascript:void(0)">询价</a>
+              <a href="javascript:void(0)">购买</a>
+              <a class="collectbtn" href="javascript:void(0)">收藏</a>
+            </td>
+          </tr>
+          <tr>
+            <td><a href="/quotations">OPPO</a></td>
+            <td><a href="/products/CP-2cau-0000-10-1">A105K</a></td>
+            <td>黑色, 红色</td>
+            <td>GSM</td>
+            <td>2010-08</td>
+            <td class="prices">695.0 </td>
+            <td>
+              <a href="javascript:void(0)">询价</a>
+              <a href="javascript:void(0)">购买</a>
+              <a class="collectbtn" href="javascript:void(0)">收藏</a>
+            </td>
+          </tr>
+          <tr>
+            <td><a href="/quotations">OPPO</a></td>
+            <td><a href="/products/CP-2cau-0000-10-1">A105K</a></td>
+            <td>黑色, 红色</td>
+            <td>GSM</td>
+            <td>2010-08</td>
+            <td class="prices">695.0 </td>
+            <td>
+              <a href="javascript:void(0)">询价</a>
+              <a href="javascript:void(0)">购买</a>
+              <a class="collectbtn" href="javascript:void(0)">收藏</a>
+            </td>
+          </tr>
+          <tr>
+            <td><a href="/quotations">OPPO</a></td>
+            <td><a href="/products/CP-2cau-0000-10-1">A105K</a></td>
+            <td>黑色, 红色</td>
+            <td>GSM</td>
+            <td>2010-08</td>
+            <td class="prices">695.0 </td>
+            <td>
+              <a href="javascript:void(0)">询价</a>
+              <a href="javascript:void(0)">购买</a>
+              <a class="collectbtn" href="javascript:void(0)">收藏</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+
+
+
+<%= hook :account_my_orders do %>
+    <div class="info-area">
     <h2><%= t("my_orders") %></h2>
 
     <table class="order-summary" width="545">
@@ -100,6 +307,14 @@
       </tbody>
     </table>
 
-    <br />
-  </div>
+    </div>
 <% end %>
+
+
+
+
+
+
+
+</div>
+<div class="clr"></div>

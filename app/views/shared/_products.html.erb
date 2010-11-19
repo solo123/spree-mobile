@@ -9,6 +9,7 @@
   </script>
 <% end %>
 
+
 <%
   paginated_products = @searcher.products if params.key?(:keywords)
   paginated_products ||= products
