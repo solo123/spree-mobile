@@ -6,6 +6,7 @@ class UsersController < Spree::BaseController
   actions :all, :except => [:index, :destroy]
 
   show.before do
+    redirect_to login_url unless current_user
     @orders = @user.orders.complete
   end
 
@@ -22,6 +23,7 @@ class UsersController < Spree::BaseController
     flash.now[:notice] = I18n.t(:please_create_user) unless User.admin_created?
   end
 
+  update.flash nil
   update.wants.html { render :partial => 'show_baseinfo' }
 
   update.after do
@@ -38,7 +40,10 @@ class UsersController < Spree::BaseController
      @user = current_user
     render :partial => 'edit_baseinfo'
   end
-
+  def edit_pwdinfo
+     @user = current_user
+    render :partial => 'edit_password'
+  end
 
 
   private

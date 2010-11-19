@@ -8,4 +8,6 @@ if Spree::Config.instance
   Spree::Config.set(:allow_openid => false )
   Spree::Config.set(:default_country_id => 41 )
   Spree::Config.set(:list_per_page => 30)
+
+  Spree::Config.set(:searcher => 'CoolpurSearch')
 end 
