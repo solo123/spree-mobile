@@ -1,3 +1,5 @@
+<% cache do %>
+
 <% content_for :head do %>
 <style type="text/css">
   
@@ -24,4 +26,4 @@
 <div class="clr"></div>
 <h2>国内品牌</h2>
 <%= render 'quotes_table', :products => @p_gn %>
-
+<% end %>

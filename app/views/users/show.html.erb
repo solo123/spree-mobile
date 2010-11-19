@@ -38,7 +38,7 @@
       $('#password-info').html( $.ajax({url: "/account/edit_pwdinfo",async: false}).responseText );
       $('form.pwdinfo').submit(function() {//点击submit的函数
         $(this).ajaxSubmit({//点击submit发起ajax请求
-          success: function(){discard_pwdinfo(); $('#upPwdInfo').html('密码修改成功');},
+          success: function(){alert('密码已修改，请重新登录。');location.href = '/login';},
           clearForm: true,
           //success: DeleteProduct,
           error: displayPwdError//发生错误,譬如validate?为false时
