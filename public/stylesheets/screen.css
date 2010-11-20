@@ -1147,9 +1147,8 @@ p button img { margin: 0 5px 0 0; }
 .product-listing li a {
   display: block;
   text-decoration: none;
-  color: #444444;
 }
-.product-listing li a.info {
+.product-listing li .info {
   position: absolute;
   bottom: 0px;
   right: 0px;
@@ -1162,21 +1161,25 @@ p button img { margin: 0 5px 0 0; }
   border-top: 1px solid #f8f8f8;
   font-size: 1.2em;
 }
-.product-listing li a.info span { display: block; }
-.product-listing li a.info .lookquotations {
+.product-listing li .info span { display: block; }
+.product-listing li .info .lookquotations {
   font-size: 0.8em;
   color: #4499aa;
 }
+.product-listing li .info p {
+  margin: 8px 0;
+  font-size: 0.8em;
+}
 .product-listing li.last { margin-right: 0; }
 .product-listing li:hover { border-color: #a6d098; }
-.product-listing li:hover a.info { color: #336699; }
-.product-listing li:hover a.info .lookquotations {
+.product-listing li:hover .info { color: #336699; }
+.product-listing li:hover .info .lookquotations {
   font-size: 0.8em;
   color: #336699;
 }
 .product-listing li.hover { border-color: #a6d098; }
-.product-listing li.hover a.info { color: #336699; }
-.product-listing li.hover a.info .lookquotations {
+.product-listing li.hover .info { color: #336699; }
+.product-listing li.hover .info .lookquotations {
   font-size: 0.8em;
   color: #336699;
 }
@@ -1372,9 +1375,9 @@ ul.thumbnails li.selected { border-color: #8ec871; }
 }
 .brand-list ul li:hover { border-color: #8ec871; }
 .years-title {
-  height: 50px;
-  line-height: 50px;
-  background: #d4ebb4;
+  height: 40px;
+  line-height: 40px;
+  background: #e9f4e9;
   padding: 0 12px;
   margin: 22px 0 12px 0;
 }
@@ -1385,7 +1388,7 @@ ul.thumbnails li.selected { border-color: #8ec871; }
 }
 .years-title .num {
   font-size: 1.2em;
-  color: #ffb311;
+  color: #ff5411;
 }
 .years-look-more {
   margin: 12px 0;
