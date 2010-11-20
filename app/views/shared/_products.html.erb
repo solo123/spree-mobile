@@ -11,8 +11,8 @@
 
 
 <%
-  paginated_products = @searcher.products if params.key?(:keywords)
-  paginated_products ||= products
+paginated_products = @searcher.products if params.key?(:keywords)
+paginated_products ||= products
 %>
 <% if products.empty? %>
   <%= t(:no_products_found) %>
@@ -21,28 +21,31 @@
 <% end %>
 
 <% if products.any? %>
-<ul class="product-listing">
-  <% products.each do |product| %>
-    <% if Spree::Config[:show_zero_stock_products] || product.has_stock? %>
-      <li id="product_<%= product.id %>">
-        <%= link_to small_image(product), product %>
-        上市时间：<%= product.property('上市时间') %><br />
-        制式：<%= product.taxon_val('制式') %>
-      </li>
+  <ul class="product-listing">
+    <% products.each do |product| %>
+      <% if Spree::Config[:show_zero_stock_products] || product.has_stock? %>
+        <li id="product_<%= product.id %>">
+          <%= link_to small_image(product), product %>
+          <div class="info">
+            <%= link_to product.name, product %>
+            <p>上市时间：<%= product.property('上市时间') %></p>
+            <!--制式：<%#*= product.taxon_val('制式') %>-->
+          </div>
+        </li>
+      <% end %>
     <% end %>
-  <% end %>
-</ul>
+  </ul>
 <% end %>
 
 <hr class="space" />
 
 <% if paginated_products.respond_to?(:total_pages)
-      params.delete(:search)
-      params.delete(:taxon)
+  params.delete(:search)
+  params.delete(:taxon)
 
 %><%= will_paginate(paginated_products,
-                    :previous_label => "&#171; #{t('previous')}",
-                    :next_label => "#{t('next')} &#187;") %>
+    :previous_label => "&#171; #{t('previous')}",
+    :next_label => "#{t('next')} &#187;") %>
 <% end %>
 
 <hr class="space" />

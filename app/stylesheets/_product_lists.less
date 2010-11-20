@@ -18,9 +18,8 @@
     a {
       display: block;
       text-decoration: none;
-      color:@black;
     }
-    a.info {
+    .info {
       position: absolute;
       bottom: 0px;
       right: 0px;
@@ -35,6 +34,10 @@
       font-size:1.2em;
       span { display: block; }
       .lookquotations{ font-size:0.8em; color: @link_color;}
+      p{
+          margin:8px 0;
+          font-size:0.8em;
+      }
     }
   }
   li.last{
@@ -42,7 +45,7 @@
     }
   li:hover,li.hover {
     border-color: #a6d098;
-    a.info {
+    .info {
       /*background: #1B1B1B url(../images/bottom_shine.png) bottom left repeat-x;*/
       color:@link_hover_color;
       .lookquotations{ font-size:0.8em; color: @link_hover_color;}

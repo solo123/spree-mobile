@@ -1,0 +1,10 @@
+<% if target && target.errors.any? %>
+  <div id="errorExplanation" class="errorExplanation">
+    <h2>保存数据时产生了 <%= pluralize(target.errors.count, "个错误") %>:</h2>
+     <ul>
+     <% target.errors.full_messages.each do |msg| %>
+       <li><%= msg %></li>
+     <% end %>
+     </ul>
+  </div>
+<% end %>
