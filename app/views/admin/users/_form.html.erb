@@ -1,5 +1,5 @@
 <%- locals = {:f => f} -%>
-<% hook :admin_user_form_fields, locals do %>
+<%= hook :admin_user_form_fields, locals do %>
 
   <% f.field_container :mobile do %>
     <%= f.label :mobile, '手机号码' %><br />
@@ -15,7 +15,7 @@
 
 <% end %>
 
-<% hook :admin_user_form_roles, locals do %>
+<%= hook :admin_user_form_roles, locals do %>
   <p>
     <label><%= t("roles") %></label><br />
     <% for role in @roles %>

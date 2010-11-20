@@ -27,8 +27,7 @@
       <li id="product_<%= product.id %>">
         <%= link_to small_image(product), product %>
         <%= link_to product.name, product %>
-        上市时间：<%= product.property('上市时间') %><br />
-        制式：<%= product.taxon_val('制式') %>
+        上市时间：<%= product.list_date %><br />
       </li>
     <% end %>
   <% end %>

@@ -1,10 +1,8 @@
-<h1><%= @taxon.name %></h1>
+<h1><%= @taxon.name %> </h1>
 
 <% if @taxon.children.empty? || !params[:keywords].blank? %>
   <%= hook :taxon_products do %>
-    <div class="years-title"><h2>2010年</h2><span class="num">（共<%= @products.count %>款）</span></div>
     <%= render :partial => "shared/products", :locals => {:products => @products, :taxon => @taxon } %>
-    <p class="years-look-more"><a href="<%= '/ta' + request.request_uri.slice(2,100) %>">查看全部商品</a><span class="num"></span></p>
   <% end %>
 <% else %>
   <%= hook :taxon_children do %>

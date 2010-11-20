@@ -5,10 +5,13 @@ class TaxonsController < Spree::BaseController
   actions :show
   helper :products
 
+  def show_all
+    load_pre_data
+  end
   private
   def load_data
     @taxon ||= object
-    @products = Product.in_taxon(@taxon).where('list_date>"2010"')
+    @products = Product.in_taxon(@taxon).where('list_date>"2010"').order('list_date desc')
   end
   def load_pre_data
     @taxon ||= object

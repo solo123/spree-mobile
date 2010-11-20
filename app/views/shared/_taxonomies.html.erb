@@ -6,17 +6,27 @@
 %>
   <h3><a href="/brands#international">国际品牌(<%= Product.active().in_taxon(gjpp).count -%>款)</a></h3>
   <ul class="navigation-list">
-
     <% Taxon.find_all_by_parent_id(gjpp.id, :order => :lft, :limit => 10).each do |brand| %>
       <li<%= ' class="current"' if @taxon and ([@taxon] + @taxon.ancestors).include?(brand) %>><a href="<%= "/t/#{brand.permalink}" %>"><%= brand.name %>(<%= Product.active().in_taxon(brand).count %>)</a></li>
     <% end %>
   </ul>
   <h3><a href="/brands#china">国内品牌(<%= Product.active().in_taxon(gnpp).count -%>款)</a></h3>
   <ul class="navigation-list list-china">
-
     <% Taxon.find_all_by_parent_id(gnpp.id,:order => :lft, :limit => 20).each do |brand| %>
       <li class="<%= 'current ' if @taxon and ([@taxon] + @taxon.ancestors).include?(brand) %>"><a href="<%= "/t/#{brand.permalink}" %>"><%= brand.name %>(<%= Product.active().in_taxon(brand).count %>)</a></li>
     <% end %>
   </ul>
+  <div class="clr"></div>
+  <% ['分类','样式','制式'].each do |c|
+    taxonomy = Taxonomy.find_by_name(c)
+  %>
+  <h3><%= link_to t("shop_by_taxonomy", :taxonomy => taxonomy.name.singularize), seo_url(taxonomy.root), :class => 'root' %></h3>
+  <ul class="navigation-list">
+	  <% taxonomy.root.children.each do |taxon| %>
+	    <li<%= ' class="current"' if @taxon and ([@taxon] + @taxon.ancestors).include?(taxon) %>><%= link_to "#{taxon.name}(#{Product.active.in_taxon(taxon).count})", seo_url(taxon) %></li>
+	  <% end %>
+	</ul>
+  <% end %>
 </div>
+
 <% end %>

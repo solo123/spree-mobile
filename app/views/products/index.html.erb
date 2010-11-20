@@ -14,16 +14,11 @@
 
 <% content_for :sidebar do %>
   <%= hook :homepage_sidebar_navigation do %>
-    <% if "products" == @current_controller && @taxon %>
-      <%= render "shared/filters" %>
-    <% else %>
-      <%= render "shared/taxonomies" %>
-    <% end %>
+    <%= render "shared/taxonomies" %>
   <% end %>
 <% end %>
 
 <% if params[:keywords] %>
-
   <%= hook :search_results do %>
     <% if @products.empty? %>
       <%= t(:no_products_found) %>
@@ -31,9 +26,7 @@
       <%= render "shared/products", :products => @products, :taxon => @taxon %>
     <% end %>
   <% end %>
-
 <% else %>
-
   <%= hook :homepage_products do %>
     <div id="random_index"  class="jcarousel-skin-default"> </div>
     <div id='index_itemlist' style='display:none;'>
@@ -48,7 +41,7 @@
           <a target="_blank" href="/products/CP-2cd3-0075"><img src="/images/picture/pic-003.jpg" alt="China Wholesale Cell Phone" /></a>
         </li>
         <li>
-          <A target="_blank" href="/products/CP-2cau-0000-181"><IMG src="/images/picture/pic-004.jpg" alt="China Wholesale Video Game"></A>
+          <a target="_blank" href="/products/CP-2cau-0000-181"><img src="/images/picture/pic-004.jpg" alt="China Wholesale Video Game" /></a>
         </li>
       </ul>
     </div>
