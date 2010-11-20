@@ -21,7 +21,7 @@ class Admin::QuotesController < Admin::BaseController
           unless @p_brand && @p_brand.id == t.id
             @p_brand = t
             @p_models = []
-            Product.in_taxon(t).each { |ap| @p_models << ap.property('型号') }
+            Product.not_deleted.in_taxon(t).each { |ap| @p_models << ap.property('型号') }
           end
           q.rel_model = @p_models.grep(Regexp.new(q.model)).join(',')
         else
@@ -78,9 +78,25 @@ class Admin::QuotesController < Admin::BaseController
   def import
     data = params[:quotes]
     rows = data.split("\n")
+    bnd = nil
+    if rows[0].split("\t").length == 1
+      bnd = rows[0]
+    end
+    prz = nil
     rows.each do |row|
       cols = row.split("\t")
-      q = Quote.new(:brand => cols[0], :model => cols[1], :price => cols[2], :remark => cols[3])
+      next if cols.length < 2
+      q = nil
+      if bnd
+        q = Quote.new(:brand => bnd, :model => cols[0], :price => cols[1], :remark => cols[2])
+        prz = cols[1]
+      else
+        q = Quote.new(:brand => cols[0], :model => cols[1], :price => cols[2], :remark => cols[3])
+        prz = cols[2]
+      end
+      if prz && (prz =~ /[^\d\s]/)
+        q.remark = prz
+      end
       q.employee_id = current_user.id
       q.status = Quote::NEW_QUOTE
       q.save

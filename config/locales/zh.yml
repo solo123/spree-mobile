@@ -1,15 +1,15 @@
 ---
 zh:
-  'no': "否"
-  'yes': "是"
+  'no': 否
+  'yes': 是
   5_biggest_spenders: "前5名最高消费客户"
   a_copy_of_all_mail_will_be_sent_to_the_following_addresses: "所有邮件的副本发送到以下地址"
   abbreviation: "缩写"
   access_denied: "访问被拒绝"
   account: "帐户"
   account_updated: "帐户更新"
-  action: 
-    actions: 
+  action: 处理
+  actions: 
     cancel: "取消"
     create: "创建"
     destroy: "删除"
@@ -687,7 +687,7 @@ zh:
         name: "分类以及所有分类以下的目录"
         sentence: "<em>在%s</em>和他们的后裔"
       master_price_gte:
-        args:当参数
+        args:
           amount: "额"
         description: "ERROR!invalid text(code:400)"
         name: "最高价格等于或大"

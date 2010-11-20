@@ -18,12 +18,12 @@ Rails.application.routes.draw do
   #   # route globbing for pretty nested taxon and product paths
   match '/ta/*id' => 'taxons#show_all'
 
-
   namespace :admin do
     resources :uploads
     resources :import_csvs
     resources :product_taxons
     resources :quotes
+    match 'quotes/:action/:id' => 'quotes'
     resources :suppliers
   end
 end

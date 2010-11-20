@@ -16,13 +16,14 @@
 <% end %>
 
 <%= stylesheet_link_tag 'admin/admin-reset', 'admin/grids', 'admin/admin-typography', 'admin/admin-forms', 'admin/admin-tables', 'admin/admin', 'admin/autocomplete', 'admin/token-input', :cache => 'admin-all' %>
-<%= javascript_include_tag 'jquery-1.4.2.min.js', 'jquery-ui', 'jrails', 'jquery.suggest', 'jrails.autocomplete', 'jquery.tokeninput.js', :cache => 'jquery-admin-plugins' %>
+<%= javascript_include_tag 'jquery-1.4.2.min.js','jquery.ui/js/jquery-ui-1.8.5.custom.min', 'jrails', 'jquery.suggest', 'jrails.autocomplete', 'jquery.tokeninput.js', :cache => 'jquery-admin-plugins' %>
 <%= javascript_include_tag('jquery.template') unless controller.controller_name == "overview" %>
 <%= javascript_include_tag 'admin', 'nested-attribute', 'zone', 'calculator', 'gateway' %>
 <%= javascript_tag "$ = jQuery;" %>
 <%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
 <%= javascript_include_tag 'jquery.alerts/jquery.alerts.js' %>
 <%= javascript_include_tag 'jquery.autocomplete.min.js' %>
+<%= stylesheet_link_tag '/javascripts/jquery.ui/css/south-street/jquery-ui-1.8.5.custom.css' %>
 
 <%= stylesheet_link_tag '/javascripts/jquery.alerts/jquery.alerts.css' %>
 <%= stylesheet_link_tag '/javascripts/jquery.alerts/jquery.alerts.spree.css' %>
