@@ -32,7 +32,6 @@
     return false;
   }
 
-
   $(function(){
     $("#dialog").dialog({autoOpen: false, show: "blind", hide: "blind", width: 580});
     $('#add_supplier').dialog({autoOpen: false, show: "blind", hide: "blind", width: 580});
@@ -47,7 +46,6 @@
       });
 
   });
-
 
   function import_data(){
     $.ajax({
@@ -166,7 +164,7 @@
       style = " class='#{style}'" if style.length > 0
     %>
     <tr id="quote_<%= q.id -%>"<%= style %>>
-      <td><%= '<span class="ui-icon ui-icon-pencil"></span>' if q.status == 0 %></td>
+      <td><%= raw  '<span class="ui-icon ui-icon-pencil"></span>' if q.status == 0 %></td>
       <td><%= q.brand %></td>
       <td><%= q.model %></td>
       <td>
@@ -177,8 +175,6 @@
           <input type="radio" onchange="set_model(<%= q.id %>, '<%= rel %>');" id="rel_<%= q.id %>_<%= rel %>" name="rel_<%=  q.id %>" value="<%= rel %>" />
           <label for="rel_<%= q.id %>_<%= rel %>"><%= rel %></label>
         <% end %>
-        <input type="radio" onchange="set_model(<%= q.id %>, '<%= q.model %>');" id="rel_<%= q.id %>_new" name="rel_<%=  q.id %>" value="<%= q.model %>" />
-        <label for="rel_<%= q.id %>_new">new</label>
         </div>
         <%  end %>
       </td>

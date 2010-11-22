@@ -10,10 +10,11 @@
 
 <h1><%= t("listing_users") %></h1>
 
+
 <table class="index">
   <thead>
   <tr>
-    <% hook :admin_users_index_headers do %>
+    <%= hook :admin_users_index_headers do %>
       <th><%= order @search, :by => :display_name, :as => '用户名' %></th>
       <th><%= order @search, :by => :mobile, :as => '手机' %></th>
       <th><%= order @search, :by => :email, :as => 'Email' %></th>
@@ -29,8 +30,8 @@
   <tbody>
     <% @users.each do |user|%>
       <tr id="<%= dom_id user %>">
-        <%- locals = {:user => user} -%>
-        <% hook :admin_users_index_rows, locals do %>
+        <%- locals = {:user => user} %>
+        <%= hook :admin_users_index_rows, locals do %>
           <td><%=link_to user.display_name, object_url(user) %></td>
           <td><%=link_to user.mobile, object_url(user) %></td>
           <td><%=link_to user.email, object_url(user) %></td>
@@ -39,7 +40,7 @@
           <td><%= user.login_count %>次</td>
         <% end %>
         <td>
-          <% hook :admin_users_index_row_actions, locals do %>
+          <%= hook :admin_users_index_row_actions, locals do %>
             <%= link_to_edit user %> &nbsp;
             <%= link_to_delete user %>
           <% end %>
@@ -55,15 +56,15 @@
 <% content_for :sidebar do %>
   <div class="box">
     <h3><%= t(:search) %></h3>
-    <% form_for @search do |f| %>
-      <%- locals = {:f => f} -%>
-      <% hook :admin_users_index_search, locals do %>
+    <%= form_for @search do |f| %>
+      <%- locals = {:f => f} %>
+      <%= hook :admin_users_index_search, locals do %>
         <p>
           <%= t("email") %><br />
           <%= f.text_field :email_contains, :size=>18 %>
         </p>
       <% end %>
-      <% hook :admin_users_index_search_buttons, locals do %>
+      <%= hook :admin_users_index_search_buttons, locals do %>
         <p><%= button t("search") %></p>
       <% end %>
     <% end %>

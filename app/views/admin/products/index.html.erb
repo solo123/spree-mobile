@@ -16,20 +16,11 @@
 <table class="index">
   <tr>
     <%= hook :admin_products_index_headers do %>
-      <th><%= t("sku") %></th>
       <th><%= order @search, :by => :name, :as => t("name") %></th>
-      <th><%= order @search, :by => :master_price, :as => t("master_price") %></th>
-      <th><%= order @search, :by => :name, :as => t("name") %></th>
-      <th>品牌</th>
-      <th>型号</th>
       <th>制式</th>
-      <th>屏幕</th>
-      <th>标配</th>
       <th>零售价</th>
       <th>批发价</th>
-     <th><%= order @search, :by => :master_price, :as => t("master_price") %></th>
-
-
+      <th>报价备注</th>
     <% end %>
     <th>
       <%= hook :admin_products_index_header_actions %>
@@ -39,21 +30,12 @@
   <tr <%= 'style="color:red;"' if product.deleted? %> id="<%= dom_id product %>">
     <%- locals = {:product => product} %>
     <%= hook :admin_products_index_rows, locals do %>
-      <td><%= product.sku %></td>
-      <td><%= product.name %></td>
-      <td><%= product.price %></td>
-      <td> <%= product.taxon_val('品牌') %> </td>
-      <td> <%= product.property('型号')  %> </td>
+      <td> <%= product.name %> </td>
       <td> <%= product.taxon_val('制式') %> </td>
-      <td> <%= product.property('屏幕')  %> </td>
-      <td> <%= product.property('标配')  %> </td>
       <td> <%= product.property('零售价')  %> </td>
       <td> <%= number_with_precision(product.property('批发价'), :precision => 2)  %> </td>
-      <td><%= number_with_precision(product.price, :precision => 2) %></td>
-
-
-
-  <% end %>
+      <td> <%= product.property('报价备注')  %> </td>
+    <% end %>
     <td class="actions">
       <%= hook :admin_products_index_row_actions, locals do %>
         <%= link_to_edit product unless product.deleted?  %>

@@ -21,19 +21,16 @@ paginated_products ||= products
 <% end %>
 
 <% if products.any? %>
-  <ul class="product-listing">
-    <% products.each do |product| %>
-      <% if Spree::Config[:show_zero_stock_products] || product.has_stock? %>
-        <li id="product_<%= product.id %>">
-          <%= link_to small_image(product), product %>
-          <div class="info">
-            <%= link_to product.name, product %>
-            <p>上市时间：<%= product.property('上市时间') %></p>
-            <!--制式：<%#*= product.taxon_val('制式') %>-->
-          </div>
-        </li>
-      <% end %>
+<ul class="product-listing">
+  <% products.each do |product| %>
+    <% if Spree::Config[:show_zero_stock_products] || product.has_stock? %>
+      <li id="product_<%= product.id %>">
+        <%= link_to small_image(product), product %>
+        <%= link_to product.name, product %>
+        上市时间：<%= product.list_date %><br />
+      </li>
     <% end %>
+      <% end %>
   </ul>
 <% end %>
 
