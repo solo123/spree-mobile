@@ -1300,7 +1300,7 @@ ul.thumbnails li.selected { border-color: #8ec871; }
 }
 .quotations-product-list .result-stats .toolbar {
   float: right;
-  width: 220px;
+  width: 420px;
   text-align: right;
   font-size: 0.8em;
 }
