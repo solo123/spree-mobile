@@ -1899,7 +1899,11 @@ div#checkout #payment-methods li.last {
   width: 50px;
 }
 div#checkout #checkout-summary {
-  background-color: #c3c9df;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #fff6ed;
+  border: 1px solid #faefe3;
   float: right;
   margin-top: 10px;
   padding: 20px;
