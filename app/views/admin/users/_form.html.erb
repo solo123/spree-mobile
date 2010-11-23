@@ -1,6 +1,13 @@
 <%- locals = {:f => f} -%>
 <%= hook :admin_user_form_fields, locals do %>
 
+  <% f.field_container :display_name do %>
+    <%= f.label :display_name, '姓名' %><br />
+    <%= f.text_field :display_name  %>
+    <%= error_message_on :user, :display_name%>
+  <% end %>
+
+
   <% f.field_container :mobile do %>
     <%= f.label :mobile, '手机号码' %><br />
     <%= f.text_field :mobile  %>
