@@ -67,6 +67,14 @@
         value: 20
       });
     });
+
+var dd;
+    function test(){
+      $.getJSON("/favorites/my_taxons",function(data){
+        alert(data);
+        dd = data;
+      });
+    }
     
   </script>
 <% end %>
@@ -127,17 +135,7 @@
 
   <div class="info-area recently-Viewed">
     <h3>最近浏览的机型</h3>
-    <ul>
-      <li><a href="#">OPPO 668K</a><span class="price">699.00</span></li>
-      <li><a href="#">OPPO 668K</a><span class="price">699.00</span></li>
-      <li><a href="#">OPPO 668K</a><span class="price">699.00</span></li>
-      <li><a href="#">OPPO 668K</a><span class="price">699.00</span></li>
-      <li><a href="#">OPPO 668K</a><span class="price">699.00</span></li>
-      <li><a href="#">OPPO 668K</a><span class="price">699.00</span></li>
-      <li><a href="#">OPPO 668K</a><span class="price">699.00</span></li>
-      <li><a href="#">OPPO 668K</a><span class="price">699.00</span></li>
-      <li><a href="#">OPPO 668K</a><span class="price">699.00</span></li>
-    </ul>
+    <%= render 'my_recent_products' %>
   </div>
 </div>
 

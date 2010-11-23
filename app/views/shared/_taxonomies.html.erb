@@ -17,7 +17,7 @@
     <% end %>
   </ul>
   <div class="clr"></div>
-  <% ['分类','样式','制式'].each do |c|
+  <% ['分类','样式'].each do |c|
     taxonomy = Taxonomy.find_by_name(c)
   %>
   <h3><%= link_to t("shop_by_taxonomy", :taxonomy => taxonomy.name.singularize), seo_url(taxonomy.root), :class => 'root' %></h3>

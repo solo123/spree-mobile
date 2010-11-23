@@ -76,27 +76,15 @@ class Admin::QuotesController < Admin::BaseController
   end
 
   def import
+    bnd = params[:brand]
     data = params[:quotes]
-    rows = data.split("\n")
-    bnd = nil
-    if rows[0].split("\t").length == 1
-      bnd = rows[0]
-    end
-    prz = nil
-    rows.each do |row|
+
+    data.split("\n").each do |row|
       cols = row.split("\t")
-      next if cols.length < 2
-      q = nil
-      if bnd
-        q = Quote.new(:brand => bnd, :model => cols[0], :price => cols[1], :remark => cols[2])
-        prz = cols[1]
-      else
-        q = Quote.new(:brand => cols[0], :model => cols[1], :price => cols[2], :remark => cols[3])
-        prz = cols[2]
-      end
-      if prz && (prz =~ /[^\d\s]/)
-        q.remark = prz
-      end
+      q = Quote.new(:brand => bnd, :model => cols[0],
+        :price => cols[1][cols[1].index(/\d/)..100].to_f,
+        :remark => cols[2..100].join(','))
+      q.remark = cols[1] + q.remark if cols[1] && (cols[1] =~ /[^\d\s]/)
       q.employee_id = current_user.id
       q.status = Quote::NEW_QUOTE
       q.save
@@ -114,7 +102,6 @@ class Admin::QuotesController < Admin::BaseController
     def collection
       @collection ||= Quote.all(:conditions => ['employee_id=? and status<10', current_user.id])
     end
-
 
     def update_prop(product, property, prop_val)
       pp = Property.find_by_name(property)

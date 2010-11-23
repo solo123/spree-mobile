@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   match 'etl/:action' => 'etl'
   resources :profiles
   resources :addresses
+  match 'favorites/:action(/:id)' => 'favorites'
 
   match '/ta/*id/s/*product_group_query' => 'taxons#show_all'
   match 'ta/*id/pg/:product_group_name' => 'taxons#show_all'

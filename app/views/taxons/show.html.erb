@@ -8,7 +8,14 @@
   <% end %>
 <% else %>
   <%= hook :taxon_children do %>
-    <%= render :partial => "taxon", :collection => @taxon.children %>
+    <ul>
+      <% @taxon.children.each do |t| %>
+      <li>
+        <%= link_to "#{t.name} (#{Product.active.in_taxon(t).count})" , seo_url(t), :class => 'brands-name' %>
+      </li>
+      <% end %>
+    </ul>
+    <%# render :partial => "taxon", :collection => @taxon.children %>
   <% end %>
 <% end %>
 

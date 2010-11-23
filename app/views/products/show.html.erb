@@ -1,3 +1,23 @@
+<% content_for :head do %>
+<script type="text/javascript">
+  function add_recent_product(pid){
+    var ck = $.cookie('last_visited');
+    if (ck == null)
+      $.cookie('last_visited', pid, {expires: 7, path: '/'});
+    else {
+      var arr = ck.split(',');
+      var idx = arr.indexOf(pid);
+      if (idx != -1) arr.splice(idx,1);
+      arr.unshift(pid);
+      $.cookie('last_visited', arr.join(','), {expires: 7, path: '/'});
+    }
+  }
+
+  $(function(){
+    add_recent_product(<%= @product.id %>);
+  });
+</script>
+<% end %>
 <% @body_id = 'product-details' %>
 <div class="pro-r-a">
   <div id="product-parameters">

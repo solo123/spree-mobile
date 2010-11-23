@@ -1,0 +1,9 @@
+    <ul>
+      <%
+        ids = []
+        UserProduct.where('user_id=? and catalog_id=10', current_user.id).each {|p| ids << p.product_id }
+        Product.where('id in (?)', ids).each do |p|
+      %>
+      <li><a href="#"><%= p.name %></a><span class="price">699.00</span></li>
+      <% end %>
+    </ul>

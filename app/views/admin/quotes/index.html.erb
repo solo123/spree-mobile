@@ -51,7 +51,7 @@
     $.ajax({
       type: 'POST',
       url: 'quotes/import/0',
-      data: ({authenticity_token: AUTH_TOKEN, quotes: $('#import_text').val()}),
+      data: ({authenticity_token: AUTH_TOKEN, brand:$('#import_brand').val(), quotes: $('#import_text').val()}),
       success: function(r){
         if (r=='ok')
           location.reload();
@@ -194,6 +194,10 @@
 		<span class="ui-icon ui-icon-circle-check" style="float:left;margin:0 7px 50px 0;"></span>
 		请把excel表格数据拷贝粘贴到下面文本框中。
 	</p>
+    <p>
+      品牌：
+      <input type="text" id="import_brand" />
+    </p>
 	<p>
       <textarea id="import_text" cols="80" rows="12" ></textarea>
       <input type="button" onclick="import_data();" value="导入数据" />
