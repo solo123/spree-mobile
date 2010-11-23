@@ -1298,6 +1298,12 @@ ul.thumbnails li.selected { border-color: #8ec871; }
   margin: 0 5px;
   color: #ff5411;
 }
+.quotations-product-list .result-stats .toolbar {
+  float: right;
+  width: 420px;
+  text-align: right;
+  font-size: 0.8em;
+}
 .quotations-product-list table tbody td { border-bottom: 1px solid #f1f1f1; }
 .quotations-product-list table tbody td a:link { text-decoration: none; }
 .quotations-product-list table tbody td a:visited { text-decoration: none; }
@@ -1313,6 +1319,12 @@ ul.thumbnails li.selected { border-color: #8ec871; }
 .quotations-product-list table tbody tr.seleted td .collectbtn { visibility: visible; }
 .quotations-product-list table colgroup .col_1 { width: 70px; }
 .quotations-product-list table colgroup .col_7 { width: 96px; }
+.quotations-table .toolbar {
+  background: #e9f4e9;
+  margin-bottom: 12px;
+  padding: 8px;
+  text-align: right;
+}
 .brand-list .area-header {
   height: 1.8em;
   line-height: 1.8em;
@@ -1887,7 +1899,11 @@ div#checkout #payment-methods li.last {
   width: 50px;
 }
 div#checkout #checkout-summary {
-  background-color: #c3c9df;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #fff6ed;
+  border: 1px solid #faefe3;
   float: right;
   margin-top: 10px;
   padding: 20px;
