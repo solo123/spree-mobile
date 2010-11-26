@@ -2,7 +2,11 @@
 
 <div class='toolbar'>
   <ul class='actions'>
+    <li>
+      <a href="/admin/inp_phones/props">属性匹配</a>
+    </li>
     <li id="new_product_link">
+      <%= button_link_to '查找机型', '/admin/inp_phones/match', {:remote => true, :icon => 'add'} %>
       <%= button_link_to '导入数据', '/admin/inp_phones/do_import', {:remote => true, :icon => 'add'} %>
     </li>
   </ul>
@@ -10,7 +14,7 @@
 </div>
 
 <h1>更新数据</h1>
-
+<div id="match_inp_phone"></div>
 <div id="do_import_inp_phone"></div>
 
 <% if @collection %>

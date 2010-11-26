@@ -17,7 +17,7 @@ module Mobile
         tx = Taxonomy.find_by_name('品牌')
         t = Taxon.find_by_name_and_taxonomy_id(brand, tx.id)
         return nil unless t
-        ps = Product.active.in_taxon(t).where('model=?', model)
+        ps = Product.not_deleted.in_taxon(t).where('model=?', model)
         return nil unless ps && ps.length > 0
         ps[0]
       end
@@ -40,6 +40,15 @@ module Mobile
           self.taxons.find_all_by_parent_id(t.id).each { |ts| v << ts.name }
         end
         v
+      end
+      def add_taxon(taxonomy_name, taxon_name)
+        pr = Taxon.find_by_name(taxonomy_name)
+        return false unless pr
+        taxon_name.split(',').each do |tn|
+          t = Taxon.find_or_create_by_name_and_parent_id_and_taxonomy_id(tn, pr.id, pr.taxonomy_id)
+          self.taxons << t unless self.taxons.include? t
+        end
+        true
       end
     end
     end
