@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     resources :import_csvs
     resources :product_taxons
     resources :quotes
+    resources :inp_phones
     match 'quotes/:action/:id' => 'quotes'
     resources :suppliers
   end

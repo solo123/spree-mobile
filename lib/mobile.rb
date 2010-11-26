@@ -12,6 +12,15 @@ module Mobile
       end
 # extend Product
     Product.class_eval do
+      def self.find_by_brand_and_model(brand,model)
+        return nil unless brand && model
+        tx = Taxonomy.find_by_name('品牌')
+        t = Taxon.find_by_name_and_taxonomy_id(brand, tx.id)
+        return nil unless t
+        ps = Product.active.in_taxon(t).where('model=?', model)
+        return nil unless ps && ps.length > 0
+        ps[0]
+      end
       def property(pname)
         p = self.properties.find_by_name(pname)
         ProductProperty.find_by_product_id_and_property_id(self.id, p.id).value if p
