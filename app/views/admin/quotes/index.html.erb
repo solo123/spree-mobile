@@ -101,6 +101,9 @@
   function set_model(q, m){
     $.post('quotes/update_model/change', {q:q, m:m}, function(d){alert(d);});
   }
+  function refresh_quotations(){
+    $.get('quotes/refresh_cache/0', function(d){alert(d);});
+  }
 </script>
 <style type="text/css">
   #quote_table {width:auto;border:solid 1px green;padding:1px;}
@@ -115,7 +118,7 @@
 </style>
 <% end %>
 
-<%= render :partial => 'admin/uploads/sub_menu' %>
+<%= render :partial => 'sub_menu' %>
 <h2>报价录入</h2>
 <table>
   <tr>
@@ -186,8 +189,8 @@
     </tr>
     <% end %>
   </tbody>
-
 </table>
+<a onclick="refresh_quotations();">刷新网站报价单</a>
 
 <div id="dialog" title="导入数据">
 	<p>

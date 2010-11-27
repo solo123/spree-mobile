@@ -19,7 +19,7 @@ class Admin::InpPhonesController < Admin::BaseController
       @props = []
       @sys_props = []
       Property.order(:name).each {|p| @sys_props << p.name }
-      InpPhoneProp.select('DISTINCT prop').order(:prop).each {|p| @props << p.prop }
+      InpPhoneProp.select('DISTINCT prop').where('status<2').order(:prop).each {|p| @props << p.prop }
     elsif params[:id] == 'match'
       InpPhone.where('status=0').each do |inp|
         p = Product.find_by_brand_and_model(inp.brand, inp.model)

@@ -97,7 +97,12 @@ class Admin::QuotesController < Admin::BaseController
     quote = Quote.find_by_id(params[:q])
     quote.model = params[:m]
     quote.save!
-    render 'ok'
+    render :text => 'ok'
+  end
+
+  def refresh_cache
+    expire_fragment('quotations')
+    render :text => 'refreshed quotations'
   end
   private
     def collection
