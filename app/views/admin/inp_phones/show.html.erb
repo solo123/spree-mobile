@@ -1,0 +1,59 @@
+<% content_for :head do %>
+<style type="text/css">
+.list-l {width: 560px; float:left;}
+.list-l > div {clear:both;}
+.item, .val { width: 100px; height:26px; float:left; margin-left:1px; margin-bottom:1px; border:solid 1px #aaa;}
+.box {width: 200px; height:26px; border:solid 1px green; float:left;}
+
+.list-r {width:200px; float:left;}
+.drop {width:120px; border:solid 1px red; margin:2px;}
+.drop_box {width:300px;height:26px; margin:4px; border:solid 1px green;}
+.clr {clear:both;}
+</style>
+<script type="text/javascript">
+  $(function(){
+    $('.drop').draggable();
+    $('.box').droppable({
+      drop: function(event,ui){
+        $(this).parent().find('.val').text(ui.draggable.text());
+      },
+      out: function(event,ui){
+        var p = $(this).parent().find('.val');
+        if (p.text() == ui.draggable.text()) p.text('');
+      }
+    });
+    $('.val').live('dblclick',function(){
+      $(this).text($('#new_val').val());
+    });
+  });
+  function save(){
+    var lst = []
+    $('.list-l > div').each(function(){
+      lst.push([$(this).find('.item').text(), $(this).find('.val').text()]);
+    });
+    $.post('/admin/inp_phones', {authenticity_token: AUTH_TOKEN, list: lst}, function(data){ alert(data); });
+  }
+</script>
+<% end %>
+<%= render :partial => 'admin/shared/product_sub_menu' %>
+
+<div class="list-l">
+  <% @props.each do |prop| %>
+  <div>
+    <div class="item"><%= prop %></div>
+    <div class="val"></div>
+    <div class="box"></div>
+  </div>
+  <% end %>
+  <div class="clr"></div>
+</div>
+<div class="list-r">
+  <% @sys_props.each do |pp| %>
+  <div class="drop"><%= pp %></div>
+  <% end %>
+</div>
+<div class="list-r">
+  <input type="button" onclick="save();" value="保存" />
+  <p><input type="text" id="new_val" /></p>
+</div>
+<div class="clr"></div>

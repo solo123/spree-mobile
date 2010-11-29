@@ -55,7 +55,8 @@ class Admin::QuotesController < Admin::BaseController
       if !quote.product_id || quote.product_id == 0
         p = Product.create \
           :name => quote.brand + " " + quote.model,
-          :price => quote.price, :description => ''
+          :price => quote.price, :description => '',
+          :model => quote.model, :brand_id => quote.brand_id
         p.taxons << Taxon.find_by_id(quote.brand_id)
         @prop_model ||= Property.find_by_name("型号")
         ProductProperty.create :property => @prop_model, :product => p, :value => quote.model
@@ -96,7 +97,12 @@ class Admin::QuotesController < Admin::BaseController
     quote = Quote.find_by_id(params[:q])
     quote.model = params[:m]
     quote.save!
-    render 'ok'
+    render :text => 'ok'
+  end
+
+  def refresh_cache
+    expire_fragment('quotations')
+    render :text => 'refreshed quotations'
   end
   private
     def collection

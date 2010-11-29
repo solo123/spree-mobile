@@ -1,0 +1,64 @@
+<%= render :partial => 'admin/shared/product_sub_menu' %>
+
+<div class='toolbar'>
+  <ul class='actions'>
+    <li>
+      <a href="/admin/inp_phones/props">属性匹配</a>
+    </li>
+    <li id="new_product_link">
+      <%= button_link_to '查找机型', '/admin/inp_phones/match', {:remote => true, :icon => 'add'} %>
+      <%= button_link_to '导入数据', '/admin/inp_phones/do_import', {:remote => true, :icon => 'add'} %>
+    </li>
+  </ul>
+  <br class='clear' />
+</div>
+
+<h1>更新数据</h1>
+<div id="match_inp_phone"></div>
+<div id="do_import_inp_phone"></div>
+
+<% if @collection %>
+<table class="index">
+  <tr>
+    <th>Pid</th>
+    <th>名称</th>
+    <th>型号</th>
+    <th>型号1</th>
+    <th>URL</th>
+    <th>状态</th>
+  </tr>
+<% @collection.each do |p| %>
+  <tr>
+    <td><%= p.product_id %></td>
+    <td><%= p.name %></td>
+    <td><%= p.model %></td>
+    <td><%= p.model_1 %></td>
+    <td><%= p.url %></td>
+    <td class="actions"><%= p.status %></td>
+  </tr>
+<% end %>
+</table>
+<%= will_paginate(:previous_label => "&#171; #{t('previous')}", :next_label => "#{t('next')} &#187;") %>
+<% end %>
+
+<% content_for :sidebar do %>
+
+  <%= form_for @search do |f| %>
+    <div class="box">
+      <h3><%= t(:search) %></h3>
+        <p>
+          <label><%= t("name") %></label><br />
+          <%= f.text_field :name_contains, :size => 15 %>
+        </p>
+        <p>
+          <label>status=1</label><br />
+          <%= f.check_box :status_equals, {}, "1", "" %>
+        </p>
+
+        <p class="form-buttons">
+          <%= button t("search") %>
+        </p>
+    </div>
+  <% end %>
+
+<% end %>

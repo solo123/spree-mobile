@@ -17,6 +17,7 @@
   <tr>
     <%= hook :admin_products_index_headers do %>
       <th><%= order @search, :by => :name, :as => t("name") %></th>
+      <th>上市日期</th>
       <th>制式</th>
       <th>零售价</th>
       <th>批发价</th>
@@ -31,6 +32,7 @@
     <%- locals = {:product => product} %>
     <%= hook :admin_products_index_rows, locals do %>
       <td> <%= product.name %> </td>
+      <td><%= product.list_date %></td>
       <td> <%= product.taxon_val('制式') %> </td>
       <td> <%= product.property('零售价')  %> </td>
       <td> <%= number_with_precision(product.property('批发价'), :precision => 2)  %> </td>

@@ -2,19 +2,20 @@ class QuotationsController < Spree::BaseController
   
   def index
     redirect_to login_url unless current_user
-    r = nil
-    if params[:b]
-      t = Taxon.find_by_id(params[:b])
-      r = Product.active().in_taxon(t)
-    elsif params[:pl]
-      r = Product.active().price_between(params[:pl], params[:ph])
-    else
-      t = Taxon.find_by_name('主推机型')
-      r = Product.active().in_taxon(t)
+    @products = Product.active.price_between(50,10000).order('name')
+    @brands = Product.active.price_between(50,10000).select('DISTINCT brand_id, (select name from taxons where id=brand_id) as brand, count(*) as cnt').group('brand_id').order('cnt desc')
+  end
+  def get_list
+    rs = []
+    unless current_user
+      render :json => rs
+      return
     end
-    @products = r.paginate(:per_page  => Spree::Config[:list_per_page],
-                           :order => 'name',
-                           :page      => params[:page])
+
+    Product.active.price_between(50,10000).each do |p|
+      rs << [p.permalink, p.name, p.price, p.property('报价备注')]
+    end
+    render :json => rs
   end
 
   def table
