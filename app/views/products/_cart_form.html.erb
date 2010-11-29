@@ -11,6 +11,7 @@
         <%= t("price") %>
         <span class="price selling"><%= product_price(@product) %></span>
       </p>
+      <p>报价备注：<%= @product.property('报价备注') %></p>
     <% end %>
   <% end %>
 
