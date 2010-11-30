@@ -8,6 +8,8 @@ zh:
   product_taxons: 分类合并
   left_logout: 离开
   quotes: 报价录入
+  brands: 品牌
+  inp_phones: 导入手机
   do_import:
     file: 上传文件
     import: 导入CSV

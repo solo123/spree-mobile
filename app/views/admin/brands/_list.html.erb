@@ -1,0 +1,29 @@
+<table class="index">
+  <thead>
+    <tr>
+      <td>ID</td>
+      <td>名称</td>
+      <td>产品数量</td>
+      <td>lgt</td>
+      <td>位置</td>
+      <td>链接名</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% brands.each do |pp| %>
+    <tr id="taxon_<%= pp.id %>">
+      <td><%= pp.id %></td>
+      <td><%= pp.name %></td>
+      <td><%= Product.in_taxon(pp).count %></td>
+      <td><%= pp.lft %></td>
+      <td><%= pp.position %></td>
+      <td><%= pp.permalink %></td>
+      <td>
+        <%= link_to_edit pp %>
+        &nbsp;
+        <%= link_to_delete pp %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

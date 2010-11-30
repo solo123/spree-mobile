@@ -7,7 +7,7 @@
         $.getJSON("/admin/product_taxons/taxon", {q: v}, function(data){
             $('#t_src').html("");
             for (var i=0; i<data.length; i++){
-              $('#t_src').append("<input type='radio' name='taxon_source' value = '"+ data[i].id +"' id='t_src_"+ i.toString() +"'><label for='t_src_"+ i.toString() +"'>"+ data[i].name +"</label><br />");
+              $('#t_src').append("<input type='radio' name='taxon_source' value = '"+ data[i].id +"' id='t_src_"+ i.toString() +"'><label for='t_src_"+ i.toString() +"'>("+ data[i].id + ") " + data[i].name +"</label><br />");
             }
      });
     }
@@ -17,7 +17,7 @@
         $.getJSON("/admin/product_taxons/taxon", {q: v}, function(data){
             $('#t_tag').html("");
             for (var i=0; i<data.length; i++){
-              $('#t_tag').append("<input type='radio' name='taxon_target' value = '"+ data[i].id +"' id='t_tag_"+ i.toString() +"'><label for='t_tag_"+ i.toString() +"'>"+ data[i].name +"</label><br />");
+              $('#t_tag').append("<input type='radio' name='taxon_target' value = '"+ data[i].id +"' id='t_tag_"+ i.toString() +"'><label for='t_tag_"+ i.toString() +"'>("+ data[i].id + ") " + data[i].name +"</label><br />");
             }
      });
     }
@@ -42,7 +42,7 @@
 </script>
 <% end %>
 
-<%= render :partial => 'admin/uploads/sub_menu' %>
+<%= render :partial => 'admin/quotes/sub_menu' %>
 
 <h2>修改分类</h2>
 

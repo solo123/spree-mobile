@@ -4,8 +4,7 @@ Rails.application.routes.draw do
   root :to => 'home#index', :as => 'home'
   match 'etl/:action' => 'etl'
   match 'pages/:id' => 'pages#index'
-  match 'quotations' => 'quotations#index'
-  match 'quotations/:action' => 'quotations'
+  match 'quotations(/:action)' => 'quotations'
   match 'account/:action' => 'users'
   match 'brands' => 'brands#index'
   match 'etl/:action' => 'etl'
@@ -20,9 +19,11 @@ Rails.application.routes.draw do
   match '/ta/*id' => 'taxons#show_all'
 
   namespace :admin do
+    resources :brands, :as => 'brands'
+    match 'brands((/:id)/:action)' => 'brands'
     resources :uploads
     resources :import_csvs
-    resources :product_taxons
+    resources :product_taxons, :as => 'product_taxons'
     resources :quotes
     resources :inp_phones
     match 'quotes/:action/:id' => 'quotes'

@@ -1,0 +1,7 @@
+<%= render :partial => 'admin/shared/product_sub_menu' %>
+
+<h2>国际品牌 (ID:<%= @gj.id %>)</h2>
+<%= render 'list', :brands => @gjpp %>
+
+<h2>国内品牌 (ID:<%= @gn.id %>)</h2>
+<%= render 'list', :brands => @gnpp %>

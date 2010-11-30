@@ -2,7 +2,7 @@ class Admin::QuotesController < Admin::BaseController
   resource_controller
 
   show.wants.html { redirect_to :action => :index }
-  update.after { object.status = Quote::NEW_QUOTE; object.save! }
+  update.after { object.status = Quote::NEW_QUOTE;}
 
   def clear
     Quote.delete_all(['employee_id=? and status<10', current_user.id])

@@ -1,0 +1,33 @@
+<%= render :partial => 'admin/shared/product_sub_menu' %>
+
+<%= form_for(@object, :url => "/admin/brands/#{params[:id]}") do |f| %>
+<p>
+  ID: <%= params[:id] %>
+</p>
+<p>
+  <%= f.label :name, t(:name) %>
+  <%= f.text_field :name %>
+</p>
+<p>
+  <%= f.label :parent_id, '父节点'  %>
+  <%= f.text_field :parent_id %>
+</p>
+<p>
+  <%= f.label :permalink, t(:permalink) %>
+  <%= f.text_field :permalink %>
+</p>
+<p>
+  <%= f.label :position, t(:position) %>
+  <%= f.text_field :position %>
+</p>
+<p>
+  <%= f.label :lft, t(:lft) %>
+  <%= f.text_field :lft %>
+</p>
+<p>
+  <%= f.label :description, t(:description) %>
+  <%= f.text_field :description %>
+</p>
+
+<%=  submit_tag "update" %>
+<% end %>
