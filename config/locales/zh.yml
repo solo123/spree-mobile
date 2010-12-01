@@ -477,9 +477,9 @@ zh:
   mark_shipped: "标明出货"
   master_price: "主价格"
   max_items: "最大的项目"
-  meta_description: "梅塔介绍"
-  meta_keywords: "标签关键词"
-  metadata: "元数据"
+  meta_description: Meta description
+  meta_keywords: Meta keywords
+  metadata: Meta data
   missing_required_information: "所需信息丢失"
   minimal_amount: "最小值"
   month: "月"
