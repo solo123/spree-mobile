@@ -4,7 +4,7 @@ class Admin::BrandsController < Admin::BaseController
   def update
     t = Taxon.find(params[:id])
     if t.update_attributes(params[:taxon])
-      flash[:notice] = 'Standard was successfully updated(jimmy).'
+      flash[:notice] = '品牌信息已保存。'
       redirect_to :action => :index
     else
       render :action => "edit"

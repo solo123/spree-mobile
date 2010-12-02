@@ -12,18 +12,30 @@ module Mobile
       end
 # extend Product
     Product.class_eval do
-      def self.find_by_brand_and_model(brand,model)
-        return nil unless brand && model
-        tx = Taxonomy.find_by_name('品牌')
-        t = Taxon.find_by_name_and_taxonomy_id(brand, tx.id)
-        return nil unless t
-        ps = Product.not_deleted.in_taxon(t).where('model=?', model)
-        return nil unless ps && ps.length > 0
-        ps[0]
-      end
-      def property(pname)
-        p = self.properties.find_by_name(pname)
-        ProductProperty.find_by_product_id_and_property_id(self.id, p.id).value if p
+      def property(*props)
+        if props.length == 1
+          p = self.properties.find_by_name(props[0])
+          if p
+            return ProductProperty.find_by_product_id_and_property_id(self.id, p.id).value
+          else
+            return nil
+          end
+        end
+        pname = props[0]
+        pvalue = props[1]
+        pm = Property.find_by_name(pname)
+        unless pm
+          pm = Property.new
+          pm.name = pm.presentation = pname
+          pm.save!
+        end
+        pp = ProductProperty.find_by_product_id_and_property_id(self.id, pm.id)
+        if pp
+          pp.value = pvalue
+        else
+          ProductProperty.create :property => pm, :product => self, :value => pvalue
+        end
+        (self.list_date = pvalue; self.save) if pname == '上市日期'
       end
       def taxon_val(tname)
         v = []
