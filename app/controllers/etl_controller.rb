@@ -16,5 +16,13 @@ skip_before_filter :verify_authenticity_token
     end
     render :text => s
   end
+
+  def get_mobile
+    p = nil
+    q = params[:q]
+    p = Product.find_by_permalink(q) if q
+    p = Product.find_by_id(q) if !p && q
+    render :json => p
+  end
 end
 

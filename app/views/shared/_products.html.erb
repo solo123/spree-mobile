@@ -28,8 +28,7 @@ paginated_products ||= products
           <%= link_to small_image(product), product %>
           <div class="info">
             <%= link_to product.name, product %>
-            <p>上市时间：<%= product.property('上市时间') %></p>
-            <!--制式：<%= product.taxon_val('制式') %>-->
+            <p>上市日期：<%= product.property('上市日期') %></p>
           </div>
         </li>
       <% end %>

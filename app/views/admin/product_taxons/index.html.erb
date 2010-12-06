@@ -1,4 +1,5 @@
 <% content_for :head do %>
+<%= javascript_include_tag 'jquery.form' %>
 <script type="text/javascript">
   function load_taxons(){
 
@@ -39,6 +40,15 @@
     }
 
   }
+
+  $(function(){
+    $("#merge-form").ajaxForm({
+      success: function(data) { alert(data); }
+    });
+    $("input.mg-inp").change(function(){
+      alert(this);
+    });
+  });
 </script>
 <% end %>
 
@@ -68,17 +78,15 @@
 </p>
 
 
+<h3>产品合并</h3>
+<form id="merge-form" action="product_taxons/product_merge">
+<p><input type="text" class="mg-inp" /><input type="hidden" name="p[1]" /></p>
+<p><input type="text" class="mg-inp" /><input type="hidden" name="p[2]" /></p>
+<p><input type="text" class="mg-inp" /><input type="hidden" name="p[3]" /></p>
+<p><input type="text" class="mg-inp" /><input type="hidden" name="p[4]" /></p>
 <p>
-  <input type="checkbox" value="01" name="products" id="p_01" /><label for="p_01">Product 01</label>
-  <input type="checkbox" value="02" name="products" id="p_02" /><label for="p_02">Product 02</label>
-  <input type="checkbox" value="03" name="products" id="p_03" /><label for="p_03">Product 03</label>
-  <input type="checkbox" value="04" name="products" id="p_04" /><label for="p_04">Product 04</label>
-  <input type="checkbox" value="05" name="products" id="p_05" /><label for="p_05">Product 05</label>
+  <%= submit_tag "产品合并" %>
 </p>
-
-<p>
-  
-</p>
-
+</form>
 
 <%= "index.html" %>

@@ -9,20 +9,21 @@ class Admin::QuotesController < Admin::BaseController
     redirect_to :action => :index
   end
   def check
+    redirect_to 'login' unless current_user
     @p_brand = nil
     @quotes = Quote.all(:conditions => ['employee_id=? and status<10', current_user.id])
     @quotes.each do |q|
       p = MobileHelper.find_mobile(q.brand, q.model)
       if p
         q.brand_id = p.brand_id
-        q.product_id = p[0].id
-        q.price_old = p[0].price
+        q.product_id = p.id
+        q.price_old = p.price
         q.rel_model = ''
       else
         t = Taxon.find_by_name(q.brand)
         if t
-          mds = MobileAlia.where('brand_id=? and model like ?', t.id, '%' + q.model + '%')
-          q.rel_model = mds.join(',')
+          mds = ModelAlia.where('brand_id=? and model like ?', t.id, '%' + q.model + '%')
+          q.rel_model = mds.collect{|md| md.model}.join(',')
           #q.rel_model = @p_models.grep(Regexp.new(q.model)).join(',')
         else
           q.brand_id = 0
@@ -66,11 +67,19 @@ class Admin::QuotesController < Admin::BaseController
     data = params[:quotes]
 
     data.split("\n").each do |row|
+      next unless row
       cols = row.split("\t")
-      q = Quote.new(:brand => bnd, :model => cols[0],
+      next unless cols && !cols.empty?
+
+      q = Quote.new(:brand => bnd, :model => cols[0].upcase,
         :price => cols[1][cols[1].index(/\d/)..100].to_f,
         :remark => cols[2..100].join(','))
       q.remark = cols[1] + q.remark if cols[1] && (cols[1] =~ /[^\d\s]/)
+      idx = cols[0].upcase.index(/[^A-Z0-9]/)
+      if idx && idx > 0
+        q.remark = q.model[idx..100] + (q.remark ? ' ' + q.remark : '')
+        q.model = q.model[0..idx-1]
+      end
       q.employee_id = current_user.id
       q.status = Quote::NEW_QUOTE
       q.save
@@ -90,10 +99,12 @@ class Admin::QuotesController < Admin::BaseController
         ma.product_id = p.id
         ma.save!
       else
+        quote.product_id = 0
         quote.model = model
         quote.save!
       end
     else
+      quote.product_id = 0
       quote.model = model
       quote.save!
     end

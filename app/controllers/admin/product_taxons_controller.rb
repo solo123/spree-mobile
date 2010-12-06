@@ -20,6 +20,9 @@ class Admin::ProductTaxonsController < Admin::BaseController
         i = i + 1
       end
       render :text => "共合并#{i}个产品"
+    when 'product_merge'
+      p = params[:products]
+      render :text => "result:[#{p.collect{|pp| pp[1]}.join(',')}]"
     end
   end
 end
