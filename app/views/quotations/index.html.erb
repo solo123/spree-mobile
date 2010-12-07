@@ -4,7 +4,6 @@
 @import "/javascripts/jquery.datatables/css/demo_page.css";
 @import "/javascripts/jquery.datatables/css/demo_table_jui.css";
 #quote-table td {height:25px;}
-.current {border:solid 1px red; background-color: lightyellow;}
 </style>
 <script type="text/javascript">
 var oTable;
@@ -12,7 +11,7 @@ var oTable;
     oTable = $('#quote-table').dataTable({
 		"bJQueryUI": true,
 		"sPaginationType": "full_numbers",
-        "aLengthMenu": [[10, 20, 100, -1], [10, 20, 100, "All"]],
+        "aLengthMenu": [[10, 20, 50, 100, -1], [10, 20, 50, 100, "All"]],
         "aoColumns": [null,null,null,null,{"bSearchable": false,"bVisible":false},null ],
         "oLanguage": { "sUrl": "/javascripts/jquery.datatables/zh_CN.txt" }
     });

@@ -1276,6 +1276,7 @@ ul.thumbnails li.selected { border-color: #8ec871; }
 .quotations-filter dl dd ul li a:link { text-decoration: none; }
 .quotations-filter dl dd ul li a:visited { text-decoration: none; }
 .quotations-filter dl dd ul li a:hover { text-decoration: underline; }
+.quotations-filter dl dd ul li a.current { color: #ff5411; }
 .quotations-sort li {
   list-style-type: none;
   display: inline;
@@ -1292,7 +1293,7 @@ ul.thumbnails li.selected { border-color: #8ec871; }
   font-size: 1.2em;
   margin: 0 0 12px 0;
   padding: 5px;
-  background: #fff6ed;
+  background: #e9f4e9;
 }
 .quotations-product-list .result-stats strong {
   margin: 0 5px;
