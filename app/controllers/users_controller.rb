@@ -6,9 +6,12 @@ class UsersController < Spree::BaseController
   actions :all, :except => [:index, :destroy]
 
   show.before do
-    redirect_to login_url unless current_user
-    @orders = @user.orders.complete
+    if current_user
+      @user = current_user
+      @orders = @user.orders.complete
+    end
   end
+  show.wants.html { redirect_to login_url unless current_user }
 
   create.after do
     Msg.user_registed(@user)

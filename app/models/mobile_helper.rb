@@ -3,6 +3,7 @@ class MobileHelper
   def self.find_mobile(brand,model)
     return nil unless brand && model
     tx = Taxonomy.find_by_name('品牌')
+    return nil unless tx
     t = Taxon.find_by_name_and_taxonomy_id(brand, tx.id)
     return nil unless t
     ma = ModelAlia.where('brand_id=? and model=?', t.id, model)
@@ -37,5 +38,20 @@ class MobileHelper
     ma.brand_id = p.brand_id
     ma.save!
     p
+  end
+
+  def self.merge(*ids)
+    return false unless ids && ids.length > 1
+
+    p0 = Product.find(ids[0])
+    (1..ids.length - 1).each do |i|
+      ModelAlia.where('product_id=?', ids[i]).each do |m|
+        m.product_id = p0.id
+        m.save!
+      end
+      p = Product.find(ids[i])
+      p.deleted_at = Time.now
+      p.save!
+    end
   end
 end

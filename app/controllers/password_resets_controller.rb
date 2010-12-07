@@ -1,12 +1,11 @@
 class PasswordResetsController < Spree::BaseController
-  before_filter :require_no_user
   before_filter :load_user_using_perishable_token, :only => [:edit, :update]
 
   def new
     render
   end
 
-  def show
+def show
     if params[:id]
       if params[:c]
         UserCode.all(:conditions => ["created_at<?",(Time.now - 3600).utc]).each { |u| u.delete; }
@@ -44,19 +43,16 @@ class PasswordResetsController < Spree::BaseController
     end
     render :text => '0'
   end
-  
+
   def create
-    if params[:code]
+    @user = User.find_by_email(params[:email])
+    if @user
+      @user.deliver_password_reset_instructions!
+      flash.notice = t("password_reset_instructions_are_mailed")
+      redirect_to root_url
     else
-      @user = User.find_by_email(params[:email])
-      if @user
-        @user.deliver_password_reset_instructions!
-        self.notice = t("password_reset_instructions_are_mailed")
-        redirect_to root_url
-      else
-        flash[:error] = t("no_user_found")
-        render :action => :new
-      end
+      flash[:error] = t("no_user_found")
+      render :action => :new
     end
   end
 
@@ -68,7 +64,7 @@ class PasswordResetsController < Spree::BaseController
     @user.password = params[:user][:password]
     @user.password_confirmation = params[:user][:password_confirmation]
     if @user.save
-      self.notice = t("password_updated")
+      flash.notice = t("password_updated")
       redirect_to account_url
     else
       render :action => :edit
@@ -77,10 +73,10 @@ class PasswordResetsController < Spree::BaseController
 
   private
     def load_user_using_perishable_token
-      @user = User.find_using_perishable_token(params[:id], 1.hours)
+      @user = User.find_using_perishable_token(params[:id])
       unless @user
-        self.notice = t("password_reset_token_not_found")
-        render :action => :new
+        flash.notice = t("password_reset_token_not_found")
+        redirect_to root_url
       end
     end
 
@@ -89,3 +85,4 @@ class PasswordResetsController < Spree::BaseController
     end
 
 end
+

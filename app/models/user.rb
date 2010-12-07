@@ -50,7 +50,10 @@ class User < ActiveRecord::Base
     reset_perishable_token!
     UserMailer.password_reset_instructions(self).deliver
   end
-
+  def deliver_password_reset_code
+    reset_perishable_token!
+    self.perishable_token
+  end
   def stars
     r = self.roles
     if r.find_by_name('admin')
