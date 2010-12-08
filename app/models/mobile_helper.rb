@@ -48,10 +48,23 @@ class MobileHelper
       ModelAlia.where('product_id=?', ids[i]).each do |m|
         m.product_id = p0.id
         m.save!
+
+        ProductProperty.where('product_id=?', ids[i]).each do |pp|
+          pp1 = ProductProperty.find_by_product_id_and_property_id(p0.id, pp.property_id)
+          if pp1
+             pp1.value = pp.value if pp.value && pp.value.length > pp1.value.length
+             pp1.save!
+          else
+            pp.product_id = p0.id
+            pp.save!
+          end
+        end
       end
       p = Product.find(ids[i])
+      p0.description = p.description if p.description && p.description.length > p0.description.length
       p.deleted_at = Time.now
       p.save!
     end
+    p0.save
   end
 end
