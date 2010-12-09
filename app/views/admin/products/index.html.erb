@@ -1,3 +1,17 @@
+<% content_for :head do %>
+<script type="text/javascript">
+  function merge_product(){
+    var ps = $('.select-product:checked');
+    if (ps.length<2){
+      alert('请选中2个或以上产品才能进行合并。')
+      return;
+    }
+    if (!confirm("确认要合并 "+ps.length+" 款产品吗？")) return;
+    var ids = $.map(ps.toArray(), function(n) { return $(n).attr('pid'); });
+    $.post('mobiles/merge', {ids: ids}, function(data){ alert(data); });
+  }
+</script>
+<% end %>
 <%= render :partial => 'admin/shared/product_sub_menu' %>
 
 <div class='toolbar'>
@@ -16,6 +30,7 @@
 <table class="index">
   <tr>
     <%= hook :admin_products_index_headers do %>
+      <th>选择</th>
       <th><%= order @search, :by => :name, :as => t("name") %></th>
       <th>上市日期</th>
       <th>制式</th>
@@ -31,6 +46,7 @@
   <tr <%= 'style="color:red;"' if product.deleted? %> id="<%= dom_id product %>">
     <%- locals = {:product => product} %>
     <%= hook :admin_products_index_rows, locals do %>
+      <td><input type="checkbox" class="select-product" pid="<%= product.id %>" /> </td>
       <td> <%= product.name %> </td>
       <td><%= product.list_date %></td>
       <td> <%= product.taxon_val('制式') %> </td>
@@ -66,8 +82,8 @@
         </p>
 
         <p>
-          <label><%= t("sku") %></label><br />
-          <%= f.text_field :variants_including_master_sku_contains, :size => 15 %>
+          <label>品牌或分类</label><br />
+          <%= f.text_field :in_taxons, :size => 15 %>
         </p>
         <p>
           <label><%= t("show_deleted") %></label><br />
@@ -82,5 +98,7 @@
       <% end %>
     </div>
   <% end %>
-
+<p>
+  <input type="button" value="产品合并" onclick="merge_product();" />
+</p>
 <% end %>

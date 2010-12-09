@@ -28,5 +28,6 @@ Rails.application.routes.draw do
     resources :inp_phones
     match 'quotes/:action/:id' => 'quotes'
     resources :suppliers
+    match 'mobiles/:action' => 'mobiles'
   end
 end

@@ -40,8 +40,8 @@ class MobileHelper
     p
   end
 
-  def self.merge(*ids)
-    return false unless ids && ids.length > 1
+  def self.merge(ids)
+    return false if ids.blank? || ids.length < 2
 
     p0 = Product.find(ids[0])
     (1..ids.length - 1).each do |i|
@@ -61,6 +61,7 @@ class MobileHelper
         end
       end
       p = Product.find(ids[i])
+      Asset.update_all("viewable_id=#{p0.id}", "viewable_id=#{p.id} and viewable_type='Product'")
       p0.description = p.description if p.description && p.description.length > p0.description.length
       p.deleted_at = Time.now
       p.save!
