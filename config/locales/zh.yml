@@ -154,7 +154,7 @@ zh:
         one: "线项目"
         other: "线项目"
       order:
-        one: "秩序"
+        one: "订单"
         other: "订单"
       payment:
         one: "付款"
@@ -492,12 +492,12 @@ zh:
   new_billing_integration: "新的结算一体化"
   new_category: "新的类别"
   new_customer: "新客户"
-  new_image: "新形象"
+  new_image: "新图片"
   new_mail_method: 新的邮件方法
   new_option_type: "新选择类型"
   new_option_value: "新的期权价值"
-  new_order: "新秩序"
-  new_order_completed: "新秩序已完成"
+  new_order: "新订单"
+  new_order_completed: "新订单已完成"
   new_payment: "新的付款方式"
   new_payment_method: "新的付款方式"
   new_product: "新产品"
@@ -572,7 +572,7 @@ zh:
     resumed : 恢复
     returned: 返回
   order_summary: "订单摘要"
-  order_sure_want_to: "你确定要%{event}这个秩序？"
+  order_sure_want_to: "你确定要%{event}这个订单？"
   order_total: "订单总量"
   order_total_message: "记账在您卡上的总支出将被"
   order_updated: "为了更新"
