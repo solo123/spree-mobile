@@ -13,4 +13,12 @@ class Admin::MobilesController < Admin::BaseController
     img.save
     render :text => img.position
   end
+  def image_reorder
+    p = Product.find(params[:id])
+    p.images.order('attachment_file_name').each_with_index do |img, idx|
+      img.position = idx
+      img.save
+    end
+    render :text => 'ok'
+  end
 end
