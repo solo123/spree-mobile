@@ -21,8 +21,8 @@ class QuotationsController < Spree::BaseController
   def table
     redirect_to login_url unless current_user
     gjpp = Taxon.find_by_name('国际品牌')
-    @p_gj = Product.active.in_taxon(gjpp).active.price_between(50,8000).all(:order => 'name, updated_at desc')
+    @p_gj = Product.active.in_taxon(gjpp).active.price_between(50,8000).all(:order => 'brand_id, name, updated_at desc')
     gnpp = Taxon.find_by_name('国内品牌')
-    @p_gn = Product.active.in_taxon(gnpp).active.price_between(50,8000).all(:order => 'name, updated_at desc')
+    @p_gn = Product.active.in_taxon(gnpp).active.price_between(50,8000).all(:order => 'brand_id, name, updated_at desc')
   end
 end
