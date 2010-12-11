@@ -11,6 +11,7 @@ zh:
   brands: 品牌
   inp_phones: 导入手机
   new_promotion: 新建促销
+  list_date: 上市日期
   do_import:
     file: 上传文件
     import: 导入CSV

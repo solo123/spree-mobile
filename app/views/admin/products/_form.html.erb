@@ -21,13 +21,10 @@
       <% end %>
 
       <%= f.field_container :model do %>
-        <%= f.label :model, t('model') %>
-        <%= f.text_field :model %>
-        <%= f.error_message_on :model %>
-
         <%= f.label :list_date, t('list_date') %>
         <%= f.text_field :list_date %>
         <%= f.error_message_on :list_date %>
+        <%= render 'model_alias' %>
       <% end %>
     <% end %>
   </div>

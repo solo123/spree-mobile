@@ -22,11 +22,10 @@ class Admin::QuotesController < Admin::BaseController
       else
         t = Taxon.find_by_name(q.brand)
         if t
+          q.brand_id = t.id
           mds = ModelAlia.where('brand_id=? and model like ?', t.id, '%' + q.model + '%')
           q.rel_model = mds.collect{|md| md.model}.join(',')
           #q.rel_model = @p_models.grep(Regexp.new(q.model)).join(',')
-        else
-          q.brand_id = 0
         end
       end
       q.status = Quote::CHECKED
@@ -88,27 +87,17 @@ class Admin::QuotesController < Admin::BaseController
   end
 
   def update_model
-    quote = Quote.find_by_id(params[:q])
+    txt = "none"
+    quote = Quote.find(params[:q])
     model = params[:m].strip
-    if quote.brand_id > 0 && !quote.model.strip.empty? && !model.empty?
-      p = MobileHelper.find_mobile(q.brand, model)
+    if quote.brand_id && quote.brand_id > 0 && !quote.model.strip.empty? && !model.empty?
+      p = MobileHelper.find_mobile(quote.brand, model)
       if p
-        ma = ModelAlia.new
-        ma.brand_id = quote.brand_id
-        ma.model = params[:m].strip
-        ma.product_id = p.id
-        ma.save!
-      else
-        quote.product_id = 0
-        quote.model = model
-        quote.save!
+        ModelAlia.add_alias(p.id, quote.model)
+        txt = "add alias #{p.id}-#{quote.model}"
       end
-    else
-      quote.product_id = 0
-      quote.model = model
-      quote.save!
     end
-    render :text => 'ok'
+    render :text => txt
   end
 
   def refresh_cache

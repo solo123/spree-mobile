@@ -1,5 +1,11 @@
 class MobileHelper
-  
+
+  def self.get_brand(brand)
+    return nil unless brand
+    tx = Taxonomy.find_by_name('品牌')
+    return nil unless tx
+    Taxon.find_by_name_and_taxonomy_id(brand, tx.id)
+  end
   def self.find_mobile(brand,model)
     return nil unless brand && model
     tx = Taxonomy.find_by_name('品牌')

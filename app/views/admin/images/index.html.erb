@@ -49,7 +49,7 @@
       $.post('/admin/mobiles/image_order', {image_id:img_id, order:order});
     }
     function image_reorder(product_id){
-      $.post('/admin/mobiles/image_reorder', {id:product_id});
+      $.post('/admin/mobiles/image_reorder', {id:product_id}, function(data){alert(data);});
     }
   </script>
 <style type="text/css">
