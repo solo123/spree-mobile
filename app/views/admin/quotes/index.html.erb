@@ -99,7 +99,7 @@
   }
 
   function set_model(q, m){
-    $.post('quotes/update_model/change', {q:q, m:m}, function(d){alert(d);}, 'text');
+    $.post('quotes/update_model/change', {q:q, m:m}, function(d){}, 'text');
   }
   function refresh_quotations(){
     $.get('quotes/refresh_cache/0', function(d){alert(d);});
