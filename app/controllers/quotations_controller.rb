@@ -29,9 +29,9 @@ class QuotationsController < Spree::BaseController
     ztjx = Taxon.find_by_name('主推机型')
     @p_zt = Product.active.in_taxon(ztjx).active.price_between(50,8000).all(:order => 'brand_id, name, updated_at desc')
     gjpp = Taxon.find_by_name('国际品牌')
-    @p_gj = Product.active.in_taxon(gjpp).active.price_between(50,8000).where('date_sub(curdate(), interval 3 day) <= products.updated_at').all(:order => 'brand_id, name, updated_at desc')
+    @p_gj = Product.active.in_taxon(gjpp).active.price_between(50,8000).where('date_sub(curdate(), interval 7 day) <= products.updated_at').all(:order => 'brand_id, name, updated_at desc')
     gnpp = Taxon.find_by_name('国内品牌')
-    @p_gn = Product.active.in_taxon(gnpp).active.price_between(50,8000).where('date_sub(curdate(), interval 3 day) <= products.updated_at').all(:order => 'brand_id, name, updated_at desc')
+    @p_gn = Product.active.in_taxon(gnpp).active.price_between(50,8000).where('date_sub(curdate(), interval 7 day) <= products.updated_at').all(:order => 'brand_id, name, updated_at desc')
   end
 
 end
