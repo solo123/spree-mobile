@@ -17,7 +17,7 @@ row = rs.count / cols
 ts = []
 cols.times do |i|
   ts << '<table class="q-table">'
-  ts.concat rs[(row * i)..(row * i + row)]
+  ts.concat rs[(row * i)..(row * i + row - 1)]
   ts << '</table>'
 end
 %>
