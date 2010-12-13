@@ -54,6 +54,7 @@ class Admin::QuotesController < Admin::BaseController
       p.property('报价备注', quote.remark) if quote.remark && !quote.remark.empty?
       p.available_on = Time.now unless p.available_on
       p.price = quote.price
+      p.master.updated_at = Time.now
       p.save!
       
       quote.status = Quote::IMPORTED
