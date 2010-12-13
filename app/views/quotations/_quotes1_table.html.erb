@@ -1,0 +1,25 @@
+<%
+cols = 4
+
+b = ''
+bnt = 0
+rs = []
+products.each do |p|
+  if b != p.taxon_val('品牌')
+    bnt += 1
+    bnt = 1 if bnt > 4
+    b = p.taxon_val('品牌')
+    rs << "<tr class='c#{bnt}'><td colspan='3' class='tit'>#{b}</td></tr>"
+  end
+  rs << "<tr class='c#{bnt}'><td class='model'><a href='/products/#{p.permalink}'>#{p.property('型号')}</a></td><td class='price'>#{p.price}</td><td>#{p.property('报价备注')}</td></tr>"
+end
+row = rs.count / cols
+ts = []
+cols.times do |i|
+  ts << '<table class="q-table">'
+  ts.concat rs[(row * i)..(row * i + row)]
+  ts << '</table>'
+end
+%>
+
+<%= raw ts.join("\n") %>

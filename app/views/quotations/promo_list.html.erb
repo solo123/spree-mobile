@@ -13,16 +13,27 @@
     td.price{ color: #FF5411; }
     .icon {float:right;margin-top:4px;}
   </style>
+<script type="text/javascript">
+  $(function(){
+    $( "#radio" ).buttonset();
+  });
+</script>
 <% end %>
 <%= render 'sub_menu' %>
-<% cache('quotation-table') do %>
-  <h1>报价列表</h1>
+<% cache('quotation-promo') do %>
+  <h1>热卖机型报价</h1>
   <div class="quotations-table">
-    <div class="toolbar"><a class="button cancel-btn" href="/print.html">打印报价单</a> <input type="button" class="button cancel-btn" value="导出为Excel(CSV)" /></div>
-    <h2>国际品牌</h2>
-    <%= render 'quotes_table', :products => @p_gj %>
+    <%= render 'quotes1_table', :products => @p_zt %>
     <div class="clr"></div>
-    <h2>国内品牌</h2>
-    <%= render 'quotes_table', :products => @p_gn %>
+  </div>
+  <h1>国际品牌</h1>
+  <div class="quotations-table">
+    <%= render 'quotes1_table', :products => @p_gj %>
+    <div class="clr"></div>
+  </div>
+  <h1>国内品牌</h1>
+  <div class="quotations-table">
+    <%= render 'quotes1_table', :products => @p_gn %>
+    <div class="clr"></div>
   </div>
 <% end %>

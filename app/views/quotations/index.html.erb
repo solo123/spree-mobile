@@ -59,7 +59,7 @@ function sp(lnk){
 }
 </script>
 <% end %>
-
+<%= render 'sub_menu' %>
 <% cache('quotations') do %>
   <h1>手机批发报价</h1>
   <div class="quotations-filter-area">
@@ -79,7 +79,7 @@ function sp(lnk){
 
   <div class="quotations-product-list" id="QPlist">
     <div class="result-stats">
-      <div class="toolbar"><a href="/quotations/table" class="button cancel-btn">查看全部报价</a> <a class="button cancel-btn" href="/print.html">打印报价单</a> <input type="button" class="button cancel-btn" value="导出为Excel(CSV)"></div>
+      <div class="toolbar"><a class="button cancel-btn" href="/print.html">打印报价单</a> <input type="button" class="button cancel-btn" value="导出为Excel(CSV)"></div>
       <div class="clr"></div>
     </div>
     <table id="quote-table">
