@@ -103,7 +103,10 @@ class Admin::QuotesController < Admin::BaseController
   end
 
   def refresh_cache
-    expire_fragment %r{quotations.*}
+    #expire_fragment %r{quotations.*}
+    expire_fragment 'quotations'
+    expire_fragment 'quotation-promo'
+    expire_fragment 'quotation-table'
     render :text => '刷新报价缓存'
   end
   private
