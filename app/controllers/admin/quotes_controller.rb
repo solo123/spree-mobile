@@ -2,7 +2,7 @@ class Admin::QuotesController < Admin::BaseController
   resource_controller
 
   show.wants.html { redirect_to :action => :index }
-  update.after { object.status = Quote::NEW_QUOTE }
+  update.after { object.status = Quote::NEW_QUOTE; object.save }
   create.after { object.employee_id = current_user.id; object.save }
 
   def clear

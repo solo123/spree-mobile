@@ -26,7 +26,7 @@ class Admin::InpPhonesController < Admin::BaseController
       end
       render :text => 'match!'
     elsif params[:id] == 'do_import'
-      InpPhone.where('status<=1 and brand is not null and model is not null').each do |inp|
+      InpPhone.where('status<=1').each do |inp|
         p = nil
         if status == 0 || !inp.product_id || inp.product_id == 0
           p = MobileHelper.find_or_create(inp.brand, inp.model)
@@ -38,7 +38,7 @@ class Admin::InpPhonesController < Admin::BaseController
           inp.save!
           next
         end
-        pps = InpPhoneProp.find_all_by_phone_id(inp.id)
+        pps = InpPhoneProp.where('inp_phone_id=? and ref_prop is not null', inp.id)
         if pps && pps.length > 0
           pps.each do |pp|
             p.property(pp.ref_prop, pp.val)
@@ -49,6 +49,7 @@ class Admin::InpPhonesController < Admin::BaseController
         end
         inp.status = 2
         inp.save!
+        p.property('ref', inp.url)
         p.save
       end
       render :text => 'do_import'
