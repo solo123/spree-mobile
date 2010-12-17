@@ -29,5 +29,6 @@ Rails.application.routes.draw do
     match 'quotes/:action/:id' => 'quotes'
     resources :suppliers
     match 'mobiles/:action' => 'mobiles'
+    match 'clients/:action' => 'clients'
   end
 end

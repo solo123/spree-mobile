@@ -1,0 +1,22 @@
+<table>
+  <thead>
+    <tr>
+      <th>订单号</th>
+      <th>产品号</th>
+      <th>数量</th>
+      <th>单价</th>
+      <th>创建时间</th>
+      <th>更新时间</th>
+    </tr>
+  </thead>
+  <% @line_items.each do |item| %>
+  <tr>
+    <td><%= item.order_id %></td>
+    <td><%= item.variant_id %></td>
+    <td><%= item.quantity %></td>
+    <td><%= item.price %></td>
+    <td><%= item.created_at.localtime.strftime("%Y.%m.%d %H:%M:%S") %></td>
+    <td><%= item.updated_at.localtime.strftime("%Y.%m.%d %H:%M:%S") %></td>
+  </tr>
+  <% end %>
+</table>

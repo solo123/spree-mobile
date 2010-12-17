@@ -157,119 +157,27 @@ var dd;
     </div>
     <div id="QPlist" class="quotations-product-list">
       <table>
-        <colgroup>
-          <col class="col_1" />
-          <col class="col_2" />
-          <col class="col_3" />
-          <col class="col_4" />
-          <col class="col_5" />
-          <col class="col_6" />
-          <col class="col_7" />
-        </colgroup>
         <thead>
           <tr>
-            <th>品牌</th>
-            <th>型号</th>
-            <th>颜色</th>
-            <th>制式</th>
+            <th>名称</th>
             <th>上市时间</th>
-            <th>批发价</th>
-            <th>操作</th>
+            <th>价格</th>
           </tr>
         </thead>
         <tbody>
-
+<%
+    order = current_order
+    order.line_items = order.line_items.select {|li| li.quantity > 0 }
+    order.line_items.select {|li| li.quantity > 0 }.each do |item|
+      vart = Variant.find(item.variant_id)
+      prod = Product.find(vart.product_id)
+%>
           <tr>
-            <td><a href="/quotations">OPPO</a></td>
-            <td><a href="/products/CP-2cau-0000-10-1">A105K</a></td>
-            <td>黑色, 红色</td>
-            <td>GSM</td>
-            <td>2010-08</td>
-            <td class="prices">695.0 </td>
-            <td>
-              <a href="javascript:void(0)">询价</a>
-              <a href="javascript:void(0)">购买</a>
-              <a class="collectbtn" href="javascript:void(0)">收藏</a>
-            </td>
+            <td><%= link_to prod.name, prod %></td>
+            <td><%= prod.list_date %></td>
+            <td class="prices"><%= prod.price %></td>
           </tr>
-          <tr>
-            <td><a href="/quotations">OPPO</a></td>
-            <td><a href="/products/CP-2cau-0000-10-1">A105K</a></td>
-            <td>黑色, 红色</td>
-            <td>GSM</td>
-            <td>2010-08</td>
-            <td class="prices">695.0 </td>
-            <td>
-              <a href="javascript:void(0)">询价</a>
-              <a href="javascript:void(0)">购买</a>
-              <a class="collectbtn" href="javascript:void(0)">收藏</a>
-            </td>
-          </tr>
-          <tr>
-            <td><a href="/quotations">OPPO</a></td>
-            <td><a href="/products/CP-2cau-0000-10-1">A105K</a></td>
-            <td>黑色, 红色</td>
-            <td>GSM</td>
-            <td>2010-08</td>
-            <td class="prices">695.0 </td>
-            <td>
-              <a href="javascript:void(0)">询价</a>
-              <a href="javascript:void(0)">购买</a>
-              <a class="collectbtn" href="javascript:void(0)">收藏</a>
-            </td>
-          </tr>
-          <tr>
-            <td><a href="/quotations">OPPO</a></td>
-            <td><a href="/products/CP-2cau-0000-10-1">A105K</a></td>
-            <td>黑色, 红色</td>
-            <td>GSM</td>
-            <td>2010-08</td>
-            <td class="prices">695.0 </td>
-            <td>
-              <a href="javascript:void(0)">询价</a>
-              <a href="javascript:void(0)">购买</a>
-              <a class="collectbtn" href="javascript:void(0)">收藏</a>
-            </td>
-          </tr>
-          <tr>
-            <td><a href="/quotations">OPPO</a></td>
-            <td><a href="/products/CP-2cau-0000-10-1">A105K</a></td>
-            <td>黑色, 红色</td>
-            <td>GSM</td>
-            <td>2010-08</td>
-            <td class="prices">695.0 </td>
-            <td>
-              <a href="javascript:void(0)">询价</a>
-              <a href="javascript:void(0)">购买</a>
-              <a class="collectbtn" href="javascript:void(0)">收藏</a>
-            </td>
-          </tr>
-          <tr>
-            <td><a href="/quotations">OPPO</a></td>
-            <td><a href="/products/CP-2cau-0000-10-1">A105K</a></td>
-            <td>黑色, 红色</td>
-            <td>GSM</td>
-            <td>2010-08</td>
-            <td class="prices">695.0 </td>
-            <td>
-              <a href="javascript:void(0)">询价</a>
-              <a href="javascript:void(0)">购买</a>
-              <a class="collectbtn" href="javascript:void(0)">收藏</a>
-            </td>
-          </tr>
-          <tr>
-            <td><a href="/quotations">OPPO</a></td>
-            <td><a href="/products/CP-2cau-0000-10-1">A105K</a></td>
-            <td>黑色, 红色</td>
-            <td>GSM</td>
-            <td>2010-08</td>
-            <td class="prices">695.0 </td>
-            <td>
-              <a href="javascript:void(0)">询价</a>
-              <a href="javascript:void(0)">购买</a>
-              <a class="collectbtn" href="javascript:void(0)">收藏</a>
-            </td>
-          </tr>
+<% end %>
         </tbody>
       </table>
     </div>

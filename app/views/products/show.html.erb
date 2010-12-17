@@ -17,6 +17,11 @@
     add_recent_product(<%= @product.id %>);
   });
 </script>
+<style type="text/css">
+  #quote-hist {margin-top:10px; padding:20px; background-color: #f8f8f8;}
+  dl.table-display1 dt {float:left; width:50px;clear:left;}
+  dl.table-display1 dd {float:left;}
+</style>
 <% end %>
 <% @body_id = 'product-details' %>
 <div class="pro-r-a">
@@ -62,6 +67,15 @@
         <%= render 'cart_form' %>
       </div>
     <% end %>
+    <div id="quote-hist">
+    <h3>报价历史</h3>
+    <dl class="table-display1">
+    <% Quote.where('product_id=? and status=100', @product.id).order('created_at desc').each do |quote| %>
+      <dt><%= quote.created_at.localtime.strftime("%Y.%m.%d") %></dt>
+      <dd class="price selling"><%= quote.price %></dd><dd><%= quote.remark %></dd>
+    <% end %>
+    </dl>
+    </div>
   </div>
 </div>
 
