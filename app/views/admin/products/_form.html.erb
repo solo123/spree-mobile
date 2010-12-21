@@ -24,7 +24,8 @@
         <%= f.label :list_date, t('list_date') %>
         <%= f.text_field :list_date %>
         <%= f.error_message_on :list_date %>
-        <%= render 'model_alias' %>
+        别名：<input type="text" value="<%= ModelAlia.product_alias(@product.id)  %>" />
+        <input type="button" value="修改别名" onclick="alert('修改别名功能尚未实现');" />
       <% end %>
     <% end %>
   </div>

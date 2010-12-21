@@ -31,4 +31,8 @@ Rails.application.routes.draw do
     match 'mobiles/:action' => 'mobiles'
     match 'clients/:action' => 'clients'
   end
+
+  namespace :m do
+    match 'home' => 'home'
+  end
 end
