@@ -1,3 +1,4 @@
+#encoding: utf-8
 class QuotationsController < Spree::BaseController
   
   def index

@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Admin::BrandsController < Admin::BaseController
   resource_controller
 

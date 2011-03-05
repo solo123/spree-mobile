@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Admin::ProductTaxonsController < Admin::BaseController
   resource_controller  :except => [:show]
 

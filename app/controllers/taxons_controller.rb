@@ -1,3 +1,4 @@
+#encoding: utf-8
 class TaxonsController < Spree::BaseController
   #prepend_before_filter :reject_unknown_object, :only => [:show]
   before_filter :load_data, :only => :show

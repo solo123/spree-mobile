@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Admin::MobilesController < Admin::BaseController
   def index
     

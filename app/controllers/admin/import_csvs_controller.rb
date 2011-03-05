@@ -1,3 +1,4 @@
+#encoding: utf-8
 #require 'faster_csv'
 
 class Admin::ImportCsvsController < Admin::BaseController

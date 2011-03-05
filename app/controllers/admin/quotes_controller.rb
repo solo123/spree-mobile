@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Admin::QuotesController < Admin::BaseController
   resource_controller
 

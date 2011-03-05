@@ -1,3 +1,4 @@
+#encoding: utf-8
 class PasswordResetsController < Spree::BaseController
   before_filter :load_user_using_perishable_token, :only => [:edit, :update]
 
