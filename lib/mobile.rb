@@ -24,11 +24,12 @@ module Mobile
         end
         pname = props[0]
         pvalue = props[1]
+        return nil if !pname && pname.blank?
         pm = Property.find_by_name(pname)
         unless pm
           pm = Property.new
           pm.name = pm.presentation = pname
-          pm.save!
+          pm.save! if pm.name && !pm.name.blank?
         end
         pp = ProductProperty.find_by_product_id_and_property_id(self.id, pm.id)
         if pp
@@ -36,7 +37,7 @@ module Mobile
         else
           ProductProperty.create :property => pm, :product => self, :value => pvalue
         end
-        (self.list_date = pvalue; self.save) if pname == '上市日期'
+        #(self.list_date = pvalue; self.save) if pname == '上市日期'
       end
       def taxon_val(tname)
         v = []
@@ -57,9 +58,11 @@ module Mobile
       def add_taxon(taxonomy_name, taxon_name)
         pr = Taxon.find_by_name(taxonomy_name)
         return false unless pr
-        taxon_name.split(',').each do |tn|
-          t = Taxon.find_or_create_by_name_and_parent_id_and_taxonomy_id(tn, pr.id, pr.taxonomy_id)
-          self.taxons << t unless self.taxons.include? t
+        taxon_name.split(/[,\/\\\s]/).each do |tn|
+          if tn && !tn.blank?
+            t = Taxon.find_or_create_by_name_and_parent_id_and_taxonomy_id(tn, pr.id, pr.taxonomy_id)
+            self.taxons << t unless self.taxons.include? t
+          end
         end
         true
       end
